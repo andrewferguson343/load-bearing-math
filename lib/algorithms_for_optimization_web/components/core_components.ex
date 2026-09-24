@@ -452,6 +452,78 @@ defmodule AlgorithmsForOptimizationWeb.CoreComponents do
     """
   end
 
+  @doc """
+  Renders a "Check My Math" toggle button and the overlay it opens.
+
+  The overlay starts hidden and is shown/hidden entirely client-side
+  (no server round-trip), closable via the X button, clicking the
+  backdrop, or pressing Escape.
+
+  ## Examples
+
+      <.math_reveal id="gradient-math">
+        <p>Here's the derivation...</p>
+      </.math_reveal>
+
+      <.math_reveal id="newton-math" label="Show the Proof">
+        <p>...</p>
+      </.math_reveal>
+  """
+  attr :id, :string, required: true
+  attr :label, :string, default: "Check My Math"
+  slot :inner_block, required: true
+
+  def math_reveal(assigns) do
+    ~H"""
+    <button type="button" class="r8-math-toggle" phx-click={show_math_modal(@id)}>
+      <.icon name="hero-calculator" class="size-4" /> {@label}
+    </button>
+
+    <div
+      id={@id}
+      class="r8-modal"
+      role="dialog"
+      aria-modal="true"
+      phx-click-away={hide_math_modal(@id)}
+      phx-window-keydown={hide_math_modal(@id)}
+      phx-key="escape"
+      style="display: none;"
+    >
+      <div class="r8-modal-backdrop" aria-hidden="true" />
+      <div class="r8-modal-content">
+        <button
+          type="button"
+          class="r8-modal-close"
+          phx-click={hide_math_modal(@id)}
+          aria-label={gettext("close")}
+        >
+          <.icon name="hero-x-mark" class="size-5" />
+        </button>
+        <div class="r8-modal-body">
+          {render_slot(@inner_block)}
+        </div>
+      </div>
+    </div>
+    """
+  end
+
+  defp show_math_modal(id) do
+    JS.show(
+      to: "##{id}",
+      display: "flex",
+      time: 150,
+      transition: {"transition-opacity ease-out duration-150", "opacity-0", "opacity-100"}
+    )
+  end
+
+  defp hide_math_modal(id) do
+    JS.hide(
+      to: "##{id}",
+      time: 100,
+      transition: {"transition-opacity ease-in duration-100", "opacity-100", "opacity-0"}
+    )
+  end
+
   ## JS Commands
 
   def show(js \\ %JS{}, selector) do

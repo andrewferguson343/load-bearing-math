@@ -391,6 +391,25 @@ h1, h2, h3 {
   color: color-mix(in oklch, var(--color-base-content) 40%, transparent);
 }
 
+.r8-toc-sublist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  margin: 0.1rem 0 0.3rem 1.8rem;
+}
+
+.r8-toc-subitem {
+  font-size: 0.75rem;
+  color: color-mix(in oklch, var(--color-base-content) 50%, transparent);
+  text-decoration: none;
+  padding: 0.2rem 0;
+  transition: color 0.2s ease;
+}
+
+.r8-toc-subitem:hover {
+  color: var(--color-primary);
+}
+
 /* Prose column */
 .r8-prose h1 {
   font-size: 2rem;
@@ -460,4 +479,97 @@ h1, h2, h3 {
 .r8-lesson-footer-title {
   font-size: 0.95rem;
   color: color-mix(in oklch, var(--color-base-content) 70%, transparent);
+}
+
+/* ======================================================================
+   Math Reveal — "Check My Math" toggle + overlay
+   ====================================================================== */
+
+.r8-math-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.5rem 0 1.25rem;
+  padding: 0.45rem 0.9rem;
+  background: transparent;
+  border: 1px solid var(--color-base-300);
+  border-radius: var(--radius-field);
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.r8-math-toggle:hover {
+  background: var(--color-base-200);
+  border-color: var(--color-primary);
+}
+
+.r8-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.r8-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: oklch(0% 0 0 / 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.r8-modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: var(--color-base-100);
+  border: 1px solid var(--color-base-300);
+  border-radius: var(--radius-box);
+  padding: 2rem;
+  box-shadow: 0 20px 50px -12px oklch(0% 0 0 / 0.4);
+}
+
+.r8-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-base-200);
+  border: 1px solid var(--color-base-300);
+  border-radius: 999px;
+  color: var(--color-base-content);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.r8-modal-close:hover {
+  background: var(--color-base-300);
+  border-color: var(--color-primary);
+}
+
+.r8-modal-body {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: color-mix(in oklch, var(--color-base-content) 85%, transparent);
+}
+
+.r8-modal-body :is(h1, h2, h3) {
+  margin-bottom: 0.75rem;
+}
+
+.r8-modal-body :is(p, ul, ol) {
+  margin-bottom: 1rem;
 }

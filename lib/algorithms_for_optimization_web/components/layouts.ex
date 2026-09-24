@@ -96,6 +96,11 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
       <.toc_upcoming number="05" label="Nelder-Mead / Simplex" />
       <.toc_upcoming number="06" label="Simulated Annealing" />
       <.toc_upcoming number="07" label="Genetic Algorithms" />
+      <.toc_link to={~p"/appendix"} number="08" label="Appendix" active={@active == :appendix} />
+      <div :if={@active == :appendix} class="r8-toc-sublist">
+        <a href="#derivatives" class="r8-toc-subitem">Derivatives</a>
+        <a href="#sources" class="r8-toc-subitem">Sources</a>
+      </div>
     </aside>
     """
   end

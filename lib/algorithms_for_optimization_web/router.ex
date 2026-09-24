@@ -21,6 +21,7 @@ defmodule AlgorithmsForOptimizationWeb.Router do
     live "/overview", OverviewLive
     live "/optimization", OptimizationLive
     live "/math", MathematicsLive
+    live "/appendix", AppendixLive
   end
 
   # Other scopes may use custom stacks.
