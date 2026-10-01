@@ -23,9 +23,9 @@ defmodule AlgorithmsForOptimizationWeb.AppendixLive do
             shrinks to zero and the line becomes tangent to the curve.
           </p>
           <p>
-            Let's solve our example equation, $f(x) = x^4 - 3x^2 + x$ with the Derivative definition:
+            Let's apply the derivative definition to our example equation, $f(x) = x^4 - 3x^2 + x$:
           </p>
-           <p>{"$$f'(x) = \\lim_{\\Delta x \\to 0} \\frac{f(x + \\Delta x)^4 - (3 + \\Delta  x)^2 + (x+ \\Delta x) - (x^4 - 3x^2 + x) }{\\Delta x}$$"}</p>
+          <p>{"$$f'(x) = \\lim_{\\Delta x \\to 0} \\frac{(x + \\Delta x)^4 - 3(x + \\Delta x)^2 + (x + \\Delta x) - (x^4 - 3x^2 + x)}{\\Delta x}$$"}</p>
 
           <h2 id="sources">Sources</h2>
           <ul>

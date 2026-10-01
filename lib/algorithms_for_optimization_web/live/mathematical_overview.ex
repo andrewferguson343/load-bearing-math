@@ -50,6 +50,53 @@ defmodule AlgorithmsForOptimizationWeb.MathematicsLive do
       margin: %{t: 40}
     }
 
+    # 2-variable surface f(x, y) = x^2 + y^2, with its tangent hyperplane at
+    # the point (1, 1). Gradient there: grad f = (2x, 2y) = (2, 2), giving
+    # tangent plane: z = f(1,1) + 2(x - 1) + 2(y - 1) = 2x + 2y - 2.
+    surface_xs = for x <- -200..200//10, do: x / 100.0
+    surface_ys = for y <- -200..200//10, do: y / 100.0
+    surface_z = for y <- surface_ys, do: for(x <- surface_xs, do: x * x + y * y)
+
+    plane_xs = for x <- 0..200//20, do: x / 100.0
+    plane_ys = for y <- 0..200//20, do: y / 100.0
+    plane_z = for y <- plane_ys, do: for(x <- plane_xs, do: 2 * x + 2 * y - 2)
+
+    gradient_traces = [
+      %{
+        type: "surface",
+        x: surface_xs,
+        y: surface_ys,
+        z: surface_z,
+        colorscale: "Reds",
+        opacity: 0.85,
+        showscale: false,
+        name: "f(x, y) = x^2 + y^2"
+      },
+      %{
+        type: "surface",
+        x: plane_xs,
+        y: plane_ys,
+        z: plane_z,
+        colorscale: [[0, "#1700e4"], [1, "#1700e4"]],
+        opacity: 0.55,
+        showscale: false,
+        name: "Tangent Hyperplane"
+      }
+    ]
+
+    gradient_layout = %{
+      title: %{
+        text:
+          "f(x, y) = x<sup>2</sup> + y<sup>2</sup> with Tangent Hyperplane at (1, 1)"
+      },
+      scene: %{
+        xaxis: %{title: %{text: "x"}},
+        yaxis: %{title: %{text: "y"}},
+        zaxis: %{title: %{text: "f(x, y)"}}
+      },
+      margin: %{t: 60}
+    }
+
     socket =
       socket
       |> assign(page_title: "Mathematical Overview")
@@ -57,6 +104,8 @@ defmodule AlgorithmsForOptimizationWeb.MathematicsLive do
       |> assign(plot_layout: Jason.encode!(layout))
       |> assign(tangent_plot_data: Jason.encode!(tangent_traces))
       |> assign(tangent_plot_layout: Jason.encode!(tangent_layout))
+      |> assign(gradient_plot_data: Jason.encode!(gradient_traces))
+      |> assign(gradient_plot_layout: Jason.encode!(gradient_layout))
 
     {:ok, socket}
   end
@@ -152,15 +201,42 @@ defmodule AlgorithmsForOptimizationWeb.MathematicsLive do
             style="width: 100%; height: 400px;"
           >
           </div>
+          <p>
+            So what does this all mean? In short, when we are trying to find the minimum of a function, the slope of the tangent line at the
+            point we are testing must be 0. That tells us the point is a critical point, a candidate for a local minimum, but a zero slope alone
+            doesn't guarantee one, the same test also flags local maximums. That's only part of the problem, then. We have to check a point some
+            distance $\Delta$ away from it in each direction to make sure the function is decreasing toward our point from both sides, that's
+            what actually confirms it's a local minimum.
+          </p>
 
           <h2>Gradients</h2>
           <p>
-            Optima are values in a function where a minimum value is found. There are local optima and global optima.
-            A local optimum is lower than every nearby point, but there could be an even lower point elsewhere in the function.
-            A global optimum is the single lowest point across the whole function. Take a look at the graph
-            below: you can see two optima. The global optimum sits in quadrant 3, while the local optimum
-            sits in quadrant 4.
+            Gradients are how we represent derivatives in equations of more than one variable. The gradient at a point, combined with the function's
+            value there, gives us a tangent hyperplane to the function at that point. The gradient of a multivariate function is a vector made up
+            of the partial derivative with respect to each variable. I know the graph is kind of hard to see, but you can visualize the general idea.
           </p>
+          <div
+            id="gradient-hyperplane-chart"
+            phx-hook="PlotlyChart"
+            data-plotly-data={@gradient_plot_data}
+            data-plotly-layout={@gradient_plot_layout}
+            style="width: 100%; height: 500px;"
+          >
+          </div>
+          <.math_reveal id="partial-derivative-math" label="Partial Derivatives?">
+            <h3>A Partial Derivative</h3>
+            <p>
+              A derivative is always taken with respect to a variable. When there are multiple variables and we
+              want to take the derivative with respect to one of them, it is called a partial derivative of the
+              multivariate function.
+            </p>
+            <p>
+              For the plotted function $f(x, y) = x^2 + y^2$, if we wanted to take the partial derivative with
+              respect to $x$, we would treat any expression containing just $y$ as a constant.
+            </p>
+            <p>The partial derivative of $f(x, y) = x^2 + y^2$ with respect to $x$ is:</p>
+            <p>{"$$\\frac{\\partial f}{\\partial x} = 2x$$"}</p>
+          </.math_reveal>
         </div>
       </div>
     </Layouts.app>
