@@ -15,15 +15,7 @@ config :algorithms_for_optimization,
 # while you're still working on it; dev_routes (config/dev.exs) shows it to
 # you locally regardless. See AlgorithmsForOptimization.Topics.
 config :algorithms_for_optimization, public_topics: [
-  :optimization,
-  :cosine_similarity,
-  :leaky_bucket,
-  :markov_chains,
-  :pagerank,
-  :metastable_failures,
-  :damped_oscillators,
-  :eulers_method,
-  :mathematics_appendix
+  :cosine_similarity
 ]
 
 # Configure the endpoint
