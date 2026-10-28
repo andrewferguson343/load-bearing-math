@@ -18,6 +18,10 @@ defmodule AlgorithmsForOptimizationWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/topics", PageController, :topics
+    post "/topic-suggestions", TopicSuggestionController, :create
+    # Not linked anywhere in the UI; visit directly to read what's come in.
+    get "/topic-suggestions", TopicSuggestionController, :index
 
     live_session :optimization, on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :optimization} do
       live "/overview", OverviewLive

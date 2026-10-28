@@ -1,0 +1,38 @@
+<Layouts.app flash={@flash}>
+  <style>
+    .r8-topic-index { max-width: 720px; margin: 2.5rem auto 0; border-top: 1px solid var(--color-base-300); }
+    .r8-topic-entry { display: block; padding: 1.5rem 0.75rem; border-bottom: 1px solid var(--color-base-300); text-decoration: none; transition: background-color 0.2s ease, padding-left 0.2s ease; }
+    .r8-topic-entry:hover { background-color: var(--color-base-200); padding-left: 1.25rem; }
+    .r8-topic-entry:hover .r8-topic-entry-arrow { transform: translateX(0.25rem); }
+    .r8-topic-entry-title-row { display: flex; align-items: baseline; gap: 0.75rem; }
+    .r8-topic-entry-number { font-family: var(--font-mono); font-size: 1rem; font-weight: 600; color: color-mix(in oklch, var(--color-base-content) 40%, transparent); }
+    .r8-topic-entry-title { font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; color: var(--color-primary); display: flex; align-items: center; gap: 0.5rem; margin: 0; }
+    .r8-topic-entry-arrow { display: inline-block; transition: transform 0.2s ease; }
+    .r8-topic-entry-description { font-size: 0.9rem; line-height: 1.6; color: var(--color-base-content); margin: 0.4rem 0 0 0; }
+  </style>
+
+  <div class="r8-hero">
+    <p class="r8-eyebrow">Rise8 Internal</p>
+    <h1 class="r8-hero-title">Table of Contents</h1>
+    <p class="r8-hero-lede">
+      Short, hands-on breakdowns of the math holding up everyday engineering. Pick a series below to
+      start, new ones get added as they're ready.
+    </p>
+  </div>
+
+  <div class="r8-topic-index">
+    <.link
+      :for={topic <- @topics}
+      navigate={AlgorithmsForOptimization.Topics.entry_path(topic)}
+      class="r8-topic-entry"
+    >
+      <div class="r8-topic-entry-title-row">
+        <span class="r8-topic-entry-number">{topic.number}</span>
+        <h2 class="r8-topic-entry-title">
+          {topic.label} <span class="r8-topic-entry-arrow" aria-hidden="true">&rarr;</span>
+        </h2>
+      </div>
+      <p class="r8-topic-entry-description">{topic.description}</p>
+    </.link>
+  </div>
+</Layouts.app>

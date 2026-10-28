@@ -1,38 +1,43 @@
 <Layouts.app flash={@flash}>
   <style>
-    .r8-topic-index { max-width: 720px; margin: 2.5rem auto 0; border-top: 1px solid var(--color-base-300); }
-    .r8-topic-entry { display: block; padding: 1.5rem 0.75rem; border-bottom: 1px solid var(--color-base-300); text-decoration: none; transition: background-color 0.2s ease, padding-left 0.2s ease; }
-    .r8-topic-entry:hover { background-color: var(--color-base-200); padding-left: 1.25rem; }
-    .r8-topic-entry:hover .r8-topic-entry-arrow { transform: translateX(0.25rem); }
-    .r8-topic-entry-title-row { display: flex; align-items: baseline; gap: 0.75rem; }
-    .r8-topic-entry-number { font-family: var(--font-mono); font-size: 1rem; font-weight: 600; color: color-mix(in oklch, var(--color-base-content) 40%, transparent); }
-    .r8-topic-entry-title { font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; color: var(--color-primary); display: flex; align-items: center; gap: 0.5rem; margin: 0; }
-    .r8-topic-entry-arrow { display: inline-block; transition: transform 0.2s ease; }
-    .r8-topic-entry-description { font-size: 0.9rem; line-height: 1.6; color: var(--color-base-content); margin: 0.4rem 0 0 0; }
+    .r8-hero-lede { text-align: left; margin-bottom: 1.25rem; }
+    .r8-hero-lede:last-of-type { margin-bottom: 0; }
+    .r8-hero-cta { margin-top: 2rem; text-align: center; }
   </style>
 
   <div class="r8-hero">
-    <p class="r8-eyebrow">Rise8 Internal</p>
     <h1 class="r8-hero-title">It's Still Just Math</h1>
     <p class="r8-hero-lede">
-      Computer science is applied math. Most of us forget that the day we leave school. These are
-      hands-on reminders of the math still running underneath everything we build.
+      This is a running collection of short, hands-on walkthroughs connecting math most of us haven't
+      touched since school to the systems we work with every day: optimization, rate limiters,
+      autoscalers, search, all of it.
     </p>
-  </div>
+    <p class="r8-hero-lede">
+      As software engineering matured, a lot of the math underneath it got abstracted away, and we're
+      watching that happen all over again with AI. I think it matters to remember where these ideas come
+      from, no matter how technical you are, so I want this to be for everybody. Anyone should be able to
+      drop into the first topic and walk away able to solve a simple problem themselves.
+    </p>
+    <p class="r8-hero-lede">
+      Every bit of math on these pages is worked out by hand, by me, which means it will occasionally be
+      wrong. The worked examples sit behind a button so you can skip them, or click through and check my
+      work.
+    </p>
+    <p class="r8-hero-lede">
+      The idea came from two places. First, I need the Elixir practice. Second, I'm in the final stretch
+      of my own education and need to review all of this anyway, so if I'm up past midnight cursing a
+      math problem, I might as well write down what I learn and share it.
+    </p>
+    <p class="r8-hero-lede">
+      Lastly, I love math, or at least the idea of it. There's a suggestions button up at the top of this
+      page, use it. I don't care if it's basic trigonometry or partial differential equations, whatever
+      gets the most requests gets written up. Promise. Well kinda, I'm not doing it if it's too hard.
+    </p>
 
-  <div class="r8-topic-index">
-    <.link
-      :for={topic <- @topics}
-      navigate={AlgorithmsForOptimization.Topics.entry_path(topic)}
-      class="r8-topic-entry"
-    >
-      <div class="r8-topic-entry-title-row">
-        <span class="r8-topic-entry-number">{topic.number}</span>
-        <h2 class="r8-topic-entry-title">
-          {topic.label} <span class="r8-topic-entry-arrow" aria-hidden="true">&rarr;</span>
-        </h2>
-      </div>
-      <p class="r8-topic-entry-description">{topic.description}</p>
-    </.link>
+    <div class="r8-hero-cta">
+      <.button navigate={~p"/topics"} variant="primary">
+        See the full table of contents <span aria-hidden="true">&rarr;</span>
+      </.button>
+    </div>
   </div>
 </Layouts.app>

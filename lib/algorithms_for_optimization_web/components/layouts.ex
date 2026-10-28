@@ -35,6 +35,26 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
 
   def app(assigns) do
     ~H"""
+    <style>
+      .r8-nav-cta {
+        font-family: var(--font-heading);
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        background: var(--color-primary);
+        color: var(--color-primary-content);
+        border: none;
+        border-radius: 999px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        transition: filter 0.2s ease, transform 0.2s ease;
+      }
+      .r8-nav-cta:hover { filter: brightness(1.1); transform: translateY(-1px); }
+      .r8-suggest-form { display: flex; gap: 0.5rem; align-items: flex-start; flex-wrap: wrap; margin-top: 1rem; }
+      .r8-suggest-form .fieldset { margin-bottom: 0; flex: 1 1 260px; }
+    </style>
+
     <header class="r8-header">
       <div class="r8-header-inner">
         <a href="/" class="r8-brand">
@@ -47,12 +67,46 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         <div class="r8-header-right">
           <nav class="r8-nav">
             <.link navigate={~p"/"} class="r8-nav-link">Home</.link>
-            <.link navigate={~p"/overview"} class="r8-nav-link">Overview</.link>
+            <.link navigate={~p"/topics"} class="r8-nav-link">Topics</.link>
+            <button type="button" class="r8-nav-cta" phx-click={show_suggest_modal()}>
+              Suggest a Topic
+            </button>
           </nav>
           <.theme_toggle />
         </div>
       </div>
     </header>
+
+    <div
+      id="suggest-topic-modal"
+      class="r8-modal"
+      role="dialog"
+      aria-modal="true"
+      phx-click-away={hide_suggest_modal()}
+      phx-window-keydown={hide_suggest_modal()}
+      phx-key="escape"
+      style="display: none;"
+    >
+      <div class="r8-modal-backdrop" aria-hidden="true" />
+      <div class="r8-modal-content">
+        <button
+          type="button"
+          class="r8-modal-close"
+          phx-click={hide_suggest_modal()}
+          aria-label={gettext("close")}
+        >
+          <.icon name="hero-x-mark" class="size-5" />
+        </button>
+        <div class="r8-modal-body">
+          <h3>Suggest a Topic</h3>
+          <p>Got something that belongs on this list? Drop it below.</p>
+          <.form for={%{}} action={~p"/topic-suggestions"} method="post" class="r8-suggest-form">
+            <.input type="text" name="suggestion" value="" />
+            <.button variant="primary">Suggest it</.button>
+          </.form>
+        </div>
+      </div>
+    </div>
 
     <main id="main-content" class="r8-main" phx-hook="KatexRender">
       {render_slot(@inner_block)}
@@ -60,6 +114,23 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
 
     <.flash_group flash={@flash} />
     """
+  end
+
+  defp show_suggest_modal do
+    JS.show(
+      to: "#suggest-topic-modal",
+      display: "flex",
+      time: 150,
+      transition: {"transition-opacity ease-out duration-150", "opacity-0", "opacity-100"}
+    )
+  end
+
+  defp hide_suggest_modal do
+    JS.hide(
+      to: "#suggest-topic-modal",
+      time: 100,
+      transition: {"transition-opacity ease-in duration-100", "opacity-100", "opacity-0"}
+    )
   end
 
   @doc """
@@ -79,23 +150,10 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
     doc: "which lesson within the active topic is current: :overview, :math, etc."
 
   def lesson_toc(assigns) do
-    assigns =
-      assigns
-      |> assign(:topics, AlgorithmsForOptimization.Topics.visible())
-      |> assign(:current, AlgorithmsForOptimization.Topics.fetch!(assigns.active_topic))
+    assigns = assign(assigns, :current, AlgorithmsForOptimization.Topics.fetch!(assigns.active_topic))
 
     ~H"""
     <aside class="r8-toc" aria-label="Lesson navigation">
-      <div :if={length(@topics) > 1} class="r8-topic-switcher">
-        <.link
-          :for={topic <- @topics}
-          navigate={AlgorithmsForOptimization.Topics.entry_path(topic)}
-          class={["r8-topic-tab", topic.id == @active_topic && "r8-topic-tab--active"]}
-        >
-          {topic.label}
-        </.link>
-      </div>
-
       <p class="r8-toc-eyebrow">{@current.label}</p>
 
       <.toc_lesson :for={lesson <- @current.lessons} lesson={lesson} active_lesson={@active_lesson} />
