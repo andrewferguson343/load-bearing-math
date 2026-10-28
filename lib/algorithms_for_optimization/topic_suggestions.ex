@@ -1,42 +1,31 @@
 defmodule AlgorithmsForOptimization.TopicSuggestions do
   @moduledoc """
-  Captures topic suggestions from site visitors. Appends to a flat file in
-  priv/ since there's nothing here that needs a database: read the file to
-  see what people have suggested.
+  Captures topic suggestions from site visitors.
   """
 
-  defp path do
-    Path.join(Application.app_dir(:algorithms_for_optimization, "priv"), "topic_suggestions.txt")
-  end
+  import Ecto.Query
 
-  def submit(suggestion) when is_binary(suggestion) do
-    trimmed = String.trim(suggestion)
+  alias AlgorithmsForOptimization.Repo
+  alias AlgorithmsForOptimization.TopicSuggestion
 
-    if trimmed != "" do
-      line = "#{DateTime.utc_now() |> DateTime.to_iso8601()}\t#{trimmed}\n"
-      File.write!(path(), line, [:append, :utf8])
-      :ok
-    else
+  def submit(text) when is_binary(text) do
+    trimmed = String.trim(text)
+
+    if trimmed == "" do
       :error
+    else
+      %TopicSuggestion{}
+      |> TopicSuggestion.changeset(%{text: trimmed})
+      |> Repo.insert()
+      |> case do
+        {:ok, _suggestion} -> :ok
+        {:error, _changeset} -> :error
+      end
     end
   end
 
-  @doc "All suggestions, newest first, as {timestamp, text} tuples."
+  @doc "All suggestions, newest first."
   def list do
-    case File.read(path()) do
-      {:ok, contents} ->
-        contents
-        |> String.split("\n", trim: true)
-        |> Enum.map(fn line ->
-          case String.split(line, "\t", parts: 2) do
-            [timestamp, text] -> {timestamp, text}
-            [text] -> {"", text}
-          end
-        end)
-        |> Enum.reverse()
-
-      {:error, :enoent} ->
-        []
-    end
+    Repo.all(from s in TopicSuggestion, order_by: [desc: s.inserted_at])
   end
 end

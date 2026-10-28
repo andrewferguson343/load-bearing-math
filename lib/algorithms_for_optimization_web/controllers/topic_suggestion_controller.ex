@@ -4,7 +4,7 @@ defmodule AlgorithmsForOptimizationWeb.TopicSuggestionController do
   def index(conn, _params) do
     body =
       AlgorithmsForOptimization.TopicSuggestions.list()
-      |> Enum.map(fn {timestamp, text} -> "#{timestamp}\t#{text}" end)
+      |> Enum.map(fn s -> "#{s.inserted_at}\t#{s.text}" end)
       |> Enum.join("\n")
 
     conn
