@@ -11,6 +11,21 @@ config :algorithms_for_optimization,
   ecto_repos: [AlgorithmsForOptimization.Repo],
   generators: [timestamp_type: :utc_datetime]
 
+# Topics flipped on here are visible to everyone. Keep a topic off this list
+# while you're still working on it; dev_routes (config/dev.exs) shows it to
+# you locally regardless. See AlgorithmsForOptimization.Topics.
+config :algorithms_for_optimization, public_topics: [
+  :optimization,
+  :cosine_similarity,
+  :leaky_bucket,
+  :markov_chains,
+  :pagerank,
+  :metastable_failures,
+  :damped_oscillators,
+  :eulers_method,
+  :mathematics_appendix
+]
+
 # Configure the endpoint
 config :algorithms_for_optimization, AlgorithmsForOptimizationWeb.Endpoint,
   url: [host: "localhost"],

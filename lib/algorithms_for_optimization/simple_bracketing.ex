@@ -1,10 +1,10 @@
-defmodule AlgorithmsForOptimization.Bracketing do
-  alias AlgorithmsForOptimization.Bracketing
+defmodule AlgorithmsForOptimization.SimpleBracketing do
   def bracket_minimum(function, initial_x_value \\0, step_length \\1*(10**-2), expansion_factor \\ 2) do
     a_value = initial_x_value
     returned_a_value = function.(a_value)
     b_value = a_value + step_length
     returned_b_value = function.(b_value)
+
 
 {a_value, returned_a_value, b_value, returned_b_value, step_length} =
   if returned_b_value > returned_a_value do

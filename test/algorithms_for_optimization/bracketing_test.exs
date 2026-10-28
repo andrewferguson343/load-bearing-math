@@ -1,11 +1,11 @@
 defmodule AlgorithmsForOptimization.BracketingTest do
   use ExUnit.Case, async: true
-  alias AlgorithmsForOptimization.Bracketing
+  alias AlgorithmsForOptimization.SimpleBracketing
 
   describe "bracket_minimum/4" do
     test "Brackets a simple parabola" do
       f = fn x -> (x-2) **2 end
-      {left_bracket, right_bracket} = Bracketing.bracket_minimum(f, 0)
+      {left_bracket, right_bracket} = SimpleBracketing.bracket_minimum(f, 0)
 
       assert left_bracket < 2
       assert right_bracket > 2
@@ -13,7 +13,7 @@ defmodule AlgorithmsForOptimization.BracketingTest do
 
     test "Swaps directions to find the minimum" do
       f = fn x -> (x-2) **2 end
-      {left_bracket, right_bracket} = Bracketing.bracket_minimum(f, 5)
+      {left_bracket, right_bracket} = SimpleBracketing.bracket_minimum(f, 5)
 
       assert left_bracket < 2
       assert right_bracket > 2
@@ -21,7 +21,7 @@ defmodule AlgorithmsForOptimization.BracketingTest do
 
     test "Handles multiple iterations to fund the minmum" do
       f = fn x -> (x-2) **2 end
-      {left_bracket, right_bracket} = Bracketing.bracket_minimum(f, -500)
+      {left_bracket, right_bracket} = SimpleBracketing.bracket_minimum(f, -500)
 
       assert left_bracket < 2
       assert right_bracket > 2

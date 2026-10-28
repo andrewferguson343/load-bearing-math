@@ -9,7 +9,7 @@ defmodule AlgorithmsForOptimizationWeb.OverviewLive do
     ~H"""
     <Layouts.app flash={@flash} current_scope={assigns[:current_scope]}>
       <div class="r8-lesson">
-        <Layouts.lesson_toc active={:overview} />
+        <Layouts.lesson_toc active_topic={:optimization} active_lesson={:overview} />
 
         <div class="r8-prose">
           <h1 id="page-heading">Overview</h1>

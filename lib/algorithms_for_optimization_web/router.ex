@@ -18,10 +18,48 @@ defmodule AlgorithmsForOptimizationWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
-    live "/overview", OverviewLive
-    live "/optimization", OptimizationLive
-    live "/math", MathematicsLive
-    live "/appendix", AppendixLive
+
+    live_session :optimization, on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :optimization} do
+      live "/overview", OverviewLive
+      live "/math", MathematicsLive
+      live "/optimization", OptimizationLive
+      live "/appendix", AppendixLive
+    end
+
+    live_session :cosine_similarity, on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :cosine_similarity} do
+      live "/cosine-similarity", CosineSimilarityLive
+    end
+
+    live_session :leaky_bucket, on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :leaky_bucket} do
+      live "/leaky-bucket", LeakyBucketLive
+    end
+
+    live_session :markov_chains, on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :markov_chains} do
+      live "/markov-chains", MarkovChainsLive
+    end
+
+    live_session :pagerank, on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :pagerank} do
+      live "/pagerank", PageRankLive
+    end
+
+    live_session :metastable_failures,
+      on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :metastable_failures} do
+      live "/metastable-failures", MetastableFailuresLive
+    end
+
+    live_session :damped_oscillators,
+      on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :damped_oscillators} do
+      live "/damped-oscillators", DampedOscillatorsLive
+    end
+
+    live_session :eulers_method, on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :eulers_method} do
+      live "/eulers-method", EulersMethodLive
+    end
+
+    live_session :mathematics_appendix,
+      on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :mathematics_appendix} do
+      live "/mathematics-appendix", MathematicsAppendixLive
+    end
   end
 
   # Other scopes may use custom stacks.

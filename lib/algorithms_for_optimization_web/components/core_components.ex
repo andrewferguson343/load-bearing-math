@@ -471,12 +471,13 @@ defmodule AlgorithmsForOptimizationWeb.CoreComponents do
   """
   attr :id, :string, required: true
   attr :label, :string, default: "Check My Math"
+  attr :icon, :string, default: "hero-calculator"
   slot :inner_block, required: true
 
   def math_reveal(assigns) do
     ~H"""
     <button type="button" class="r8-math-toggle" phx-click={show_math_modal(@id)}>
-      <.icon name="hero-calculator" class="size-4" /> {@label}
+      <.icon name={@icon} class="size-4" /> {@label}
     </button>
 
     <div

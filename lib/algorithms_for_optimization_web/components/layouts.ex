@@ -70,38 +70,57 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
       <Layouts.lesson_toc active={:overview} />
 
   """
-  attr :active, :atom,
+  attr :active_topic, :atom,
     required: true,
-    doc: "which lesson is current: :overview, :math, :optimization, etc."
+    doc: "which topic series is current: :optimization, :cosine_similarity, etc."
+
+  attr :active_lesson, :atom,
+    required: true,
+    doc: "which lesson within the active topic is current: :overview, :math, etc."
 
   def lesson_toc(assigns) do
+    assigns =
+      assigns
+      |> assign(:topics, AlgorithmsForOptimization.Topics.visible())
+      |> assign(:current, AlgorithmsForOptimization.Topics.fetch!(assigns.active_topic))
+
     ~H"""
     <aside class="r8-toc" aria-label="Lesson navigation">
-      <p class="r8-toc-eyebrow">This Series</p>
-      <.toc_link to={~p"/overview"} number="00" label="Overview" active={@active == :overview} />
-      <.toc_link
-        to={~p"/math"}
-        number="01"
-        label="A Mathematical Overview"
-        active={@active == :math}
-      />
-      <.toc_link
-        to={~p"/optimization"}
-        number="02"
-        label="An Optimal Optimization Overview"
-        active={@active == :optimization}
-      />
-      <.toc_upcoming number="03" label="Gradient Descent" />
-      <.toc_upcoming number="04" label="Newton's Method" />
-      <.toc_upcoming number="05" label="Nelder-Mead / Simplex" />
-      <.toc_upcoming number="06" label="Simulated Annealing" />
-      <.toc_upcoming number="07" label="Genetic Algorithms" />
-      <.toc_link to={~p"/appendix"} number="08" label="Appendix" active={@active == :appendix} />
-      <div :if={@active == :appendix} class="r8-toc-sublist">
+      <div :if={length(@topics) > 1} class="r8-topic-switcher">
+        <.link
+          :for={topic <- @topics}
+          navigate={AlgorithmsForOptimization.Topics.entry_path(topic)}
+          class={["r8-topic-tab", topic.id == @active_topic && "r8-topic-tab--active"]}
+        >
+          {topic.label}
+        </.link>
+      </div>
+
+      <p class="r8-toc-eyebrow">{@current.label}</p>
+
+      <.toc_lesson :for={lesson <- @current.lessons} lesson={lesson} active_lesson={@active_lesson} />
+
+      <div :if={@active_topic == :optimization and @active_lesson == :appendix} class="r8-toc-sublist">
         <a href="#derivatives" class="r8-toc-subitem">Derivatives</a>
         <a href="#sources" class="r8-toc-subitem">Sources</a>
       </div>
     </aside>
+    """
+  end
+
+  attr :lesson, :map, required: true
+  attr :active_lesson, :atom, required: true
+
+  defp toc_lesson(assigns) do
+    ~H"""
+    <.toc_link
+      :if={@lesson.path}
+      to={@lesson.path}
+      number={@lesson.number}
+      label={@lesson.label}
+      active={@lesson.key == @active_lesson}
+    />
+    <.toc_upcoming :if={is_nil(@lesson.path)} number={@lesson.number} label={@lesson.label} />
     """
   end
 
