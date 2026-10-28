@@ -15,7 +15,8 @@ config :algorithms_for_optimization,
 # while you're still working on it; dev_routes (config/dev.exs) shows it to
 # you locally regardless. See AlgorithmsForOptimization.Topics.
 config :algorithms_for_optimization, public_topics: [
-  :cosine_similarity
+  :cosine_similarity,
+  :optimization
 ]
 
 # Configure the endpoint

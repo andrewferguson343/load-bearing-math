@@ -183,11 +183,6 @@ h1, h2, h3 {
   color: inherit;
 }
 
-.r8-brand-mark {
-  height: 28px;
-  width: auto;
-}
-
 .r8-brand-text {
   display: flex;
   flex-direction: column;

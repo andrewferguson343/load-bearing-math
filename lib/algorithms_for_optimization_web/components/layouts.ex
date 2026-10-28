@@ -58,7 +58,6 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
     <header class="r8-header">
       <div class="r8-header-inner">
         <a href="/" class="r8-brand">
-          <img src={~p"/images/logo.svg"} class="r8-brand-mark" alt="Logo" />
           <div class="r8-brand-text">
             <span class="r8-brand-name">Calcul8</span>
             <span class="r8-brand-subtitle">by Andrew Ferguson</span>
