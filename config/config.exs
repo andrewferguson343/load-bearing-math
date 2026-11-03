@@ -16,7 +16,7 @@ config :algorithms_for_optimization,
 # you locally regardless. See AlgorithmsForOptimization.Topics.
 config :algorithms_for_optimization, public_topics: [
   :cosine_similarity,
-  :optimization
+  :leaky_bucket
 ]
 
 # Configure the endpoint

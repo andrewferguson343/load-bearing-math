@@ -14,7 +14,7 @@ defmodule AlgorithmsForOptimizationWeb.LeakyBucketLive do
         <div class="r8-prose">
           <h1 id="page-heading">The Leaky Bucket</h1>
 
-          <h2>A differential equation holding back the flood</h2>
+          <%!-- <h2>A differential equation holding back the flood</h2>
           <p>
             Picture a bucket with a hole in the bottom. Water drips in whenever a request comes in, and
             drains out at some fixed rate no matter what. If requests show up faster than the bucket
@@ -22,6 +22,11 @@ defmodule AlgorithmsForOptimizationWeb.LeakyBucketLive do
             That overflow is your 429. The fill level over time is governed by a simple differential
             equation, and that one equation is quietly running the rate limiter in front of nearly every
             API you've ever hit.
+          </p> --%>
+
+          <h2>More coming soon</h2>
+          <p>
+            Check back soon, or use the suggest a topic button above if there's something specific you'd like covered first.
           </p>
         </div>
       </div>

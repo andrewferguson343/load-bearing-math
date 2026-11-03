@@ -16,7 +16,20 @@ defmodule AlgorithmsForOptimization.Topics do
       description:
         "The angle between two vectors turns out to be the whole trick: it's how search engines, recommendation systems, and every embedding model decide what counts as similar.",
       lessons: [
-        %{key: :overview, number: "00", label: "Overview", path: "/cosine-similarity"}
+        %{key: :overview, number: "00", label: "Overview", path: "/cosine-similarity"},
+        %{key: :math, number: "01", label: "An Introduction to the Math", path: "/cosine-similarity-math"},
+        %{
+          key: :implementation,
+          number: "02",
+          label: "A Simple Cosine Similarity Example",
+          path: "/cosine-similarity-implementation"
+        },
+        %{
+          key: :realistic_example,
+          number: "03",
+          label: "A More Realistic Example",
+          path: "/cosine-similarity-realistic-example"
+        }
       ]
     },
     %{

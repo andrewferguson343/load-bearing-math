@@ -23,6 +23,8 @@ defmodule AlgorithmsForOptimizationWeb.Router do
     # Not linked anywhere in the UI; visit directly to read what's come in.
     get "/topic-suggestions", TopicSuggestionController, :index
 
+    live "/sources", SourcesLive
+
     live_session :optimization, on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :optimization} do
       live "/overview", OverviewLive
       live "/math", MathematicsLive
@@ -32,6 +34,9 @@ defmodule AlgorithmsForOptimizationWeb.Router do
 
     live_session :cosine_similarity, on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :cosine_similarity} do
       live "/cosine-similarity", CosineSimilarityLive
+      live "/cosine-similarity-math", CosineSimilarityMathLive
+      live "/cosine-similarity-implementation", CosineSimilarityImplementationLive
+      live "/cosine-similarity-realistic-example", CosineSimilarityRealisticExampleLive
     end
 
     live_session :leaky_bucket, on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :leaky_bucket} do
