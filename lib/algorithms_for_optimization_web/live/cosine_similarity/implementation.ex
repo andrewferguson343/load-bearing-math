@@ -37,7 +37,8 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityImplementationLive do
           <p>
             We can then plug and play the values and see the similarities and differences. Let's look at Halo as our example. Halo is an FPS with a campaign mode.
             Let's compare this to Counter Strike, a team based FPS, and Stellaris, a Scifi strategy game. We see that between Halo and Counter Strike we get $\cos\theta = 1/\sqrt 2$. Between Halo and Stellaris however
-            we see $\cos\theta = 0$. This shows us that Halo is more similar to Counter Strike than it is to Stellaris.
+            we see $\cos\theta = 0$. This shows us that Halo is more similar to Counter Strike than it is to Stellaris. The closer the cosine value is to 1, the more similar the options are.
+            A value of 0 means that the options are completely unrelated (orthogonal), and a negative value means the two vectors are pointing in opposite directions.
           </p>
 
 
