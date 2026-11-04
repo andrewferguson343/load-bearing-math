@@ -159,7 +159,6 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
 
       <div :if={@active_topic == :optimization and @active_lesson == :appendix} class="r8-toc-sublist">
         <a href="#derivatives" class="r8-toc-subitem">Derivatives</a>
-        <a href="#sources" class="r8-toc-subitem">Sources</a>
       </div>
     </aside>
     """

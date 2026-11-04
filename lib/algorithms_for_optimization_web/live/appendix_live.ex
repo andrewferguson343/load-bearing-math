@@ -26,13 +26,6 @@ defmodule AlgorithmsForOptimizationWeb.AppendixLive do
             Let's apply the derivative definition to our example equation, $f(x) = x^4 - 3x^2 + x$:
           </p>
           <p>{"$$f'(x) = \\lim_{\\Delta x \\to 0} \\frac{(x + \\Delta x)^4 - 3(x + \\Delta x)^2 + (x + \\Delta x) - (x^4 - 3x^2 + x)}{\\Delta x}$$"}</p>
-
-          <h2 id="sources">Sources</h2>
-          <ul>
-            <li><em>Algorithms for Optimization</em> by Kochenderfer and Wheeler</li>
-            <li><em>Calculus</em> (10th ed.) by Larson and Edwards</li>
-            <li><em>Advanced Engineering Mathematics</em> by Zill</li>
-          </ul>
         </div>
       </div>
     </Layouts.app>

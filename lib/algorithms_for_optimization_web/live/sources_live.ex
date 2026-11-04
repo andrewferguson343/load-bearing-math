@@ -13,7 +13,7 @@ defmodule AlgorithmsForOptimizationWeb.SourcesLive do
         <p>The books and datasets referenced across this site's lessons.</p>
         <ul>
           <li><em>Algorithms for Optimization</em> by Kochenderfer and Wheeler</li>
-          <li><em>Calculus</em> (10th ed.) by Larson and Edwards</li>
+          <li><em>Calculus: Early Transcendentals</em> by Stewart, Clegg, and Watson</li>
           <li><em>Advanced Engineering Mathematics</em> by Zill</li>
           <li>
             GloVe: Global Vectors for Word Representation (Pennington, Socher, and Manning), Stanford NLP,
