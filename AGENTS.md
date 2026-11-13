@@ -3,6 +3,12 @@ This is a web application written using the Phoenix web framework.
 **Load Bearing Math** (loadbearingmath.com): short, hands-on walkthroughs of the math behind
 everyday engineering. Repo: `RancorTamer/load-bearing-math`. Hosted on Railway, DNS at Porkbun.
 
+> **This repo is its own project.** On GitHub it's still marked as a fork of
+> `aferguson-rise8/optimization-algorithms` (a former work repo), but nothing goes back there:
+> never open PRs against it, never add it as a remote, never push to it. Every PR targets
+> **`RancorTamer/load-bearing-math`, base `main`**. GitHub's PR page on a fork defaults the
+> base to the parent repo, so always open PRs from this repo's own compare URL (below).
+
 ## Git & deploy workflow
 
 `main` is protected: it only changes through merged pull requests, and every merge to `main`
@@ -16,7 +22,11 @@ deploys to production. Follow this flow for every change:
 3. **Run `mix precommit` before pushing** and fix anything it reports. CI runs the same checks,
    and a red CI blocks both the merge and the deploy.
 4. **Push the branch** (`git push -u origin <branch>`), only when asked. The `gh` CLI isn't
-   set up, so the PR is opened in the GitHub UI ("Compare & pull request").
+   set up, so the PR is opened in the GitHub UI, always via this repo's compare URL:
+   `https://github.com/RancorTamer/load-bearing-math/compare/main...<branch>`.
+   Don't use the "Compare & pull request" banner or the `pull/new/<branch>` link that
+   `git push` prints: on a fork those default to the parent repo as the base. Before
+   creating the PR, check it reads **base repository: RancorTamer/load-bearing-math, base: main**.
 5. **Merge when CI is green.** Required check: **`Build and test`** (`.github/workflows/ci.yml`).
    Branches must be up to date with `main` before merging.
 6. **Deploy is automatic.** After the merge, CI runs on `main`; Railway ("Wait for CI") deploys
