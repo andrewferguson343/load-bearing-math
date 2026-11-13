@@ -21,6 +21,11 @@ defmodule AlgorithmsForOptimizationWeb.Router do
     plug :admin_basic_auth
   end
 
+  # Deploy health check for Railway (see HealthController and railway.json).
+  scope "/", AlgorithmsForOptimizationWeb do
+    get "/health", HealthController, :show
+  end
+
   # Crawler files, served dynamically so they can use the configured host.
   scope "/", AlgorithmsForOptimizationWeb do
     get "/robots.txt", SitemapController, :robots

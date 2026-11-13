@@ -1,0 +1,31 @@
+# Weekly dependency update PRs. Each PR runs the CI workflow, and with Railway's
+# "Wait for CI" nothing deploys until a merged update passes.
+version: 2
+updates:
+  - package-ecosystem: "mix"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    groups:
+      # One PR for all patch/minor bumps instead of one per package; major versions
+      # still get their own PR since they can need code changes.
+      hex-minor-and-patch:
+        update-types: ["minor", "patch"]
+    commit-message:
+      prefix: "deps"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    groups:
+      github-actions:
+        patterns: ["*"]
+    commit-message:
+      prefix: "ci"
+
+# Not covered on purpose: the Dockerfile's Elixir/OTP image. Those versions are pinned to
+# match ELIXIR_VERSION/OTP_VERSION in .github/workflows/ci.yml, so bump both together by hand.
