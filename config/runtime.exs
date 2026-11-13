@@ -41,6 +41,12 @@ if config_env() == :dev do
 end
 
 if config_env() == :prod do
+  # Basic auth for the private /topic-suggestions page. If either variable is
+  # unset the page returns 404 instead of being publicly readable.
+  config :algorithms_for_optimization, :admin_basic_auth,
+    username: System.get_env("ADMIN_USERNAME"),
+    password: System.get_env("ADMIN_PASSWORD")
+
   database_url =
     System.get_env("DATABASE_URL") ||
       raise """

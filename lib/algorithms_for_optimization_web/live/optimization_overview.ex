@@ -53,7 +53,7 @@ defmodule AlgorithmsForOptimizationWeb.OptimizationLive do
     {:ok,
      socket
      |> assign(
-       page_title: "Overview",
+       page_title: "Optimization Algorithms: An Optimal Optimization Overview",
        function_options: Enum.map(functions(), fn {key, {label, _f}} -> {label, key} end),
        result: nil,
        error: nil,
@@ -86,10 +86,10 @@ defmodule AlgorithmsForOptimizationWeb.OptimizationLive do
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash} current_scope={assigns[:current_scope]}>
-      <div class="c8-lesson">
+      <div class="lbm-lesson">
         <Layouts.lesson_toc active_topic={:optimization} active_lesson={:optimization} />
 
-        <div class="c8-prose">
+        <div class="lbm-prose">
           <h1 id="page-heading">An Optimal Optimization Overview</h1>
 
           <h2>Finding a starting point</h2>
@@ -100,14 +100,14 @@ defmodule AlgorithmsForOptimizationWeb.OptimizationLive do
             minimum is trapped somewhere between your last two points.
           </p>
 
-          <div class="c8-demo">
+          <div class="lbm-demo">
             <h3>Try it yourself</h3>
             <p>
               Pick a function below, choose a starting point, and see what interval the bracketing
               algorithm comes back with.
             </p>
 
-            <form phx-submit="bracket" phx-change="preview" class="c8-demo-form">
+            <form phx-submit="bracket" phx-change="preview" class="lbm-demo-form">
               <.input
                 type="select"
                 name="function"
@@ -121,8 +121,8 @@ defmodule AlgorithmsForOptimizationWeb.OptimizationLive do
               <.button variant="primary">Bracket it</.button>
             </form>
 
-            <p :if={@error} class="c8-demo-error">{@error}</p>
-            <p :if={@result} class="c8-demo-result">
+            <p :if={@error} class="lbm-demo-error">{@error}</p>
+            <p :if={@result} class="lbm-demo-result">
               Bracket: [{elem(@result, 0) |> Float.round(4)}, {elem(@result, 1) |> Float.round(4)}]
             </p>
 

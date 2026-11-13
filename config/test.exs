@@ -40,3 +40,5 @@ config :phoenix_live_view,
 # Sort query params output of verified routes for robust url comparisons
 config :phoenix,
   sort_verified_routes_query_params: true
+
+config :algorithms_for_optimization, :admin_basic_auth, username: "admin", password: "secret"

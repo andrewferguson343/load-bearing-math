@@ -2,16 +2,16 @@ defmodule AlgorithmsForOptimizationWeb.OverviewLive do
   use AlgorithmsForOptimizationWeb, :live_view
 
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, page_title: "Overview")}
+    {:ok, assign(socket, page_title: "Optimization Algorithms: Overview")}
   end
 
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash} current_scope={assigns[:current_scope]}>
-      <div class="c8-lesson">
+      <div class="lbm-lesson">
         <Layouts.lesson_toc active_topic={:optimization} active_lesson={:overview} />
 
-        <div class="c8-prose">
+        <div class="lbm-prose">
           <h1 id="page-heading">Overview</h1>
 
           <h2>What is optimization?</h2>
@@ -53,10 +53,10 @@ defmodule AlgorithmsForOptimizationWeb.OverviewLive do
             tackle a different mathematical subject. For now, though, I think this is a natural progression.
           </p>
 
-          <div class="c8-lesson-footer">
-            <div class="c8-lesson-footer-next">
-              <span class="c8-lesson-footer-label">Up Next</span>
-              <span class="c8-lesson-footer-title">A Mathematical Overview (coming soon)</span>
+          <div class="lbm-lesson-footer">
+            <div class="lbm-lesson-footer-next">
+              <span class="lbm-lesson-footer-label">Up Next</span>
+              <span class="lbm-lesson-footer-title">A Mathematical Overview (coming soon)</span>
             </div>
           </div>
         </div>

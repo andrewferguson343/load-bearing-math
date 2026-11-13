@@ -1,4 +1,4 @@
-# calcul8
+# Load Bearing Math
 
 A little Phoenix site where I write up the math behind the systems we build every day: optimization,
 rate limiters, autoscalers, search, that kind of thing. Hands-on walkthroughs, worked by hand (so expect

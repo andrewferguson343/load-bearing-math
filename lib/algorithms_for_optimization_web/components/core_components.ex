@@ -476,13 +476,13 @@ defmodule AlgorithmsForOptimizationWeb.CoreComponents do
 
   def math_reveal(assigns) do
     ~H"""
-    <button type="button" class="c8-math-toggle" phx-click={show_math_modal(@id)}>
+    <button type="button" class="lbm-math-toggle" phx-click={show_math_modal(@id)}>
       <.icon name={@icon} class="size-4" /> {@label}
     </button>
 
     <div
       id={@id}
-      class="c8-modal"
+      class="lbm-modal"
       role="dialog"
       aria-modal="true"
       phx-click-away={hide_math_modal(@id)}
@@ -490,17 +490,17 @@ defmodule AlgorithmsForOptimizationWeb.CoreComponents do
       phx-key="escape"
       style="display: none;"
     >
-      <div class="c8-modal-backdrop" aria-hidden="true" />
-      <div class="c8-modal-content">
+      <div class="lbm-modal-backdrop" aria-hidden="true" />
+      <div class="lbm-modal-content">
         <button
           type="button"
-          class="c8-modal-close"
+          class="lbm-modal-close"
           phx-click={hide_math_modal(@id)}
           aria-label={gettext("close")}
         >
           <.icon name="hero-x-mark" class="size-5" />
         </button>
-        <div class="c8-modal-body">
+        <div class="lbm-modal-body">
           {render_slot(@inner_block)}
         </div>
       </div>

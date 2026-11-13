@@ -5,6 +5,8 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
   """
   use AlgorithmsForOptimizationWeb, :html
 
+  alias AlgorithmsForOptimizationWeb.SEO
+
   # Embed all files in layouts/* within this module.
   # The default root.html.heex file contains the HTML
   # skeleton of your application, namely HTML headers
@@ -36,7 +38,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
   def app(assigns) do
     ~H"""
     <style>
-      .c8-nav-cta {
+      .lbm-nav-cta {
         font-family: var(--font-heading);
         font-size: 0.8rem;
         font-weight: 600;
@@ -50,24 +52,24 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         cursor: pointer;
         transition: filter 0.2s ease, transform 0.2s ease;
       }
-      .c8-nav-cta:hover { filter: brightness(1.1); transform: translateY(-1px); }
-      .c8-suggest-form { display: flex; gap: 0.5rem; align-items: flex-start; flex-wrap: wrap; margin-top: 1rem; }
-      .c8-suggest-form .fieldset { margin-bottom: 0; flex: 1 1 260px; }
+      .lbm-nav-cta:hover { filter: brightness(1.1); transform: translateY(-1px); }
+      .lbm-suggest-form { display: flex; gap: 0.5rem; align-items: flex-start; flex-wrap: wrap; margin-top: 1rem; }
+      .lbm-suggest-form .fieldset { margin-bottom: 0; flex: 1 1 260px; }
     </style>
 
-    <header class="c8-header">
-      <div class="c8-header-inner">
-        <a href="/" class="c8-brand">
-          <div class="c8-brand-text">
-            <span class="c8-brand-name">Calcul8</span>
-            <span class="c8-brand-subtitle">by Andrew Ferguson</span>
+    <header class="lbm-header">
+      <div class="lbm-header-inner">
+        <a href="/" class="lbm-brand">
+          <div class="lbm-brand-text">
+            <span class="lbm-brand-name">Load Bearing Math</span>
+            <span class="lbm-brand-subtitle">by Andrew Ferguson</span>
           </div>
         </a>
-        <div class="c8-header-right">
-          <nav class="c8-nav">
-            <.link navigate={~p"/"} class="c8-nav-link">Home</.link>
-            <.link navigate={~p"/topics"} class="c8-nav-link">Topics</.link>
-            <button type="button" class="c8-nav-cta" phx-click={show_suggest_modal()}>
+        <div class="lbm-header-right">
+          <nav class="lbm-nav">
+            <.link navigate={~p"/"} class="lbm-nav-link">Home</.link>
+            <.link navigate={~p"/topics"} class="lbm-nav-link">Topics</.link>
+            <button type="button" class="lbm-nav-cta" phx-click={show_suggest_modal()}>
               Suggest a Topic
             </button>
           </nav>
@@ -78,7 +80,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
 
     <div
       id="suggest-topic-modal"
-      class="c8-modal"
+      class="lbm-modal"
       role="dialog"
       aria-modal="true"
       phx-click-away={hide_suggest_modal()}
@@ -86,20 +88,20 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
       phx-key="escape"
       style="display: none;"
     >
-      <div class="c8-modal-backdrop" aria-hidden="true" />
-      <div class="c8-modal-content">
+      <div class="lbm-modal-backdrop" aria-hidden="true" />
+      <div class="lbm-modal-content">
         <button
           type="button"
-          class="c8-modal-close"
+          class="lbm-modal-close"
           phx-click={hide_suggest_modal()}
           aria-label={gettext("close")}
         >
           <.icon name="hero-x-mark" class="size-5" />
         </button>
-        <div class="c8-modal-body">
+        <div class="lbm-modal-body">
           <h3>Suggest a Topic</h3>
           <p>Got something that belongs on this list? Drop it below.</p>
-          <.form for={%{}} action={~p"/topic-suggestions"} method="post" class="c8-suggest-form">
+          <.form for={%{}} action={~p"/topic-suggestions"} method="post" class="lbm-suggest-form">
             <.input type="text" name="suggestion" value="" />
             <.button variant="primary">Suggest it</.button>
           </.form>
@@ -107,7 +109,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
       </div>
     </div>
 
-    <main id="main-content" class="c8-main" phx-hook="KatexRender">
+    <main id="main-content" class="lbm-main" phx-hook="KatexRender">
       {render_slot(@inner_block)}
     </main>
 
@@ -152,13 +154,13 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
     assigns = assign(assigns, :current, AlgorithmsForOptimization.Topics.fetch!(assigns.active_topic))
 
     ~H"""
-    <aside class="c8-toc" aria-label="Lesson navigation">
-      <p class="c8-toc-eyebrow">{@current.label}</p>
+    <aside class="lbm-toc" aria-label="Lesson navigation">
+      <p class="lbm-toc-eyebrow">{@current.label}</p>
 
       <.toc_lesson :for={lesson <- @current.lessons} lesson={lesson} active_lesson={@active_lesson} />
 
-      <div :if={@active_topic == :optimization and @active_lesson == :appendix} class="c8-toc-sublist">
-        <a href="#derivatives" class="c8-toc-subitem">Derivatives</a>
+      <div :if={@active_topic == :optimization and @active_lesson == :appendix} class="lbm-toc-sublist">
+        <a href="#derivatives" class="lbm-toc-subitem">Derivatives</a>
       </div>
     </aside>
     """
@@ -187,8 +189,8 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
 
   defp toc_link(assigns) do
     ~H"""
-    <.link navigate={@to} class={["c8-toc-item", @active && "c8-toc-item--active"]}>
-      <span class="c8-toc-number">{@number}</span> {@label}
+    <.link navigate={@to} class={["lbm-toc-item", @active && "lbm-toc-item--active"]}>
+      <span class="lbm-toc-number">{@number}</span> {@label}
     </.link>
     """
   end
@@ -198,9 +200,9 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
 
   defp toc_upcoming(assigns) do
     ~H"""
-    <span class="c8-toc-item c8-toc-item--upcoming">
-      <span class="c8-toc-number">{@number}</span> {@label}
-      <span class="c8-toc-tag">Soon</span>
+    <span class="lbm-toc-item lbm-toc-item--upcoming">
+      <span class="lbm-toc-number">{@number}</span> {@label}
+      <span class="lbm-toc-tag">Soon</span>
     </span>
     """
   end
@@ -288,6 +290,63 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         <.icon name="hero-moon-micro" class="size-4 opacity-75 hover:opacity-100" />
       </button>
     </div>
+    """
+  end
+
+  @doc """
+  Search and social metadata for the `<head>`: description, canonical URL,
+  Open Graph / Twitter tags, and JSON-LD structured data. See `AlgorithmsForOptimizationWeb.SEO`.
+  """
+  attr :page_title, :string, default: nil
+  attr :page_description, :string, default: nil
+  attr :canonical_path, :string, default: nil
+  attr :seo_lesson, :map, default: nil, doc: "%{topic: topic, lesson: lesson} on lesson pages"
+
+  def seo_meta(assigns) do
+    description = assigns.page_description || SEO.default_description()
+
+    json_ld =
+      cond do
+        assigns.seo_lesson ->
+          SEO.lesson_json_ld(
+            Map.merge(assigns.seo_lesson, %{
+              title: assigns.page_title,
+              description: description,
+              path: assigns.canonical_path || assigns.seo_lesson.lesson.path
+            })
+          )
+
+        assigns.canonical_path == "/" ->
+          SEO.website_json_ld()
+
+        true ->
+          nil
+      end
+
+    assigns =
+      assigns
+      |> assign(:description, description)
+      |> assign(:full_title, SEO.full_title(assigns.page_title))
+      |> assign(:canonical_url, assigns.canonical_path && SEO.url(assigns.canonical_path))
+      |> assign(:json_ld, json_ld)
+
+    ~H"""
+    <meta name="description" content={@description} />
+    <meta name="author" content={SEO.author()} />
+    <meta name="theme-color" content="#14a394" />
+    <link :if={@canonical_url} rel="canonical" href={@canonical_url} />
+    <meta property="og:site_name" content={SEO.site_name()} />
+    <meta property="og:type" content={if(@seo_lesson, do: "article", else: "website")} />
+    <meta property="og:title" content={@full_title} />
+    <meta property="og:description" content={@description} />
+    <meta :if={@canonical_url} property="og:url" content={@canonical_url} />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={@full_title} />
+    <meta name="twitter:description" content={@description} />
+    <script :if={@json_ld} type="application/ld+json">
+      <%= Phoenix.HTML.raw(@json_ld) %>
+    </script>
     """
   end
 end

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Load Bearing Math: an I-beam carrying a load -->
+  <rect width="64" height="64" rx="14" fill="#141d2b"/>
+  <!-- load arrow -->
+  <path d="M32 7v10" stroke="#f0b44c" stroke-width="6" stroke-linecap="round"/>
+  <path d="M24 14l8 8 8-8" fill="none" stroke="#f0b44c" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- I-beam: top flange, web, bottom flange -->
+  <rect x="13" y="26" width="38" height="7" rx="2" fill="#3fd1bd"/>
+  <rect x="28" y="31" width="8" height="18" fill="#3fd1bd"/>
+  <rect x="13" y="47" width="38" height="7" rx="2" fill="#3fd1bd"/>
+</svg>

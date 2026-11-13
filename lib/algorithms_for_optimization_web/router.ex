@@ -1,6 +1,8 @@
 defmodule AlgorithmsForOptimizationWeb.Router do
   use AlgorithmsForOptimizationWeb, :router
 
+  import AlgorithmsForOptimizationWeb.SEO, only: [put_canonical_path: 2]
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -8,10 +10,29 @@ defmodule AlgorithmsForOptimizationWeb.Router do
     plug :put_root_layout, html: {AlgorithmsForOptimizationWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :put_canonical_path
   end
 
   pipeline :api do
     plug :accepts, ["json"]
+  end
+
+  pipeline :admin do
+    plug :admin_basic_auth
+  end
+
+  # Crawler files, served dynamically so they can use the configured host.
+  scope "/", AlgorithmsForOptimizationWeb do
+    get "/robots.txt", SitemapController, :robots
+    get "/sitemap.xml", SitemapController, :sitemap
+  end
+
+  # Private: read submitted topic suggestions. Credentials come from
+  # ADMIN_USERNAME / ADMIN_PASSWORD (see config/runtime.exs); without them it 404s.
+  scope "/", AlgorithmsForOptimizationWeb do
+    pipe_through [:browser, :admin]
+
+    get "/topic-suggestions", TopicSuggestionController, :index
   end
 
   scope "/", AlgorithmsForOptimizationWeb do
@@ -20,8 +41,6 @@ defmodule AlgorithmsForOptimizationWeb.Router do
     get "/", PageController, :home
     get "/topics", PageController, :topics
     post "/topic-suggestions", TopicSuggestionController, :create
-    # Not linked anywhere in the UI; visit directly to read what's come in.
-    get "/topic-suggestions", TopicSuggestionController, :index
 
     live "/sources", SourcesLive
 
@@ -90,6 +109,19 @@ defmodule AlgorithmsForOptimizationWeb.Router do
 
       live_dashboard "/dashboard", metrics: AlgorithmsForOptimizationWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
+    end
+  end
+
+  defp admin_basic_auth(conn, _opts) do
+    case Application.get_env(:algorithms_for_optimization, :admin_basic_auth) do
+      [username: username, password: password]
+      when is_binary(username) and username != "" and is_binary(password) and password != "" ->
+        Plug.BasicAuth.basic_auth(conn, username: username, password: password)
+
+      _not_configured ->
+        conn
+        |> send_resp(404, "Not Found")
+        |> halt()
     end
   end
 end

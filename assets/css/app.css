@@ -19,7 +19,7 @@
 }
 
 /* ======================================================================
-   Calcul8 Fonts — self-hosted variable fonts (all SIL Open Font License)
+   Load Bearing Math Fonts — self-hosted variable fonts (all SIL Open Font License)
    ====================================================================== */
 
 @font-face {
@@ -52,7 +52,7 @@
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', ui-monospace, monospace;
 }
 
-/* daisyUI theme plugin — Calcul8 palette.
+/* daisyUI theme plugin — Load Bearing Math palette.
    Dark is "chalkboard ink": deep ink-blue with chalk text, teal + amber.
    Light is "paper": warm off-white with ink text, deep teal + burnt amber. */
 @plugin "daisyui/packages/bundle/daisyui-theme" {
@@ -155,7 +155,7 @@ h1, h2, h3 {
    Header
    ====================================================================== */
 
-.c8-header {
+.lbm-header {
   position: sticky;
   top: 0;
   z-index: 100;
@@ -164,7 +164,7 @@ h1, h2, h3 {
   border-bottom: 1px solid var(--color-base-300);
 }
 
-.c8-header-inner {
+.lbm-header-inner {
   max-width: 1100px;
   margin: 0 auto;
   padding: 1rem 1.5rem;
@@ -174,7 +174,7 @@ h1, h2, h3 {
   gap: 1rem;
 }
 
-.c8-brand {
+.lbm-brand {
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -182,13 +182,13 @@ h1, h2, h3 {
   color: inherit;
 }
 
-.c8-brand-text {
+.lbm-brand-text {
   display: flex;
   flex-direction: column;
   line-height: 1.15;
 }
 
-.c8-brand-name {
+.lbm-brand-name {
   font-family: var(--font-heading);
   font-size: 0.9rem;
   text-transform: uppercase;
@@ -196,7 +196,7 @@ h1, h2, h3 {
   color: var(--color-base-content);
 }
 
-.c8-brand-subtitle {
+.lbm-brand-subtitle {
   font-size: 0.65rem;
   color: color-mix(in oklch, var(--color-base-content) 55%, transparent);
   text-transform: uppercase;
@@ -204,18 +204,18 @@ h1, h2, h3 {
   margin-top: 2px;
 }
 
-.c8-header-right {
+.lbm-header-right {
   display: flex;
   align-items: center;
   gap: 1.25rem;
 }
 
-.c8-nav {
+.lbm-nav {
   display: flex;
   gap: 0.25rem;
 }
 
-.c8-nav-link {
+.lbm-nav-link {
   font-family: var(--font-heading);
   font-size: 0.8rem;
   text-transform: uppercase;
@@ -227,12 +227,12 @@ h1, h2, h3 {
   transition: color 0.2s ease, background 0.2s ease;
 }
 
-.c8-nav-link:hover {
+.lbm-nav-link:hover {
   color: var(--color-base-content);
   background: var(--color-base-200);
 }
 
-.c8-main {
+.lbm-main {
   max-width: 1100px;
   margin: 0 auto;
   padding: 3rem 1.5rem 5rem;
@@ -242,14 +242,14 @@ h1, h2, h3 {
    Hero / Page Intro
    ====================================================================== */
 
-.c8-hero {
+.lbm-hero {
   max-width: 640px;
   margin: 0 auto;
   text-align: center;
   padding-top: 2rem;
 }
 
-.c8-eyebrow {
+.lbm-eyebrow {
   font-family: var(--font-heading);
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -258,7 +258,7 @@ h1, h2, h3 {
   margin-bottom: 0.75rem;
 }
 
-.c8-hero-title {
+.lbm-hero-title {
   font-family: var(--font-heading);
   font-size: clamp(2rem, 1.4rem + 2.5vw, 3rem);
   font-weight: 700;
@@ -266,19 +266,19 @@ h1, h2, h3 {
   margin-bottom: 1.25rem;
 }
 
-.c8-hero-lede {
+.lbm-hero-lede {
   font-size: 1.05rem;
   line-height: 1.7;
   color: color-mix(in oklch, var(--color-base-content) 75%, transparent);
 }
 
-.c8-topic-index {
+.lbm-topic-index {
   max-width: 720px;
   margin: 2.5rem auto 0;
   border-top: 1px solid var(--color-base-300);
 }
 
-.c8-topic-entry {
+.lbm-topic-entry {
   display: flex;
   align-items: baseline;
   gap: 1.25rem;
@@ -288,16 +288,16 @@ h1, h2, h3 {
   transition: background-color 0.2s ease, padding-left 0.2s ease;
 }
 
-.c8-topic-entry:hover {
+.lbm-topic-entry:hover {
   background-color: var(--color-base-200);
   padding-left: 1.25rem;
 }
 
-.c8-topic-entry:hover .c8-topic-entry-arrow {
+.lbm-topic-entry:hover .lbm-topic-entry-arrow {
   transform: translateX(0.2rem);
 }
 
-.c8-topic-entry-number {
+.lbm-topic-entry-number {
   font-family: var(--font-mono);
   font-size: 1rem;
   font-weight: 600;
@@ -305,13 +305,13 @@ h1, h2, h3 {
   color: color-mix(in oklch, var(--color-base-content) 40%, transparent);
 }
 
-.c8-topic-entry-body {
+.lbm-topic-entry-body {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
 }
 
-.c8-topic-entry-title {
+.lbm-topic-entry-title {
   font-family: var(--font-heading);
   font-size: 1.2rem;
   font-weight: 700;
@@ -321,12 +321,12 @@ h1, h2, h3 {
   gap: 0.5rem;
 }
 
-.c8-topic-entry-arrow {
+.lbm-topic-entry-arrow {
   display: inline-block;
   transition: transform 0.2s ease;
 }
 
-.c8-topic-entry-description {
+.lbm-topic-entry-description {
   font-size: 0.9rem;
   line-height: 1.6;
   color: var(--color-base-content);
@@ -336,7 +336,7 @@ h1, h2, h3 {
    Content Card — generic bordered block for lesson content
    ====================================================================== */
 
-.c8-card {
+.lbm-card {
   padding: 1.5rem;
   background: var(--color-base-200);
   border: 1px solid var(--color-base-300);
@@ -347,7 +347,7 @@ h1, h2, h3 {
    Lesson Layout — storybook-style sidebar + reading column
    ====================================================================== */
 
-.c8-lesson {
+.lbm-lesson {
   display: grid;
   grid-template-columns: 220px minmax(0, 1fr);
   gap: 3rem;
@@ -355,12 +355,12 @@ h1, h2, h3 {
 }
 
 @media (max-width: 860px) {
-  .c8-lesson {
+  .lbm-lesson {
     grid-template-columns: 1fr;
   }
 }
 
-.c8-toc {
+.lbm-toc {
   position: sticky;
   top: 5.5rem;
   display: flex;
@@ -371,7 +371,7 @@ h1, h2, h3 {
 }
 
 @media (max-width: 860px) {
-  .c8-toc {
+  .lbm-toc {
     position: static;
     border-left: none;
     border-bottom: 1px solid var(--color-base-300);
@@ -381,7 +381,7 @@ h1, h2, h3 {
   }
 }
 
-.c8-toc-eyebrow {
+.lbm-toc-eyebrow {
   font-family: var(--font-heading);
   font-size: 0.7rem;
   text-transform: uppercase;
@@ -390,7 +390,7 @@ h1, h2, h3 {
   margin-bottom: 0.5rem;
 }
 
-.c8-toc-item {
+.lbm-toc-item {
   display: flex;
   align-items: baseline;
   gap: 0.6rem;
@@ -401,35 +401,35 @@ h1, h2, h3 {
   transition: color 0.2s ease;
 }
 
-.c8-toc-item:hover {
+.lbm-toc-item:hover {
   color: var(--color-base-content);
 }
 
-.c8-toc-number {
+.lbm-toc-number {
   font-family: var(--font-mono);
   font-size: 0.7rem;
   min-width: 1.2rem;
   color: color-mix(in oklch, var(--color-base-content) 40%, transparent);
 }
 
-.c8-toc-item--active {
+.lbm-toc-item--active {
   color: var(--color-primary);
   font-weight: 600;
 }
 
-.c8-toc-item--active .c8-toc-number {
+.lbm-toc-item--active .lbm-toc-number {
   color: var(--color-primary);
 }
 
-.c8-toc-item--upcoming {
+.lbm-toc-item--upcoming {
   cursor: default;
 }
 
-.c8-toc-item--upcoming:hover {
+.lbm-toc-item--upcoming:hover {
   color: color-mix(in oklch, var(--color-base-content) 55%, transparent);
 }
 
-.c8-toc-tag {
+.lbm-toc-tag {
   margin-left: auto;
   font-family: var(--font-heading);
   font-size: 0.6rem;
@@ -438,14 +438,14 @@ h1, h2, h3 {
   color: color-mix(in oklch, var(--color-base-content) 40%, transparent);
 }
 
-.c8-toc-sublist {
+.lbm-toc-sublist {
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
   margin: 0.1rem 0 0.3rem 1.8rem;
 }
 
-.c8-toc-subitem {
+.lbm-toc-subitem {
   font-size: 0.75rem;
   color: color-mix(in oklch, var(--color-base-content) 50%, transparent);
   text-decoration: none;
@@ -453,17 +453,17 @@ h1, h2, h3 {
   transition: color 0.2s ease;
 }
 
-.c8-toc-subitem:hover {
+.lbm-toc-subitem:hover {
   color: var(--color-primary);
 }
 
 /* Prose column */
-.c8-prose h1 {
+.lbm-prose h1 {
   font-size: 2rem;
   margin-bottom: 1.5rem;
 }
 
-.c8-prose h2 {
+.lbm-prose h2 {
   font-size: 1.1rem;
   text-transform: uppercase;
   letter-spacing: 0.03em;
@@ -473,20 +473,20 @@ h1, h2, h3 {
   border-top: 1px solid var(--color-base-300);
 }
 
-.c8-prose h2:first-of-type {
+.lbm-prose h2:first-of-type {
   margin-top: 0;
   padding-top: 0;
   border-top: none;
 }
 
-.c8-prose p {
+.lbm-prose p {
   font-size: 1rem;
   line-height: 1.75;
   color: color-mix(in oklch, var(--color-base-content) 85%, transparent);
   margin-bottom: 1rem;
 }
 
-.c8-prose ul {
+.lbm-prose ul {
   margin: 1rem 0 1rem 1.25rem;
   display: flex;
   flex-direction: column;
@@ -494,12 +494,12 @@ h1, h2, h3 {
   list-style: disc;
 }
 
-.c8-prose li {
+.lbm-prose li {
   line-height: 1.6;
   color: color-mix(in oklch, var(--color-base-content) 85%, transparent);
 }
 
-.c8-lesson-footer {
+.lbm-lesson-footer {
   margin-top: 3rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--color-base-300);
@@ -507,7 +507,7 @@ h1, h2, h3 {
   justify-content: flex-end;
 }
 
-.c8-lesson-footer-next {
+.lbm-lesson-footer-next {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -515,7 +515,7 @@ h1, h2, h3 {
   text-align: right;
 }
 
-.c8-lesson-footer-label {
+.lbm-lesson-footer-label {
   font-family: var(--font-heading);
   font-size: 0.65rem;
   text-transform: uppercase;
@@ -523,7 +523,7 @@ h1, h2, h3 {
   color: color-mix(in oklch, var(--color-base-content) 45%, transparent);
 }
 
-.c8-lesson-footer-title {
+.lbm-lesson-footer-title {
   font-size: 0.95rem;
   color: color-mix(in oklch, var(--color-base-content) 70%, transparent);
 }
@@ -532,7 +532,7 @@ h1, h2, h3 {
    Interactive Demo — inline algorithm playground
    ====================================================================== */
 
-.c8-demo {
+.lbm-demo {
   margin: 1.5rem 0;
   padding: 1.5rem;
   background: var(--color-base-200);
@@ -540,13 +540,13 @@ h1, h2, h3 {
   border-radius: var(--radius-box);
 }
 
-.c8-demo h3 {
+.lbm-demo h3 {
   margin: 0 0 0.5rem;
   font-family: var(--font-heading);
   font-size: 1rem;
 }
 
-.c8-demo-form {
+.lbm-demo-form {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
@@ -554,23 +554,23 @@ h1, h2, h3 {
   margin-top: 1rem;
 }
 
-.c8-demo-form > * {
+.lbm-demo-form > * {
   flex: 1 1 10rem;
 }
 
-.c8-demo-error {
+.lbm-demo-error {
   margin-top: 1rem;
   color: var(--color-error);
 }
 
-.c8-demo-result {
+.lbm-demo-result {
   margin-top: 1rem;
   font-family: var(--font-heading);
   font-size: 0.95rem;
   color: var(--color-primary);
 }
 
-.c8-code-block {
+.lbm-code-block {
   margin-top: 0.75rem;
   padding: 1rem;
   background: var(--color-base-300);
@@ -586,7 +586,7 @@ h1, h2, h3 {
    Math Reveal — "Check My Math" toggle + overlay
    ====================================================================== */
 
-.c8-math-toggle {
+.lbm-math-toggle {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -604,12 +604,12 @@ h1, h2, h3 {
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 
-.c8-math-toggle:hover {
+.lbm-math-toggle:hover {
   background: var(--color-base-200);
   border-color: var(--color-primary);
 }
 
-.c8-modal {
+.lbm-modal {
   position: fixed;
   inset: 0;
   z-index: 200;
@@ -619,14 +619,14 @@ h1, h2, h3 {
   padding: 1.5rem;
 }
 
-.c8-modal-backdrop {
+.lbm-modal-backdrop {
   position: absolute;
   inset: 0;
   background: oklch(0% 0 0 / 0.6);
   backdrop-filter: blur(4px);
 }
 
-.c8-modal-content {
+.lbm-modal-content {
   position: relative;
   width: 100%;
   max-width: 560px;
@@ -639,7 +639,7 @@ h1, h2, h3 {
   box-shadow: 0 20px 50px -12px oklch(0% 0 0 / 0.4);
 }
 
-.c8-modal-close {
+.lbm-modal-close {
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -656,21 +656,21 @@ h1, h2, h3 {
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 
-.c8-modal-close:hover {
+.lbm-modal-close:hover {
   background: var(--color-base-300);
   border-color: var(--color-primary);
 }
 
-.c8-modal-body {
+.lbm-modal-body {
   font-size: 0.95rem;
   line-height: 1.7;
   color: color-mix(in oklch, var(--color-base-content) 85%, transparent);
 }
 
-.c8-modal-body :is(h1, h2, h3) {
+.lbm-modal-body :is(h1, h2, h3) {
   margin-bottom: 0.75rem;
 }
 
-.c8-modal-body :is(p, ul, ol) {
+.lbm-modal-body :is(p, ul, ol) {
   margin-bottom: 1rem;
 }

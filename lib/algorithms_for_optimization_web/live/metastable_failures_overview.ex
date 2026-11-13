@@ -8,10 +8,10 @@ defmodule AlgorithmsForOptimizationWeb.MetastableFailuresLive do
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash} current_scope={assigns[:current_scope]}>
-      <div class="c8-lesson">
+      <div class="lbm-lesson">
         <Layouts.lesson_toc active_topic={:metastable_failures} active_lesson={:overview} />
 
-        <div class="c8-prose">
+        <div class="lbm-prose">
           <h1 id="page-heading">Metastable Failures</h1>
 
           <h2>Why a system can stay down after the trigger is gone</h2>

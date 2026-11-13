@@ -17,18 +17,29 @@ defmodule AlgorithmsForOptimization.Topics do
         "The angle between two vectors turns out to be the whole trick: it's how search engines, recommendation systems, and every embedding model decide what counts as similar.",
       lessons: [
         %{key: :overview, number: "00", label: "Overview", path: "/cosine-similarity"},
-        %{key: :math, number: "01", label: "An Introduction to the Math", path: "/cosine-similarity-math"},
+        %{
+          key: :math,
+          number: "01",
+          label: "An Introduction to the Math",
+          path: "/cosine-similarity-math",
+          description:
+            "The math behind cosine similarity from the ground up: what a vector is, how to plot one in 2D and 3D, and how the dot product turns two vectors into a single number."
+        },
         %{
           key: :implementation,
           number: "02",
           label: "A Simple Cosine Similarity Example",
-          path: "/cosine-similarity-implementation"
+          path: "/cosine-similarity-implementation",
+          description:
+            "Cosine similarity worked through by hand: turn a few video games into trait vectors, then use the angle between them to see which games are most alike."
         },
         %{
           key: :realistic_example,
           number: "03",
           label: "A More Realistic Example",
-          path: "/cosine-similarity-realistic-example"
+          path: "/cosine-similarity-realistic-example",
+          description:
+            "Scale cosine similarity up to 50-dimensional word vectors: pick a word and see its nearest neighbors, the same idea that powers semantic search and embeddings."
         }
       ]
     },

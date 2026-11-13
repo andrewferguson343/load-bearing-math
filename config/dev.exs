@@ -76,3 +76,6 @@ config :phoenix_live_view,
 
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
+
+# Basic auth for the private /topic-suggestions page (prod reads ADMIN_USERNAME/ADMIN_PASSWORD).
+config :algorithms_for_optimization, :admin_basic_auth, username: "admin", password: "admin"

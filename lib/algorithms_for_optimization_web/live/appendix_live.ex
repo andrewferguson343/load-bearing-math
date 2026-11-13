@@ -2,15 +2,15 @@ defmodule AlgorithmsForOptimizationWeb.AppendixLive do
   use AlgorithmsForOptimizationWeb, :live_view
 
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, page_title: "Appendix")}
+    {:ok, assign(socket, page_title: "Optimization Algorithms: Appendix")}
   end
 
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash} current_scope={assigns[:current_scope]}>
-      <div class="c8-lesson">
+      <div class="lbm-lesson">
         <Layouts.lesson_toc active_topic={:optimization} active_lesson={:appendix} />
-        <div class="c8-prose">
+        <div class="lbm-prose">
           <h1 id="page-heading">Appendix</h1>
 
           <h2 id="derivatives">Derivatives</h2>

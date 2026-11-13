@@ -17,7 +17,7 @@ defmodule AlgorithmsForOptimizationWeb do
   those modules here.
   """
 
-  def static_paths, do: ~w(assets fonts images vendor favicon.ico robots.txt)
+  def static_paths, do: ~w(assets fonts images vendor favicon.ico)
 
   def router do
     quote do
@@ -51,6 +51,8 @@ defmodule AlgorithmsForOptimizationWeb do
   def live_view do
     quote do
       use Phoenix.LiveView
+
+      on_mount AlgorithmsForOptimizationWeb.SEO
 
       unquote(html_helpers())
     end
