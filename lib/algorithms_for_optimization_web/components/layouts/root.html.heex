@@ -13,11 +13,12 @@
     />
     <link rel="icon" href={~p"/images/favicon.svg"} type="image/svg+xml" />
     <link rel="icon" href={~p"/favicon.ico"} sizes="any" />
+    <link rel="apple-touch-icon" href={~p"/images/apple-touch-icon.png"} />
     <link phx-track-static rel="stylesheet" href={~p"/assets/css/app.css"} />
     <link rel="stylesheet" href={~p"/vendor/katex/katex.min.css"} />
     <script phx-track-static type="module" src={~p"/assets/js/app.js"}>
     </script>
-    <script>
+    <script nonce={assigns[:csp_nonce]}>
       (() => {
         const systemTheme = () => matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 

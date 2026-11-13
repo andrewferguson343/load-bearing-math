@@ -10,6 +10,7 @@ defmodule AlgorithmsForOptimizationWeb.Router do
     plug :put_root_layout, html: {AlgorithmsForOptimizationWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug AlgorithmsForOptimizationWeb.ContentSecurityPolicy
     plug :put_canonical_path
   end
 
@@ -117,7 +118,10 @@ defmodule AlgorithmsForOptimizationWeb.Router do
     scope "/dev" do
       pipe_through :browser
 
-      live_dashboard "/dashboard", metrics: AlgorithmsForOptimizationWeb.Telemetry
+      live_dashboard "/dashboard",
+        metrics: AlgorithmsForOptimizationWeb.Telemetry,
+        csp_nonce_assign_key: :csp_nonce
+
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
 

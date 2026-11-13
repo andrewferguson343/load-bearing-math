@@ -98,6 +98,8 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityMathLive do
           </p>
           <div
             id="vector-chart"
+            role="figure"
+            aria-label="Chart: the vector ⟨1, 1⟩ drawn as an arrow from the origin to the point (1, 1) on the x and y axes."
             phx-hook="PlotlyChart"
             data-plotly-data={@vector_plot_data}
             data-plotly-layout={@vector_plot_layout}
@@ -111,6 +113,8 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityMathLive do
           </p>
           <div
             id="vector-3d-chart"
+            role="figure"
+            aria-label="Interactive 3D chart: the vector ⟨1, 2, 3⟩ drawn as a line from the origin to the point (1, 2, 3) on the x, y and z axes."
             phx-hook="PlotlyChart"
             data-plotly-data={@vector_3d_plot_data}
             data-plotly-layout={@vector_3d_plot_layout}

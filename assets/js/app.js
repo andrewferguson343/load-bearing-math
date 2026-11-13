@@ -67,7 +67,11 @@ const Hooks = {
       const Plotly = await loadPlotly()
       // The hook may have been removed (live navigation) while Plotly was loading.
       if (!this.el.isConnected) return
-      Plotly.react(this.el, data, layout, {responsive: true})
+      await Plotly.react(this.el, data, layout, {responsive: true})
+      // The chart's description lives in the container's aria-label (role="figure"), so hide
+      // Plotly's SVG internals (tick labels, paths) from screen readers instead of reading them out.
+      // The toolbar buttons stay reachable.
+      this.el.querySelectorAll(".main-svg, .gl-container").forEach(el => el.setAttribute("aria-hidden", "true"))
     },
   },
 

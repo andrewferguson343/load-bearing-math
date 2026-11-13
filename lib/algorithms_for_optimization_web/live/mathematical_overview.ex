@@ -150,6 +150,8 @@ defmodule AlgorithmsForOptimizationWeb.MathematicsLive do
           </p>
           <div
             id="objective-function-chart"
+            role="figure"
+            aria-label="Chart: the curve f(x) = x⁴ − 3x² + x, which dips into two valleys with a hump between them."
             phx-hook="PlotlyChart"
             data-plotly-data={@plot_data}
             data-plotly-layout={@plot_layout}
@@ -199,6 +201,8 @@ defmodule AlgorithmsForOptimizationWeb.MathematicsLive do
           </.math_reveal>
           <div
             id="tangent-line-chart"
+            role="figure"
+            aria-label="Chart: the curve f(x) = x⁴ − 3x² + x with its tangent line touching it at x = 1."
             phx-hook="PlotlyChart"
             data-plotly-data={@tangent_plot_data}
             data-plotly-layout={@tangent_plot_layout}
@@ -221,6 +225,8 @@ defmodule AlgorithmsForOptimizationWeb.MathematicsLive do
           </p>
           <div
             id="gradient-hyperplane-chart"
+            role="figure"
+            aria-label="Interactive 3D chart: the bowl-shaped surface f(x, y) = x² + y² with its tangent plane z = 2x + 2y − 2 touching it at the point (1, 1)."
             phx-hook="PlotlyChart"
             data-plotly-data={@gradient_plot_data}
             data-plotly-layout={@gradient_plot_layout}

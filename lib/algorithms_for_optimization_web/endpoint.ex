@@ -15,6 +15,9 @@ defmodule AlgorithmsForOptimizationWeb.Endpoint do
     websocket: [connect_info: [session: @session_options]],
     longpoll: [connect_info: [session: @session_options]]
 
+  # www.loadbearingmath.com -> loadbearingmath.com (before anything else is served).
+  plug AlgorithmsForOptimizationWeb.CanonicalHost
+
   # Serve at "/" the static files from "priv/static" directory.
   #
   # When code reloading is disabled (e.g., in production),

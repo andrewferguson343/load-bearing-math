@@ -107,7 +107,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         <button
           type="button"
           class="lbm-nav-cta lbm-mobile-nav-cta"
-          phx-click={hide_mobile_nav() |> show_suggest_modal()}
+          phx-click={hide_mobile_nav() |> show_suggest_modal("#mobile-nav-toggle")}
         >
           Suggest a Topic
         </button>
@@ -123,13 +123,15 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
       class="lbm-modal"
       role="dialog"
       aria-modal="true"
+      aria-labelledby="suggest-topic-title"
       phx-click-away={hide_suggest_modal()}
       phx-window-keydown={hide_suggest_modal()}
       phx-key="escape"
       style="display: none;"
     >
       <div class="lbm-modal-backdrop" aria-hidden="true" />
-      <div class="lbm-modal-content">
+      <%!-- focus_wrap keeps Tab cycling inside the dialog while it's open --%>
+      <.focus_wrap id="suggest-topic-content" class="lbm-modal-content">
         <button
           type="button"
           class="lbm-modal-close"
@@ -139,7 +141,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
           <.icon name="hero-x-mark" class="size-5" />
         </button>
         <div class="lbm-modal-body">
-          <h3>Suggest a Topic</h3>
+          <h3 id="suggest-topic-title">Suggest a Topic</h3>
           <p>Got something that belongs on this list? Drop it below.</p>
           <.form
             for={%{}}
@@ -172,7 +174,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
             <.button variant="primary">Suggest it</.button>
           </.form>
         </div>
-      </div>
+      </.focus_wrap>
     </div>
 
     <main id="main-content" class="lbm-main" phx-hook="KatexRender">
@@ -194,14 +196,19 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
     JS.set_attribute(js, {"aria-expanded", "false"}, to: "#mobile-nav-toggle")
   end
 
-  defp show_suggest_modal(js \\ %JS{}) do
+  # Opening remembers where focus was (`return_focus_to`, or the clicked button by default) and
+  # puts the cursor in the suggestion field; closing hands focus back. From the mobile menu the
+  # clicked button disappears as the menu closes, so focus returns to the menu button instead.
+  defp show_suggest_modal(js \\ %JS{}, return_focus_to \\ nil) do
     js
+    |> JS.push_focus(if(return_focus_to, do: [to: return_focus_to], else: []))
     |> JS.show(
       to: "#suggest-topic-modal",
       display: "flex",
       time: 150,
       transition: {"transition-opacity ease-out duration-150", "opacity-0", "opacity-100"}
     )
+    |> JS.focus(to: "#suggest-topic-input")
   end
 
   defp hide_suggest_modal do
@@ -210,6 +217,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
       time: 100,
       transition: {"transition-opacity ease-in duration-100", "opacity-100", "opacity-0"}
     )
+    |> JS.pop_focus()
   end
 
   @doc """
@@ -414,6 +422,8 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
       |> assign(:full_title, SEO.full_title(assigns.page_title))
       |> assign(:canonical_url, assigns.canonical_path && SEO.url(assigns.canonical_path))
       |> assign(:json_ld, json_ld)
+      # 1200x630 share card; source is assets/og/og-image.html. ~p gives the digested path in prod.
+      |> assign(:share_image_url, SEO.url(~p"/images/og-image.png"))
 
     ~H"""
     <meta name="description" content={@description} />
@@ -426,9 +436,18 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
     <meta property="og:description" content={@description} />
     <meta :if={@canonical_url} property="og:url" content={@canonical_url} />
     <meta property="og:locale" content="en_US" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={@share_image_url} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Load Bearing Math: short, hands-on walkthroughs of the math behind everyday engineering"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={@full_title} />
     <meta name="twitter:description" content={@description} />
+    <meta name="twitter:image" content={@share_image_url} />
     <script :if={@json_ld} type="application/ld+json">
       <%= Phoenix.HTML.raw(@json_ld) %>
     </script>
