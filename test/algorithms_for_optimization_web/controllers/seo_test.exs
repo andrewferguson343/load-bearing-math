@@ -20,6 +20,12 @@ defmodule AlgorithmsForOptimizationWeb.SEOTest do
       assert attr(doc, ~s(meta[property="og:title"]), "content") =~ "Load Bearing Math"
       assert attr(doc, ~s(link[rel="icon"][type="image/svg+xml"]), "href") =~ "favicon"
 
+      # Share card: absolute URL (crawlers don't resolve relative ones) + large Twitter/X card.
+      assert attr(doc, ~s(meta[property="og:image"]), "content") =~
+               ~r{^https?://[^/]+/images/og-image.*\.png$}
+
+      assert attr(doc, ~s(meta[name="twitter:card"]), "content") == "summary_large_image"
+
       json_ld = doc |> LazyHTML.query(~s(script[type="application/ld+json"])) |> LazyHTML.text()
       assert %{"@type" => "WebSite", "name" => "Load Bearing Math"} = Jason.decode!(json_ld)
     end

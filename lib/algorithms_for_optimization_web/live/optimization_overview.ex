@@ -148,6 +148,8 @@ defmodule AlgorithmsForOptimizationWeb.OptimizationLive do
 
             <div
               id="bracketing-function-chart"
+              role="figure"
+              aria-label="Chart: the selected function f(x), with the bracket found around its minimum marked by dotted vertical lines."
               phx-hook="PlotlyChart"
               data-plotly-data={@plot_data}
               data-plotly-layout={@plot_layout}

@@ -1,0 +1,151 @@
+<!doctype html>
+<!--
+  Source for priv/static/images/og-image.png, the 1200x630 social share image (og:image).
+  Not served by the app. To regenerate after a branding change, render it with headless
+  Chrome/Edge from the repo root, e.g. on Windows:
+
+    "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --headless=new
+      --disable-gpu --hide-scrollbars --force-device-scale-factor=1 --window-size=1200,630
+      --screenshot="%CD%\priv\static\images\og-image.png" "file:///%CD%/assets/og/og-image.html"
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Load Bearing Math share image</title>
+    <style>
+      @font-face {
+        font-family: "Bricolage Grotesque";
+        src: url("../../priv/static/fonts/bricolage-grotesque-latin-wght-normal.woff2") format("woff2-variations");
+        font-weight: 200 800;
+      }
+      @font-face {
+        font-family: "Instrument Sans";
+        src: url("../../priv/static/fonts/instrument-sans-latin-wght-normal.woff2") format("woff2-variations");
+        font-weight: 400 700;
+      }
+      @font-face {
+        font-family: "JetBrains Mono";
+        src: url("../../priv/static/fonts/jetbrains-mono-latin-wght-normal.woff2") format("woff2-variations");
+        font-weight: 100 800;
+      }
+
+      /* Palette mirrors the dark theme in assets/css/app.css */
+      :root {
+        --ink: #141d2b;
+        --ink-2: #1b2638;
+        --chalk: #f3efe6;
+        --chalk-dim: #a9b2c0;
+        --teal: #3fd1bd;
+        --amber: #f0b44c;
+        --grid: rgba(243, 239, 230, 0.06);
+      }
+
+      * { margin: 0; box-sizing: border-box; }
+
+      html, body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+      }
+
+      body {
+        background:
+          linear-gradient(var(--grid) 1px, transparent 1px) 0 0 / 40px 40px,
+          linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0 / 40px 40px,
+          radial-gradient(ellipse at 85% 20%, rgba(63, 209, 189, 0.14), transparent 55%),
+          var(--ink);
+        color: var(--chalk);
+        font-family: "Instrument Sans", sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 72px 80px;
+      }
+
+      .top {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .mark { width: 72px; height: 72px; }
+
+      .eyebrow {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 22px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--teal);
+      }
+
+      h1 {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-weight: 750;
+        font-size: 112px;
+        line-height: 0.98;
+        letter-spacing: -0.02em;
+      }
+
+      h1 .accent { color: var(--amber); }
+
+      .lede {
+        margin-top: 28px;
+        max-width: 860px;
+        font-size: 34px;
+        line-height: 1.35;
+        color: var(--chalk-dim);
+      }
+
+      .bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 24px;
+      }
+
+      .url { color: var(--chalk); }
+      .author { color: var(--chalk-dim); }
+
+      /* A beam under load: the equation the site is named after, sort of. */
+      .formula {
+        position: absolute;
+        right: 80px;
+        top: 66px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 22px;
+        color: rgba(240, 180, 76, 0.5);
+        text-align: right;
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top">
+      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="14" fill="#1b2638" />
+        <path d="M32 7v10" stroke="#f0b44c" stroke-width="6" stroke-linecap="round" />
+        <path d="M24 14l8 8 8-8" fill="none" stroke="#f0b44c" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+        <rect x="13" y="26" width="38" height="7" rx="2" fill="#3fd1bd" />
+        <rect x="28" y="31" width="8" height="18" fill="#3fd1bd" />
+        <rect x="13" y="47" width="38" height="7" rx="2" fill="#3fd1bd" />
+      </svg>
+      <span class="eyebrow">The math behind the systems</span>
+    </div>
+
+    <div class="formula">cos θ = a·b / ‖a‖‖b‖<br />dx/dt = −kx + u</div>
+
+    <div>
+      <h1>Load Bearing <span class="accent">Math</span></h1>
+      <p class="lede">
+        Short, hands-on walkthroughs of the math holding up search, rate limiters,
+        autoscalers and optimization.
+      </p>
+    </div>
+
+    <div class="bottom">
+      <span class="url">loadbearingmath.com</span>
+      <span class="author">by Andrew Ferguson</span>
+    </div>
+  </body>
+</html>

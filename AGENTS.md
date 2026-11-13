@@ -53,11 +53,6 @@ same flow.
 - **Topics are gated** by `public_topics` in `config/config.exs`; dev (`dev_routes`) shows
   everything. Tests and the sitemap follow the gate.
 
-### Tracking
-
-Launch work is tracked in `LAUNCH_CHECKLIST.md` and CI/CD work in `CI_CD_CHECKLIST.md`.
-Tick items off (and note anything learned) in the same branch as the change that completes them.
-
 ### Local development (Windows)
 
 - Elixir and Erlang are installed under `C:\Program Files\Elixir\bin` and
@@ -69,6 +64,9 @@ Tick items off (and note anything learned) in the same branch as the change that
   `priv/static` may need a rebuild or server restart before the dev server sees it.
 - Changes to `config/*.exs` or dependencies need a dev server restart.
 - Preview the branded error pages at `/dev/errors/404` and `/dev/errors/500`.
+- Raster images are generated, not hand-edited: the share card (`priv/static/images/og-image.png`)
+  from `assets/og/og-image.html`, and `favicon.ico` + `apple-touch-icon.png` from `assets/og/icon.html`
+  via `assets/og/build-icons.ps1`. Regenerate them after changing the logo or brand colors.
 
 ## Project guidelines
 

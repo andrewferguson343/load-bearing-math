@@ -485,13 +485,15 @@ defmodule AlgorithmsForOptimizationWeb.CoreComponents do
       class="lbm-modal"
       role="dialog"
       aria-modal="true"
+      aria-label={@label}
       phx-click-away={hide_math_modal(@id)}
       phx-window-keydown={hide_math_modal(@id)}
       phx-key="escape"
       style="display: none;"
     >
       <div class="lbm-modal-backdrop" aria-hidden="true" />
-      <div class="lbm-modal-content">
+      <%!-- focus_wrap keeps Tab cycling inside the dialog while it's open --%>
+      <.focus_wrap id={"#{@id}-content"} class="lbm-modal-content">
         <button
           type="button"
           class="lbm-modal-close"
@@ -503,18 +505,22 @@ defmodule AlgorithmsForOptimizationWeb.CoreComponents do
         <div class="lbm-modal-body">
           {render_slot(@inner_block)}
         </div>
-      </div>
+      </.focus_wrap>
     </div>
     """
   end
 
+  # Remember the button that opened the dialog, move focus into the dialog, and hand focus
+  # back to that button on close, so keyboard and screen-reader users don't get lost.
   defp show_math_modal(id) do
-    JS.show(
+    JS.push_focus()
+    |> JS.show(
       to: "##{id}",
       display: "flex",
       time: 150,
       transition: {"transition-opacity ease-out duration-150", "opacity-0", "opacity-100"}
     )
+    |> JS.focus_first(to: "##{id}-content")
   end
 
   defp hide_math_modal(id) do
@@ -523,6 +529,7 @@ defmodule AlgorithmsForOptimizationWeb.CoreComponents do
       time: 100,
       transition: {"transition-opacity ease-in duration-100", "opacity-100", "opacity-0"}
     )
+    |> JS.pop_focus()
   end
 
   ## JS Commands
