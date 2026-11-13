@@ -38,9 +38,12 @@ Last reviewed: 2026-11-12
   contains `$` math. Minified `app.js`: **4.9 MB → 149 KB**; Plotly (4.5 MB) and
   KaTeX (273 KB) are separate chunks loaded on demand.
 
-- [ ] **Fix the mobile header** 🤖
-  At phone width the brand wraps to three lines and the theme toggle runs off
-  screen. Needs a compact layout (shorter brand, menu button). Check at 375px.
+- [x] **Fix the mobile header** 🤖
+  At 720px and below, the brand stays on one line and the nav + theme toggle collapse
+  into a menu button with a dropdown panel. The button's `aria-expanded` is the single source of
+  truth (CSS `:has()` shows the panel), so it can't desync on fast taps. Closes on outside tap,
+  Escape, link tap, or Suggest a Topic. Theme buttons got aria-labels. Checked at 320, 375,
+  768 and desktop, light and dark.
 
 - [ ] **Patch Bandit security advisories** 🤖
   `bandit 1.12.5` has several HIGH advisories. Run `mix deps.update bandit`, rerun tests.

@@ -57,7 +57,13 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
       .lbm-suggest-form .fieldset { margin-bottom: 0; flex: 1 1 260px; }
     </style>
 
-    <header class="lbm-header">
+    <header
+      id="site-header"
+      class="lbm-header"
+      phx-click-away={hide_mobile_nav()}
+      phx-window-keydown={hide_mobile_nav()}
+      phx-key="escape"
+    >
       <div class="lbm-header-inner">
         <a href="/" class="lbm-brand">
           <div class="lbm-brand-text">
@@ -66,16 +72,50 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
           </div>
         </a>
         <div class="lbm-header-right">
-          <nav class="lbm-nav">
+          <nav class="lbm-nav" aria-label="Main">
             <.link navigate={~p"/"} class="lbm-nav-link">Home</.link>
             <.link navigate={~p"/topics"} class="lbm-nav-link">Topics</.link>
             <button type="button" class="lbm-nav-cta" phx-click={show_suggest_modal()}>
               Suggest a Topic
             </button>
           </nav>
-          <.theme_toggle />
+          <div class="lbm-header-theme">
+            <.theme_toggle />
+          </div>
+          <button
+            type="button"
+            id="mobile-nav-toggle"
+            class="lbm-menu-button"
+            aria-label="Menu"
+            aria-controls="mobile-nav"
+            aria-expanded="false"
+            phx-click={toggle_mobile_nav()}
+          >
+            <.icon name="hero-bars-3" class="lbm-menu-icon-open size-5" />
+            <.icon name="hero-x-mark" class="lbm-menu-icon-close size-5" />
+          </button>
         </div>
       </div>
+
+      <nav id="mobile-nav" class="lbm-mobile-nav" aria-label="Main">
+        <.link navigate={~p"/"} class="lbm-mobile-nav-link" phx-click={hide_mobile_nav()}>
+          Home
+        </.link>
+        <.link navigate={~p"/topics"} class="lbm-mobile-nav-link" phx-click={hide_mobile_nav()}>
+          Topics
+        </.link>
+        <button
+          type="button"
+          class="lbm-nav-cta lbm-mobile-nav-cta"
+          phx-click={hide_mobile_nav() |> show_suggest_modal()}
+        >
+          Suggest a Topic
+        </button>
+        <div class="lbm-mobile-nav-theme">
+          <span>Theme</span>
+          <.theme_toggle />
+        </div>
+      </nav>
     </header>
 
     <div
@@ -117,8 +157,20 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
     """
   end
 
-  defp show_suggest_modal do
-    JS.show(
+  # The menu button's aria-expanded is the single source of truth: app.css shows the panel
+  # with `.lbm-header:has(#mobile-nav-toggle[aria-expanded="true"])`. Driving the panel
+  # with a separate JS.show/toggle or class op lets the two drift apart on fast taps.
+  defp toggle_mobile_nav do
+    JS.toggle_attribute({"aria-expanded", "true", "false"}, to: "#mobile-nav-toggle")
+  end
+
+  defp hide_mobile_nav(js \\ %JS{}) do
+    JS.set_attribute(js, {"aria-expanded", "false"}, to: "#mobile-nav-toggle")
+  end
+
+  defp show_suggest_modal(js \\ %JS{}) do
+    js
+    |> JS.show(
       to: "#suggest-topic-modal",
       display: "flex",
       time: 150,
@@ -270,6 +322,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         class="flex p-2 cursor-pointer w-1/3"
         phx-click={JS.dispatch("phx:set-theme")}
         data-phx-theme="system"
+        aria-label="Use system theme"
       >
         <.icon name="hero-computer-desktop-micro" class="size-4 opacity-75 hover:opacity-100" />
       </button>
@@ -278,6 +331,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         class="flex p-2 cursor-pointer w-1/3"
         phx-click={JS.dispatch("phx:set-theme")}
         data-phx-theme="light"
+        aria-label="Use light theme"
       >
         <.icon name="hero-sun-micro" class="size-4 opacity-75 hover:opacity-100" />
       </button>
@@ -286,6 +340,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         class="flex p-2 cursor-pointer w-1/3"
         phx-click={JS.dispatch("phx:set-theme")}
         data-phx-theme="dark"
+        aria-label="Use dark theme"
       >
         <.icon name="hero-moon-micro" class="size-4 opacity-75 hover:opacity-100" />
       </button>
