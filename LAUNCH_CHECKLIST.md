@@ -62,8 +62,11 @@ Last reviewed: 2026-11-12
 
 ## 2. Should have
 
-- [ ] **Branded 404 / 500 pages** 🤖
-  Prod currently shows plain-text "Not Found". Use the site layout with a link back to Topics.
+- [x] **Branded 404 / 500 pages** 🤖
+  `ErrorHTML` renders standalone pages that only load `app.css`: no LiveView, JS, DB or root
+  layout, so the 500 page still renders when the normal page stack is what broke. Theme
+  follows the system setting; pages are `noindex`. Other statuses keep the plain-text default.
+  Preview in dev at `/dev/errors/404` and `/dev/errors/500` (real errors in dev show the debug page).
 
 - [ ] **CI/CD** 🤝
   Tracked in detail in [CI_CD_CHECKLIST.md](CI_CD_CHECKLIST.md): getting `mix precommit`

@@ -115,6 +115,13 @@ defmodule AlgorithmsForOptimizationWeb.Router do
       live_dashboard "/dashboard", metrics: AlgorithmsForOptimizationWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
+
+    # Preview the branded error pages: /dev/errors/404, /dev/errors/500
+    scope "/dev", AlgorithmsForOptimizationWeb do
+      pipe_through :browser
+
+      get "/errors/:status", ErrorPreviewController, :show
+    end
   end
 
   defp admin_basic_auth(conn, _opts) do
