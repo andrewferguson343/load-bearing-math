@@ -24,8 +24,21 @@ import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
 import {hooks as colocatedHooks} from "phoenix-colocated/algorithms_for_optimization"
 import topbar from "../vendor/topbar"
-import Plotly from "../vendor/plotly.min.js"
-import renderMathInElement from "../vendor/katex-auto-render.min.js"
+
+// KaTeX (~275 KB) is only fetched when a page actually contains math delimiters.
+let katexPromise = null
+const loadKatexAutoRender = () => {
+  katexPromise ||= import("../vendor/katex-auto-render.min.js").then(mod => mod.default || mod)
+  return katexPromise
+}
+
+// Plotly is ~4.5 MB, so it's split into its own chunk and only fetched the
+// first time a page actually mounts a chart. Later charts reuse the same promise.
+let plotlyPromise = null
+const loadPlotly = () => {
+  plotlyPromise ||= import("../vendor/plotly.min.js").then(mod => mod.default || mod)
+  return plotlyPromise
+}
 
 // Renders a Plotly chart from data/layout passed as JSON in data attributes.
 //
@@ -48,9 +61,12 @@ const Hooks = {
     updated() {
       this.draw()
     },
-    draw() {
+    async draw() {
       const data = JSON.parse(this.el.dataset.plotlyData || "[]")
       const layout = JSON.parse(this.el.dataset.plotlyLayout || "{}")
+      const Plotly = await loadPlotly()
+      // The hook may have been removed (live navigation) while Plotly was loading.
+      if (!this.el.isConnected) return
       Plotly.react(this.el, data, layout, {responsive: true})
     },
   },
@@ -69,7 +85,10 @@ const Hooks = {
     updated() {
       this.render()
     },
-    render() {
+    async render() {
+      if (!this.el.textContent.includes("$")) return
+      const renderMathInElement = await loadKatexAutoRender()
+      if (!this.el.isConnected) return
       renderMathInElement(this.el, {
         delimiters: [
           {left: "$$", right: "$$", display: true},

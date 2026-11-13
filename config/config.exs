@@ -53,7 +53,7 @@ config :esbuild,
   version: "0.25.4",
   algorithms_for_optimization: [
     args:
-      ~w(js/app.js --bundle --target=es2022 --outdir=../priv/static/assets/js --external:/fonts/* --external:/images/* --alias:@=. --alias:katex=./vendor/katex.min.js),
+      ~w(js/app.js --bundle --format=esm --splitting --chunk-names=chunks/[name]-[hash] --target=es2022 --outdir=../priv/static/assets/js --external:/fonts/* --external:/images/* --alias:@=. --alias:katex=./vendor/katex.min.js),
     cd: Path.expand("../assets", __DIR__),
     env: %{"NODE_PATH" => [Path.expand("../deps", __DIR__), Mix.Project.build_path()]}
   ]
