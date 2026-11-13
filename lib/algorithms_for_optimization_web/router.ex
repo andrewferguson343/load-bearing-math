@@ -44,25 +44,29 @@ defmodule AlgorithmsForOptimizationWeb.Router do
 
     live "/sources", SourcesLive
 
-    live_session :optimization, on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :optimization} do
+    live_session :optimization,
+      on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :optimization} do
       live "/overview", OverviewLive
       live "/math", MathematicsLive
       live "/optimization", OptimizationLive
       live "/appendix", AppendixLive
     end
 
-    live_session :cosine_similarity, on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :cosine_similarity} do
+    live_session :cosine_similarity,
+      on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :cosine_similarity} do
       live "/cosine-similarity", CosineSimilarityLive
       live "/cosine-similarity-math", CosineSimilarityMathLive
       live "/cosine-similarity-implementation", CosineSimilarityImplementationLive
       live "/cosine-similarity-realistic-example", CosineSimilarityRealisticExampleLive
     end
 
-    live_session :leaky_bucket, on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :leaky_bucket} do
+    live_session :leaky_bucket,
+      on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :leaky_bucket} do
       live "/leaky-bucket", LeakyBucketLive
     end
 
-    live_session :markov_chains, on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :markov_chains} do
+    live_session :markov_chains,
+      on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :markov_chains} do
       live "/markov-chains", MarkovChainsLive
     end
 
@@ -80,7 +84,8 @@ defmodule AlgorithmsForOptimizationWeb.Router do
       live "/damped-oscillators", DampedOscillatorsLive
     end
 
-    live_session :eulers_method, on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :eulers_method} do
+    live_session :eulers_method,
+      on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :eulers_method} do
       live "/eulers-method", EulersMethodLive
     end
 

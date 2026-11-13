@@ -27,7 +27,8 @@ defmodule AlgorithmsForOptimizationWeb.TopicSuggestionController do
   end
 
   def create(conn, params) do
-    rate_limit = Application.fetch_env!(:algorithms_for_optimization, :topic_suggestion_rate_limit)
+    rate_limit =
+      Application.fetch_env!(:algorithms_for_optimization, :topic_suggestion_rate_limit)
 
     with :ok <- RateLimiter.hit({:topic_suggestion, client_ip(conn)}, rate_limit),
          :ok <- TopicSuggestions.submit(params["suggestion"] || "") do
@@ -37,7 +38,10 @@ defmodule AlgorithmsForOptimizationWeb.TopicSuggestionController do
         # A plain redirect (not 429): browsers don't follow a Location header on a 429,
         # so the visitor would be stranded on a blank page instead of seeing this message.
         conn
-        |> put_flash(:error, "That's a lot of suggestions at once. Give it a few minutes and try again.")
+        |> put_flash(
+          :error,
+          "That's a lot of suggestions at once. Give it a few minutes and try again."
+        )
         |> redirect(to: ~p"/")
 
       {:error, :too_long} ->
@@ -66,7 +70,8 @@ defmodule AlgorithmsForOptimizationWeb.TopicSuggestionController do
   # (entries further left are client-supplied and spoofable). If another proxy such as
   # Cloudflare is ever put in front of Railway, this needs revisiting.
   defp client_ip(conn) do
-    trust_forwarded? = Application.get_env(:algorithms_for_optimization, :trust_x_forwarded_for, false)
+    trust_forwarded? =
+      Application.get_env(:algorithms_for_optimization, :trust_x_forwarded_for, false)
 
     forwarded =
       if trust_forwarded? do

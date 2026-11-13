@@ -3,7 +3,7 @@ defmodule AlgorithmsForOptimizationWeb.MathematicsLive do
 
   def mount(_params, _session, socket) do
     xs = for x <- -220..220, do: x / 100.0
-    ys = for x <- xs, do: x**4 - 3*x**2 + x
+    ys = for x <- xs, do: x ** 4 - 3 * x ** 2 + x
     tangent_ys = for x <- xs, do: -x
 
     plain_traces = [
@@ -86,8 +86,7 @@ defmodule AlgorithmsForOptimizationWeb.MathematicsLive do
 
     gradient_layout = %{
       title: %{
-        text:
-          "f(x, y) = x<sup>2</sup> + y<sup>2</sup> with Tangent Hyperplane at (1, 1)"
+        text: "f(x, y) = x<sup>2</sup> + y<sup>2</sup> with Tangent Hyperplane at (1, 1)"
       },
       scene: %{
         xaxis: %{title: %{text: "x"}},
@@ -136,7 +135,8 @@ defmodule AlgorithmsForOptimizationWeb.MathematicsLive do
           <h2>Objective functions</h2>
           <p>
             We can think of an objective function as some function that we want to minimize. It's denoted
-            f(<b>x</b>), where <b>x</b> is a set of variables, and the goal is to find the specific values
+            f(<b>x</b>), where <b>x</b>
+            is a set of variables, and the goal is to find the specific values
             for those variables that minimize it.
           </p>
 
@@ -163,7 +163,7 @@ defmodule AlgorithmsForOptimizationWeb.MathematicsLive do
             drawing a tangent line to the plot of a function, which is a line that touches the curve at
             one specific point, but does not cross at that point. Take a look at the graph below: it shows the same curve with a tangent line drawn at x = 1.
           </p>
-           <.math_reveal id="the-tangent-line" label="How did we get this tangent line?">
+          <.math_reveal id="the-tangent-line" label="How did we get this tangent line?">
             <h3>The Tangent Line</h3>
             <p>For any differentiable function, there are steps to find the tangent line:</p>
             <ul>
@@ -177,8 +177,12 @@ defmodule AlgorithmsForOptimizationWeb.MathematicsLive do
 
             <h4>Worked example</h4>
             <p>Our original equation is $$f(x) = x^4 - 3x^2 + x$$</p>
-            <p>Take the derivative (see Appendix A for the worked derivative): $$f'(x) = 4x^3 - 6x + 1$$</p>
-            <p>Since I chose 1 as my example point, plug 1 into both the original equation and the derivative.</p>
+            <p>
+              Take the derivative (see Appendix A for the worked derivative): $$f'(x) = 4x^3 - 6x + 1$$
+            </p>
+            <p>
+              Since I chose 1 as my example point, plug 1 into both the original equation and the derivative.
+            </p>
             <p>
               $$f(1) = 1^4 - 3(1)^2 + 1$$
               $$f(1) = 1 - 3 + 1$$

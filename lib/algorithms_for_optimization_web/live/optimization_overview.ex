@@ -1,8 +1,14 @@
 defmodule AlgorithmsForOptimizationWeb.OptimizationLive do
   use AlgorithmsForOptimizationWeb, :live_view
   alias AlgorithmsForOptimization.SimpleBracketing
-  @bracketing_source File.read!(Path.join(__DIR__, "../../algorithms_for_optimization/simple_bracketing.ex"))
-                    |> String.trim()
+
+  @bracketing_source File.read!(
+                       Path.join(
+                         __DIR__,
+                         "../../algorithms_for_optimization/simple_bracketing.ex"
+                       )
+                     )
+                     |> String.trim()
 
   @plot_xs for x <- -1000..1000, do: x / 100.0
 
@@ -45,7 +51,15 @@ defmodule AlgorithmsForOptimizationWeb.OptimizationLive do
 
   defp bracket_shapes({left, right}) do
     for x <- [left, right] do
-      %{type: "line", x0: x, x1: x, y0: 0, y1: 1, yref: "paper", line: %{color: "#e09a2b", dash: "dot"}}
+      %{
+        type: "line",
+        x0: x,
+        x1: x,
+        y0: 0,
+        y1: 1,
+        yref: "paper",
+        line: %{color: "#e09a2b", dash: "dot"}
+      }
     end
   end
 
@@ -117,7 +131,13 @@ defmodule AlgorithmsForOptimizationWeb.OptimizationLive do
               />
               <.input type="number" name="initial_x_value" label="Starting x" value="0" step="any" />
               <.input type="number" name="step_length" label="Step length" value="0.01" step="any" />
-              <.input type="number" name="expansion_factor" label="Expansion factor" value="2" step="any" />
+              <.input
+                type="number"
+                name="expansion_factor"
+                label="Expansion factor"
+                value="2"
+                step="any"
+              />
               <.button variant="primary">Bracket it</.button>
             </form>
 

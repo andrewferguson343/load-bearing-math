@@ -229,7 +229,8 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
     doc: "which lesson within the active topic is current: :overview, :math, etc."
 
   def lesson_toc(assigns) do
-    assigns = assign(assigns, :current, AlgorithmsForOptimization.Topics.fetch!(assigns.active_topic))
+    assigns =
+      assign(assigns, :current, AlgorithmsForOptimization.Topics.fetch!(assigns.active_topic))
 
     ~H"""
     <aside class="lbm-toc" aria-label="Lesson navigation">
@@ -237,7 +238,10 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
 
       <.toc_lesson :for={lesson <- @current.lessons} lesson={lesson} active_lesson={@active_lesson} />
 
-      <div :if={@active_topic == :optimization and @active_lesson == :appendix} class="lbm-toc-sublist">
+      <div
+        :if={@active_topic == :optimization and @active_lesson == :appendix}
+        class="lbm-toc-sublist"
+      >
         <a href="#derivatives" class="lbm-toc-subitem">Derivatives</a>
       </div>
     </aside>

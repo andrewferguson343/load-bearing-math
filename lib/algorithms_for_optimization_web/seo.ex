@@ -27,8 +27,8 @@ defmodule AlgorithmsForOptimizationWeb.SEO do
   def on_mount(:default, _params, _session, socket) do
     {:cont,
      Phoenix.LiveView.attach_hook(socket, :seo_canonical_path, :handle_params, fn _params,
-                                                                                    uri,
-                                                                                    socket ->
+                                                                                  uri,
+                                                                                  socket ->
        {:cont, assign(socket, :canonical_path, URI.parse(uri).path)}
      end)}
   end
@@ -41,7 +41,13 @@ defmodule AlgorithmsForOptimizationWeb.SEO do
   def full_title(page_title), do: "#{page_title} · #{@author}"
 
   @doc "JSON-LD for a lesson page, as an HTML-safe JSON string."
-  def lesson_json_ld(%{topic: topic, lesson: lesson, title: title, description: description, path: path}) do
+  def lesson_json_ld(%{
+        topic: topic,
+        lesson: lesson,
+        title: title,
+        description: description,
+        path: path
+      }) do
     %{
       "@context" => "https://schema.org",
       "@type" => "LearningResource",

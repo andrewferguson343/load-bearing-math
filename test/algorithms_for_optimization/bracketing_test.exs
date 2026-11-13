@@ -4,7 +4,7 @@ defmodule AlgorithmsForOptimization.BracketingTest do
 
   describe "bracket_minimum/4" do
     test "Brackets a simple parabola" do
-      f = fn x -> (x-2) **2 end
+      f = fn x -> (x - 2) ** 2 end
       {left_bracket, right_bracket} = SimpleBracketing.bracket_minimum(f, 0)
 
       assert left_bracket < 2
@@ -12,7 +12,7 @@ defmodule AlgorithmsForOptimization.BracketingTest do
     end
 
     test "Swaps directions to find the minimum" do
-      f = fn x -> (x-2) **2 end
+      f = fn x -> (x - 2) ** 2 end
       {left_bracket, right_bracket} = SimpleBracketing.bracket_minimum(f, 5)
 
       assert left_bracket < 2
@@ -20,7 +20,7 @@ defmodule AlgorithmsForOptimization.BracketingTest do
     end
 
     test "Handles multiple iterations to fund the minmum" do
-      f = fn x -> (x-2) **2 end
+      f = fn x -> (x - 2) ** 2 end
       {left_bracket, right_bracket} = SimpleBracketing.bracket_minimum(f, -500)
 
       assert left_bracket < 2

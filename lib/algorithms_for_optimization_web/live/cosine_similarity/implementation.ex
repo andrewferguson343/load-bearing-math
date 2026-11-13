@@ -13,9 +13,11 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityImplementationLive do
 
         <div class="lbm-prose">
           <h1 id="page-heading">A Simple Cosine Similarity Example</h1>
-          <p>In computer land everything is denoted as vectors. LLMs we use every day train on an unfathomable amount of data to determine which
-          words are the most common "neighbors" of search topics and can use this to created a weighted model. All of this data is stored as vectors
-          in a database. I will not be doing this. Sorry.</p>
+          <p>
+            In computer land everything is denoted as vectors. LLMs we use every day train on an unfathomable amount of data to determine which
+            words are the most common "neighbors" of search topics and can use this to created a weighted model. All of this data is stored as vectors
+            in a database. I will not be doing this. Sorry.
+          </p>
           <h2>Creating our vectors</h2>
           <p>
             For simplicity let's start with a very small example. Let's pick some words and assign some common traits to some of my favorite video games.
@@ -41,20 +43,20 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityImplementationLive do
             A value of 0 means that the options are completely unrelated (orthogonal), and a negative value means the two vectors are pointing in opposite directions.
           </p>
 
-
-
           <.math_reveal id="dot-product-math" label="Check My Math">
-          <p>Magnitude of the Halo vector: {"$$\\sqrt{1^2 + 1^2 + 0} = \\sqrt{2}$$"}</p>
-          <p>Magnitude of the Counter Strike vector: {"$$\\sqrt{1^2 + 0 + 0} = 1$$"}</p>
-          <p>Magnitude of the Stellaris vector: {"$$\\sqrt{0 + 0 + 1^2} = 1$$"}</p>
-          <p>Dot product of the Halo and Counter Strike vectors:</p>
-          <p>$$1\cdot 1 + 1\cdot 0 + 0\cdot 0 = 1$$</p>
-          <p>Dot product of the Halo and Stellaris vectors:</p>
-          <p>$$1\cdot 0 + 1\cdot 0 + 0\cdot 1 = 0$$</p>
+            <p>Magnitude of the Halo vector: {"$$\\sqrt{1^2 + 1^2 + 0} = \\sqrt{2}$$"}</p>
+            <p>Magnitude of the Counter Strike vector: {"$$\\sqrt{1^2 + 0 + 0} = 1$$"}</p>
+            <p>Magnitude of the Stellaris vector: {"$$\\sqrt{0 + 0 + 1^2} = 1$$"}</p>
+            <p>Dot product of the Halo and Counter Strike vectors:</p>
+            <p>$$1\cdot 1 + 1\cdot 0 + 0\cdot 0 = 1$$</p>
+            <p>Dot product of the Halo and Stellaris vectors:</p>
+            <p>$$1\cdot 0 + 1\cdot 0 + 0\cdot 1 = 0$$</p>
 
-          <p>Now we have everything we need to plug into the main formula $\cos\theta$: {"$$\\cos\\theta = \\frac{\\mathbf a \\cdot \\mathbf b}{\\|\\mathbf a\\|\\|\\mathbf b\\|}$$"}</p>
-          <p>Halo vs Counter Strike: {"$$\\frac{1}{\\sqrt 2 \\cdot 1} = \\frac{1}{\\sqrt 2}$$"}</p>
-          <p>Halo vs Stellaris: {"$$\\frac{0}{\\sqrt 2 \\cdot 1} = 0$$"}</p>
+            <p>
+              Now we have everything we need to plug into the main formula $\cos\theta$: {"$$\\cos\\theta = \\frac{\\mathbf a \\cdot \\mathbf b}{\\|\\mathbf a\\|\\|\\mathbf b\\|}$$"}
+            </p>
+            <p>Halo vs Counter Strike: {"$$\\frac{1}{\\sqrt 2 \\cdot 1} = \\frac{1}{\\sqrt 2}$$"}</p>
+            <p>Halo vs Stellaris: {"$$\\frac{0}{\\sqrt 2 \\cdot 1} = 0$$"}</p>
           </.math_reveal>
         </div>
       </div>

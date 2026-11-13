@@ -48,7 +48,8 @@ defmodule AlgorithmsForOptimizationWeb.TopicSuggestionControllerTest do
   end
 
   test "silently drops submissions that fill in the honeypot", %{conn: conn} do
-    conn = suggest(conn, %{"suggestion" => "buy cheap watches", "website" => "http://spam.example"})
+    conn =
+      suggest(conn, %{"suggestion" => "buy cheap watches", "website" => "http://spam.example"})
 
     # Looks like a success to the bot...
     assert redirected_to(conn) == ~p"/"
@@ -83,7 +84,11 @@ defmodule AlgorithmsForOptimizationWeb.TopicSuggestionControllerTest do
       Application.put_env(:algorithms_for_optimization, :trust_x_forwarded_for, true)
 
       on_exit(fn ->
-        Application.put_env(:algorithms_for_optimization, :trust_x_forwarded_for, previous || false)
+        Application.put_env(
+          :algorithms_for_optimization,
+          :trust_x_forwarded_for,
+          previous || false
+        )
       end)
     end
 

@@ -91,9 +91,10 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityMathLive do
 
           <h2>An Introduction to Vectors</h2>
 
-          <p>Determining cosine similarity has everything to do with the concept of vectors. A vector is simply a quantity that has both a
-          magnitude and direction. There are two standard notations for vectors: we can write a vector as $\langle 1, 1 \rangle$ or as $1\mathbf i + 1\mathbf j$. Both of these mean the same thing
-          and can be plotted on a graph similarly to cartesian coordinates.
+          <p>
+            Determining cosine similarity has everything to do with the concept of vectors. A vector is simply a quantity that has both a
+            magnitude and direction. There are two standard notations for vectors: we can write a vector as $\langle 1, 1 \rangle$ or as $1\mathbf i + 1\mathbf j$. Both of these mean the same thing
+            and can be plotted on a graph similarly to cartesian coordinates.
           </p>
           <div
             id="vector-chart"
@@ -127,9 +128,10 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityMathLive do
           <p>Cool, so now we know the basics of vectors, now just one last thing.</p>
 
           <h2>The Dot Product</h2>
-          <p>The Dot Product is a technique used to find the product of two vectors. The output of the dot product is always a real number. Vectors go in, one number comes out.
-          The formal definition for the product of two vectors $\mathbf a$ and $\mathbf b$ in two dimensional space is $a_1 b_1 + a_2 b_2$. If we want to take the dot product of a vector
-          in three dimensional space we simply add the third component of the vector into the equation, making $a_1 b_1 + a_2 b_2 + a_3 b_3$.
+          <p>
+            The Dot Product is a technique used to find the product of two vectors. The output of the dot product is always a real number. Vectors go in, one number comes out.
+            The formal definition for the product of two vectors $\mathbf a$ and $\mathbf b$ in two dimensional space is $a_1 b_1 + a_2 b_2$. If we want to take the dot product of a vector
+            in three dimensional space we simply add the third component of the vector into the equation, making $a_1 b_1 + a_2 b_2 + a_3 b_3$.
           </p>
 
           <h2>The <i>other</i> Dot Product</h2>

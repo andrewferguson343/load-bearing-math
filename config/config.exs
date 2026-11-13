@@ -14,10 +14,11 @@ config :algorithms_for_optimization,
 # Topics flipped on here are visible to everyone. Keep a topic off this list
 # while you're still working on it; dev_routes (config/dev.exs) shows it to
 # you locally regardless. See AlgorithmsForOptimization.Topics.
-config :algorithms_for_optimization, public_topics: [
-  :cosine_similarity,
-  :leaky_bucket
-]
+config :algorithms_for_optimization,
+  public_topics: [
+    :cosine_similarity,
+    :leaky_bucket
+  ]
 
 # Configure the endpoint
 config :algorithms_for_optimization, AlgorithmsForOptimizationWeb.Endpoint,

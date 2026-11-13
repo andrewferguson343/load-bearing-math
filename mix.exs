@@ -89,7 +89,11 @@ defmodule AlgorithmsForOptimization.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["compile", "tailwind algorithms_for_optimization", "esbuild algorithms_for_optimization"],
+      "assets.build": [
+        "compile",
+        "tailwind algorithms_for_optimization",
+        "esbuild algorithms_for_optimization"
+      ],
       "assets.deploy": [
         "tailwind algorithms_for_optimization --minify",
         "esbuild algorithms_for_optimization --minify",

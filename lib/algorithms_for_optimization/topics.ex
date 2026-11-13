@@ -112,7 +112,12 @@ defmodule AlgorithmsForOptimization.Topics do
       lessons: [
         %{key: :overview, number: "00", label: "Overview", path: "/overview"},
         %{key: :math, number: "01", label: "A Mathematical Overview", path: "/math"},
-        %{key: :optimization, number: "02", label: "An Optimal Optimization Overview", path: "/optimization"},
+        %{
+          key: :optimization,
+          number: "02",
+          label: "An Optimal Optimization Overview",
+          path: "/optimization"
+        },
         %{key: :gradient_descent, number: "03", label: "Gradient Descent", path: nil},
         %{key: :newtons_method, number: "04", label: "Newton's Method", path: nil},
         %{key: :nelder_mead, number: "05", label: "Nelder-Mead / Simplex", path: nil},
@@ -135,7 +140,7 @@ defmodule AlgorithmsForOptimization.Topics do
 
   def all, do: @topics
 
-  def fetch!(id), do: Enum.find(@topics, &(&1.id == id)) || raise "unknown topic #{inspect(id)}"
+  def fetch!(id), do: Enum.find(@topics, &(&1.id == id)) || raise("unknown topic #{inspect(id)}")
 
   @doc "Topics visible for this build: public ones, plus everything when dev_routes is on."
   def visible, do: Enum.filter(@topics, &public?(&1.id))
