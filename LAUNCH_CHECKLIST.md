@@ -98,7 +98,7 @@ Last reviewed: 2026-11-12
 - [x] Renamed to Load Bearing Math (header, titles, favicon, `lbm-` classes)
 - [x] SEO: meta descriptions, canonical URLs, Open Graph, JSON-LD, `sitemap.xml`, `robots.txt`
 - [x] `/topic-suggestions` list behind basic auth
-- [x] GitHub repo renamed to `RancorTamer/load-bearing-math`
+- [x] GitHub repo renamed to `load-bearing-math`, then transferred to `andrewferguson343/load-bearing-math` (no longer a fork)
 - [x] `check_origin` and default host set to `loadbearingmath.com`
 
 ## Parked

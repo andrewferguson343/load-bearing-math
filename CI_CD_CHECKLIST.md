@@ -66,7 +66,9 @@ CI is only useful if it can pass. These are failing locally today and would bloc
 
 ## 4. CD: deploy to Railway
 
-- [x] 🙋 Railway is connected to `RancorTamer/load-bearing-math` and deploys from `main`
+- [x] 🙋 Railway is connected to the GitHub repo and deploys from `main`
+- [ ] 🙋 Repo moved to `andrewferguson343/load-bearing-math` (2026-11-12): reconnect it in Railway
+      (service → Settings → Source) and confirm **Wait for CI** is still on
 - [x] 🙋 Railway → service → Settings → turn on **Wait for CI**, so a red build never deploys
       (done 2026-11-12; takes effect once `ci.yml` is on GitHub)
 - [x] 🤝 Run migrations on every deploy: pre-deploy command `/app/bin/migrate`, set in the
