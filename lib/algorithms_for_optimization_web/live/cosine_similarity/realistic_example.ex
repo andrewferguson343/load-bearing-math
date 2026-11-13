@@ -45,10 +45,10 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityRealisticExampleLive do
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash} current_scope={assigns[:current_scope]}>
-      <div class="r8-lesson">
+      <div class="c8-lesson">
         <Layouts.lesson_toc active_topic={:cosine_similarity} active_lesson={:realistic_example} />
 
-        <div class="r8-prose">
+        <div class="c8-prose">
           <h1 id="page-heading">A More Realistic Example</h1>
           <h2>There aren't just three dimensions</h2>
           <p>It's easy for us as humans to understand things that happen in two or three dimensions, but vectors in the real world can contain many, many dimensions.
@@ -60,11 +60,11 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityRealisticExampleLive do
           <p>Using the exact same math from our simple video game vector example, we are going to scale this to 50 dimensions. Select a word from the list below
               and you'll get back the nearest neighbors using our similarity function!
           </p>
-          <div class="r8-demo">
+          <div class="c8-demo">
             <h3>Try it</h3>
             <p>Pick a word and see which other words are its nearest neighbors.</p>
 
-            <form phx-change="select_word" class="r8-demo-form">
+            <form phx-change="select_word" class="c8-demo-form">
               <.input
                 type="select"
                 name="word"
@@ -87,7 +87,7 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityRealisticExampleLive do
             <.math_reveal id="cosine-similarity-code" label="Show the Code">
               <h3>The Elixir Implementation</h3>
               <p>This is the exact code powering the demo above, dot product, magnitude, and cosine similarity.</p>
-              <pre class="r8-code-block"><code>{@cosine_similarity_source}</code></pre>
+              <pre class="c8-code-block"><code>{@cosine_similarity_source}</code></pre>
             </.math_reveal>
           </div>
           <p>Here is an example of what "king" looks like with our example embeddings:</p>

@@ -13,7 +13,7 @@ defmodule AlgorithmsForOptimizationWeb.MathematicsLive do
         type: "scatter",
         mode: "lines",
         name: "Polynomial Graph",
-        line: %{color: "#e4002b"}
+        line: %{color: "#14a394"}
       }
     ]
 
@@ -24,7 +24,7 @@ defmodule AlgorithmsForOptimizationWeb.MathematicsLive do
         type: "scatter",
         mode: "lines",
         name: "Polynomial Graph",
-        line: %{color: "#e4002b"}
+        line: %{color: "#14a394"}
       },
       %{
         x: xs,
@@ -32,7 +32,7 @@ defmodule AlgorithmsForOptimizationWeb.MathematicsLive do
         type: "scatter",
         mode: "lines",
         name: "Tangent Line",
-        line: %{color: "#1700e4"}
+        line: %{color: "#e09a2b"}
       }
     ]
 
@@ -77,7 +77,7 @@ defmodule AlgorithmsForOptimizationWeb.MathematicsLive do
         x: plane_xs,
         y: plane_ys,
         z: plane_z,
-        colorscale: [[0, "#1700e4"], [1, "#1700e4"]],
+        colorscale: [[0, "#e09a2b"], [1, "#e09a2b"]],
         opacity: 0.55,
         showscale: false,
         name: "Tangent Hyperplane"
@@ -113,10 +113,10 @@ defmodule AlgorithmsForOptimizationWeb.MathematicsLive do
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash} current_scope={assigns[:current_scope]}>
-      <div class="r8-lesson">
+      <div class="c8-lesson">
         <Layouts.lesson_toc active_topic={:optimization} active_lesson={:math} />
 
-        <div class="r8-prose">
+        <div class="c8-prose">
           <h1 id="page-heading">A Mathematical Overview</h1>
           <h2>Mathematical Topics</h2>
           <p>

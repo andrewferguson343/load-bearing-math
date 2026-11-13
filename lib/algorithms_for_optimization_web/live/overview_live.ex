@@ -8,10 +8,10 @@ defmodule AlgorithmsForOptimizationWeb.OverviewLive do
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash} current_scope={assigns[:current_scope]}>
-      <div class="r8-lesson">
+      <div class="c8-lesson">
         <Layouts.lesson_toc active_topic={:optimization} active_lesson={:overview} />
 
-        <div class="r8-prose">
+        <div class="c8-prose">
           <h1 id="page-heading">Overview</h1>
 
           <h2>What is optimization?</h2>
@@ -53,10 +53,10 @@ defmodule AlgorithmsForOptimizationWeb.OverviewLive do
             tackle a different mathematical subject. For now, though, I think this is a natural progression.
           </p>
 
-          <div class="r8-lesson-footer">
-            <div class="r8-lesson-footer-next">
-              <span class="r8-lesson-footer-label">Up Next</span>
-              <span class="r8-lesson-footer-title">A Mathematical Overview (coming soon)</span>
+          <div class="c8-lesson-footer">
+            <div class="c8-lesson-footer-next">
+              <span class="c8-lesson-footer-label">Up Next</span>
+              <span class="c8-lesson-footer-title">A Mathematical Overview (coming soon)</span>
             </div>
           </div>
         </div>

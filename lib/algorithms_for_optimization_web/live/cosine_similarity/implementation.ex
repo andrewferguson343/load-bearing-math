@@ -8,10 +8,10 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityImplementationLive do
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash} current_scope={assigns[:current_scope]}>
-      <div class="r8-lesson">
+      <div class="c8-lesson">
         <Layouts.lesson_toc active_topic={:cosine_similarity} active_lesson={:implementation} />
 
-        <div class="r8-prose">
+        <div class="c8-prose">
           <h1 id="page-heading">A Simple Cosine Similarity Example</h1>
           <p>In computer land everything is denoted as vectors. LLMs we use every day train on an unfathomable amount of data to determine which
           words are the most common "neighbors" of search topics and can use this to created a weighted model. All of this data is stored as vectors

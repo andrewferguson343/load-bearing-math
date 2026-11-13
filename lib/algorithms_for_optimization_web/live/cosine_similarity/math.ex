@@ -10,7 +10,7 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityMathLive do
         mode: "markers+text",
         text: ["⟨1, 1⟩"],
         textposition: "top right",
-        marker: %{color: "#e4002b", size: 8},
+        marker: %{color: "#14a394", size: 8},
         showlegend: false
       }
     ]
@@ -38,7 +38,7 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityMathLive do
           arrowhead: 3,
           arrowsize: 1.5,
           arrowwidth: 2,
-          arrowcolor: "#1700e4"
+          arrowcolor: "#e09a2b"
         }
       ],
       margin: %{t: 40}
@@ -53,8 +53,8 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityMathLive do
         mode: "lines+markers+text",
         text: ["", "⟨1, 2, 3⟩"],
         textposition: "top right",
-        line: %{color: "#1700e4", width: 6},
-        marker: %{color: "#e4002b", size: 4},
+        line: %{color: "#e09a2b", width: 6},
+        marker: %{color: "#14a394", size: 4},
         showlegend: false
       }
     ]
@@ -83,10 +83,10 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityMathLive do
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash} current_scope={assigns[:current_scope]}>
-      <div class="r8-lesson">
+      <div class="c8-lesson">
         <Layouts.lesson_toc active_topic={:cosine_similarity} active_lesson={:math} />
 
-        <div class="r8-prose">
+        <div class="c8-prose">
           <h1 id="page-heading">An Introduction to the Math</h1>
 
           <h2>An Introduction to Vectors</h2>

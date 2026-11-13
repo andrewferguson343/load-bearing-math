@@ -26,7 +26,7 @@ defmodule AlgorithmsForOptimizationWeb.OptimizationLive do
         type: "scatter",
         mode: "lines",
         name: label,
-        line: %{color: "#e4002b"}
+        line: %{color: "#14a394"}
       }
     ]
 
@@ -45,7 +45,7 @@ defmodule AlgorithmsForOptimizationWeb.OptimizationLive do
 
   defp bracket_shapes({left, right}) do
     for x <- [left, right] do
-      %{type: "line", x0: x, x1: x, y0: 0, y1: 1, yref: "paper", line: %{color: "#1700e4", dash: "dot"}}
+      %{type: "line", x0: x, x1: x, y0: 0, y1: 1, yref: "paper", line: %{color: "#e09a2b", dash: "dot"}}
     end
   end
 
@@ -86,10 +86,10 @@ defmodule AlgorithmsForOptimizationWeb.OptimizationLive do
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash} current_scope={assigns[:current_scope]}>
-      <div class="r8-lesson">
+      <div class="c8-lesson">
         <Layouts.lesson_toc active_topic={:optimization} active_lesson={:optimization} />
 
-        <div class="r8-prose">
+        <div class="c8-prose">
           <h1 id="page-heading">An Optimal Optimization Overview</h1>
 
           <h2>Finding a starting point</h2>
@@ -100,14 +100,14 @@ defmodule AlgorithmsForOptimizationWeb.OptimizationLive do
             minimum is trapped somewhere between your last two points.
           </p>
 
-          <div class="r8-demo">
+          <div class="c8-demo">
             <h3>Try it yourself</h3>
             <p>
               Pick a function below, choose a starting point, and see what interval the bracketing
               algorithm comes back with.
             </p>
 
-            <form phx-submit="bracket" phx-change="preview" class="r8-demo-form">
+            <form phx-submit="bracket" phx-change="preview" class="c8-demo-form">
               <.input
                 type="select"
                 name="function"
@@ -121,8 +121,8 @@ defmodule AlgorithmsForOptimizationWeb.OptimizationLive do
               <.button variant="primary">Bracket it</.button>
             </form>
 
-            <p :if={@error} class="r8-demo-error">{@error}</p>
-            <p :if={@result} class="r8-demo-result">
+            <p :if={@error} class="c8-demo-error">{@error}</p>
+            <p :if={@result} class="c8-demo-result">
               Bracket: [{elem(@result, 0) |> Float.round(4)}, {elem(@result, 1) |> Float.round(4)}]
             </p>
 

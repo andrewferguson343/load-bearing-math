@@ -8,10 +8,10 @@ defmodule AlgorithmsForOptimizationWeb.EulersMethodLive do
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash} current_scope={assigns[:current_scope]}>
-      <div class="r8-lesson">
+      <div class="c8-lesson">
         <Layouts.lesson_toc active_topic={:eulers_method} active_lesson={:overview} />
 
-        <div class="r8-prose">
+        <div class="c8-prose">
           <h1 id="page-heading">Euler's Method</h1>
 
           <h2>Why game physics explode at large time steps</h2>

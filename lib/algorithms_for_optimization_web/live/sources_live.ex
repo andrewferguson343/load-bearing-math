@@ -8,7 +8,7 @@ defmodule AlgorithmsForOptimizationWeb.SourcesLive do
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash} current_scope={assigns[:current_scope]}>
-      <div class="r8-prose" style="max-width: 720px; margin: 2.5rem auto 0;">
+      <div class="c8-prose" style="max-width: 720px; margin: 2.5rem auto 0;">
         <h1 id="page-heading">Sources Cited</h1>
         <p>The books and datasets referenced across this site's lessons.</p>
         <ul>
