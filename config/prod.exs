@@ -15,7 +15,9 @@ config :algorithms_for_optimization, AlgorithmsForOptimizationWeb.Endpoint,
   force_ssl: [
     rewrite_on: [:x_forwarded_proto],
     exclude: [
-      # paths: ["/health"],
+      # Railway's health check calls the app over plain HTTP on its internal network;
+      # redirecting it to https would fail every deploy's health check.
+      paths: ["/health"],
       hosts: ["localhost", "127.0.0.1"]
     ]
   ]

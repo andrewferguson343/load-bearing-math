@@ -43,30 +43,48 @@ CI is only useful if it can pass. These are failing locally today and would bloc
   - [x] `mix test`
 - [x] 🤖 Build minified production assets (tailwind + esbuild, as the Dockerfile does)
 - [ ] 🤖 Optional: `docker build` the image on PRs to catch Dockerfile breakage before Railway does
-- [ ] 🤝 Push and watch the first run go green (the YAML hasn't been checked by GitHub yet;
-      if `setup-beam` can't find OTP 29.0.1 / Elixir 1.20.1 builds, that's the first thing to adjust)
+- [ ] 🤝 Push and watch the first run go green. Pushed 2026-11-12 (`29c1930`): GitHub accepted the
+      YAML and run #1 started. If it fails, check `setup-beam` finding OTP 29.0.1 / Elixir 1.20.1 first
 
 ## 3. Protect `main`
 
-- [ ] 🙋 Decide: push straight to `main`, or work on branches + PRs
-- [ ] 🙋 If PRs: GitHub → Settings → Branches → protect `main`, require the CI check to pass before merging
-- [ ] 🙋 Even without PRs: CI on `main` still flags breakage after the fact
+- [x] 🙋 Decided 2026-11-12: work on branches and merge through PRs, with `main` protected
+- [ ] 🙋 Push the last direct-to-`main` commit (`9d0f716`) **before** turning protection on;
+      after that, `main` only changes through merged PRs
+- [ ] 🙋 GitHub → repo **Settings → Rules → Rulesets → New branch ruleset**:
+  - Name `main`, enforcement **Active**, target **Include default branch**
+  - ✅ **Require a pull request before merging**, required approvals **0**
+        (you can't approve your own PR, so 1+ would lock you out as the only contributor)
+  - ✅ **Require status checks to pass**, add the check **`Build and test`**
+        (it only appears in the picker after CI has run at least once), and tick
+        **Require branches to be up to date before merging**
+  - ✅ **Block force pushes** and ✅ **Restrict deletions**
+  - Optional: add **Repository admin** to the bypass list for emergencies
+- [ ] 🤝 First change through the new flow: 🤖 commits on a branch and pushes it, 🙋 opens the PR
+      (GitHub shows a "Compare & pull request" banner), CI runs, merge when green → Railway
+      deploys after CI passes on `main`
 
 ## 4. CD: deploy to Railway
 
-- [ ] 🙋 Confirm Railway is connected to `RancorTamer/load-bearing-math` and auto-deploys from `main`
+- [x] 🙋 Railway is connected to `RancorTamer/load-bearing-math` and deploys from `main`
 - [x] 🙋 Railway → service → Settings → turn on **Wait for CI**, so a red build never deploys
       (done 2026-11-12; takes effect once `ci.yml` is on GitHub)
-- [x] 🤝 Run migrations on every deploy: Railway **pre-deploy command** `/app/bin/migrate`
-      (set in the dashboard, confirmed by Andrew 2026-11-12). Optional later: 🤖 mirror it in a
-      `railway.json` so it lives in the repo
-- [ ] 🤖 Add a health check endpoint (e.g. `/health`, returns 200 and checks the DB) and
-      🙋 point Railway's health check at it, so a broken release doesn't replace a working one
+- [x] 🤝 Run migrations on every deploy: pre-deploy command `/app/bin/migrate`, set in the
+      dashboard and now also in `railway.json`
+- [x] 🤖 `GET /health`: 200 `{"status":"ok"}` when Postgres answers `SELECT 1`, 503 otherwise
+      (checked locally by stopping Postgres). Outside the browser pipeline (no session) and
+      excluded from `force_ssl` in `config/prod.exs`, since Railway checks over plain HTTP
+- [x] 🤖 `railway.json` (config-as-code): Dockerfile build, `/app/bin/migrate` pre-deploy,
+      health check on `/health` (120s timeout), restart on failure (max 5).
+      **These settings override the Railway dashboard** for those fields
+- [ ] 🙋 After the next deploy, confirm Railway's deploy view shows the health check passing
 - [x] 🙋 Production variables set in Railway (confirmed by Andrew 2026-11-12)
 
 ## 5. Keep it healthy
 
-- [ ] 🤖 Add Dependabot (`.github/dependabot.yml`) for Hex packages and GitHub Actions versions, weekly
+- [x] 🤖 Dependabot (`.github/dependabot.yml`): weekly on Mondays for Hex packages (minor/patch
+      grouped into one PR, majors separate) and GitHub Actions. The Docker image's Elixir/OTP
+      versions are left out on purpose: they're pinned to match `ci.yml`, so bump both by hand
 - [x] 🤖 Scheduled weekly CI run of `mix hex.audit`, so new advisories surface even when nobody pushes
       (the `schedule` trigger in `ci.yml`)
 - [ ] 🤖 CI status badge in the README

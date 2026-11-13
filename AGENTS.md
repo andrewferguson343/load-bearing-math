@@ -1,5 +1,77 @@
 This is a web application written using the Phoenix web framework.
 
+**Load Bearing Math** (loadbearingmath.com): short, hands-on walkthroughs of the math behind
+everyday engineering. Repo: `RancorTamer/load-bearing-math`. Hosted on Railway, DNS at Porkbun.
+
+> **This repo is its own project.** On GitHub it's still marked as a fork of
+> `aferguson-rise8/optimization-algorithms` (a former work repo), but nothing goes back there:
+> never open PRs against it, never add it as a remote, never push to it. Every PR targets
+> **`RancorTamer/load-bearing-math`, base `main`**. GitHub's PR page on a fork defaults the
+> base to the parent repo, so always open PRs from this repo's own compare URL (below).
+
+## Git & deploy workflow
+
+`main` is protected: it only changes through merged pull requests, and every merge to `main`
+deploys to production. Follow this flow for every change:
+
+1. **Branch from an up-to-date `main`**: `git switch main && git pull`, then
+   `git switch -c <type>/<short-description>` using `feat/`, `fix/`, `chore/`, `docs/` or `deps/`.
+   Never commit to, or push to, `main` directly.
+2. **Commit only when asked.** Keep commits focused, with a short imperative subject line
+   ("Add branded 404 and 500 error pages") and a body explaining why.
+3. **Run `mix precommit` before pushing** and fix anything it reports. CI runs the same checks,
+   and a red CI blocks both the merge and the deploy.
+4. **Push the branch** (`git push -u origin <branch>`), only when asked. The `gh` CLI isn't
+   set up, so the PR is opened in the GitHub UI, always via this repo's compare URL:
+   `https://github.com/RancorTamer/load-bearing-math/compare/main...<branch>`.
+   Don't use the "Compare & pull request" banner or the `pull/new/<branch>` link that
+   `git push` prints: on a fork those default to the parent repo as the base. Before
+   creating the PR, check it reads **base repository: RancorTamer/load-bearing-math, base: main**.
+5. **Merge when CI is green.** Required check: **`Build and test`** (`.github/workflows/ci.yml`).
+   Branches must be up to date with `main` before merging.
+6. **Deploy is automatic.** After the merge, CI runs on `main`; Railway ("Wait for CI") deploys
+   only once it passes. `railway.json` builds the `Dockerfile`, runs `/app/bin/migrate` before
+   each deploy, and switches traffic only when `GET /health` returns 200.
+7. **After a merge**, switch back to `main` and pull before starting the next branch.
+
+### What CI checks
+
+`mix deps.unlock --check-unused`, `mix hex.audit` (fails on security advisories),
+`mix compile --warnings-as-errors`, `mix format --check-formatted`, `mix test` against
+Postgres 17, and a minified production asset build. It also runs weekly (Mondays) so new
+advisories surface without a push. Dependabot opens weekly update PRs that go through the
+same flow.
+
+### Things that are easy to get wrong
+
+- **Elixir/OTP versions live in two places**: `ELIXIR_VERSION`/`OTP_VERSION` in the `Dockerfile`
+  and in `.github/workflows/ci.yml`. Change them together. Dependabot deliberately doesn't touch them.
+- **`railway.json` overrides the Railway dashboard** for build, pre-deploy, health check and
+  restart settings. Change those in the file, not the dashboard.
+- **`/health` must stay outside the browser pipeline** and in the `force_ssl` `exclude: [paths: ...]`
+  list in `config/prod.exs`; Railway checks it over plain HTTP.
+- **Formatting**: `.formatter.exs` excludes `lib/algorithms_for_optimization/word_vectors.ex`
+  (a hand-laid-out vector table). Don't run the formatter on it directly.
+- **Topics are gated** by `public_topics` in `config/config.exs`; dev (`dev_routes`) shows
+  everything. Tests and the sitemap follow the gate.
+
+### Tracking
+
+Launch work is tracked in `LAUNCH_CHECKLIST.md` and CI/CD work in `CI_CD_CHECKLIST.md`.
+Tick items off (and note anything learned) in the same branch as the change that completes them.
+
+### Local development (Windows)
+
+- Elixir and Erlang are installed under `C:\Program Files\Elixir\bin` and
+  `C:\Program Files\Erlang OTP\bin`; shells opened before they were installed may need them
+  added to `PATH`.
+- Postgres runs in Docker as `optimization-algorithms-pg` (`postgres`/`postgres` on port 5432).
+  If tests or the dev server report `econnrefused` on 5432, Docker Desktop has probably stopped.
+- `priv/` is copied into `_build` (Windows can't symlink it), so a changed or deleted file in
+  `priv/static` may need a rebuild or server restart before the dev server sees it.
+- Changes to `config/*.exs` or dependencies need a dev server restart.
+- Preview the branded error pages at `/dev/errors/404` and `/dev/errors/500`.
+
 ## Project guidelines
 
 - Use `mix precommit` alias when you are done with all changes and fix any pending issues
