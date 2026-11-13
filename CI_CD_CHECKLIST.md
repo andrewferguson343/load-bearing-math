@@ -48,9 +48,21 @@ CI is only useful if it can pass. These are failing locally today and would bloc
 
 ## 3. Protect `main`
 
-- [ ] 🙋 Decide: push straight to `main`, or work on branches + PRs
-- [ ] 🙋 If PRs: GitHub → Settings → Branches → protect `main`, require the CI check to pass before merging
-- [ ] 🙋 Even without PRs: CI on `main` still flags breakage after the fact
+- [x] 🙋 Decided 2026-11-12: work on branches and merge through PRs, with `main` protected
+- [ ] 🙋 Push the last direct-to-`main` commit (`9d0f716`) **before** turning protection on;
+      after that, `main` only changes through merged PRs
+- [ ] 🙋 GitHub → repo **Settings → Rules → Rulesets → New branch ruleset**:
+  - Name `main`, enforcement **Active**, target **Include default branch**
+  - ✅ **Require a pull request before merging**, required approvals **0**
+        (you can't approve your own PR, so 1+ would lock you out as the only contributor)
+  - ✅ **Require status checks to pass**, add the check **`Build and test`**
+        (it only appears in the picker after CI has run at least once), and tick
+        **Require branches to be up to date before merging**
+  - ✅ **Block force pushes** and ✅ **Restrict deletions**
+  - Optional: add **Repository admin** to the bypass list for emergencies
+- [ ] 🤝 First change through the new flow: 🤖 commits on a branch and pushes it, 🙋 opens the PR
+      (GitHub shows a "Compare & pull request" banner), CI runs, merge when green → Railway
+      deploys after CI passes on `main`
 
 ## 4. CD: deploy to Railway
 
