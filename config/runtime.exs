@@ -76,12 +76,14 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
-  host = System.get_env("PHX_HOST") || "example.com"
+  host = System.get_env("PHX_HOST") || "loadbearingmath.com"
 
   config :algorithms_for_optimization, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
   config :algorithms_for_optimization, AlgorithmsForOptimizationWeb.Endpoint,
     url: [host: host, port: 443, scheme: "https"],
+    # Only accept LiveView/channel websocket connections from the site's own origins.
+    check_origin: ["https://loadbearingmath.com", "https://www.loadbearingmath.com"],
     http: [
       # Enable IPv6 and bind on all interfaces.
       # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
