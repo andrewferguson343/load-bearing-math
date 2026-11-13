@@ -1,13 +1,13 @@
 This is a web application written using the Phoenix web framework.
 
 **Load Bearing Math** (loadbearingmath.com): short, hands-on walkthroughs of the math behind
-everyday engineering. Repo: `RancorTamer/load-bearing-math`. Hosted on Railway, DNS at Porkbun.
+everyday engineering. Repo: `andrewferguson343/load-bearing-math`. Hosted on Railway, DNS at Porkbun.
 
-> **This repo is its own project.** On GitHub it's still marked as a fork of
-> `aferguson-rise8/optimization-algorithms` (a former work repo), but nothing goes back there:
-> never open PRs against it, never add it as a remote, never push to it. Every PR targets
-> **`RancorTamer/load-bearing-math`, base `main`**. GitHub's PR page on a fork defaults the
-> base to the parent repo, so always open PRs from this repo's own compare URL (below).
+> **This repo is its own project.** It started as a fork of a former work repo
+> (`aferguson-rise8/optimization-algorithms`, since removed) and lived briefly at
+> `RancorTamer/load-bearing-math` (GitHub redirects that URL here). Neither is used anymore:
+> never add them as remotes or target them. Every PR targets
+> **`andrewferguson343/load-bearing-math`, base `main`**.
 
 ## Git & deploy workflow
 
@@ -22,11 +22,9 @@ deploys to production. Follow this flow for every change:
 3. **Run `mix precommit` before pushing** and fix anything it reports. CI runs the same checks,
    and a red CI blocks both the merge and the deploy.
 4. **Push the branch** (`git push -u origin <branch>`), only when asked. The `gh` CLI isn't
-   set up, so the PR is opened in the GitHub UI, always via this repo's compare URL:
-   `https://github.com/RancorTamer/load-bearing-math/compare/main...<branch>`.
-   Don't use the "Compare & pull request" banner or the `pull/new/<branch>` link that
-   `git push` prints: on a fork those default to the parent repo as the base. Before
-   creating the PR, check it reads **base repository: RancorTamer/load-bearing-math, base: main**.
+   set up, so the PR is opened in the GitHub UI:
+   `https://github.com/andrewferguson343/load-bearing-math/compare/main...<branch>`.
+   Before creating it, check it reads **base repository: andrewferguson343/load-bearing-math, base: main**.
 5. **Merge when CI is green.** Required check: **`Build and test`** (`.github/workflows/ci.yml`).
    Branches must be up to date with `main` before merging.
 6. **Deploy is automatic.** After the merge, CI runs on `main`; Railway ("Wait for CI") deploys
