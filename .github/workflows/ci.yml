@@ -45,7 +45,7 @@ jobs:
 
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up Erlang/OTP and Elixir
         id: beam
@@ -55,7 +55,7 @@ jobs:
           elixir-version: ${{ env.ELIXIR_VERSION }}
 
       - name: Restore deps and build cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: |
             deps
