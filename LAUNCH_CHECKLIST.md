@@ -51,11 +51,15 @@ Last reviewed: 2026-11-12
   mint 1.10.1 → 1.11.0, lazy_html 0.1.12 → 0.1.14 (test only).
   Re-run `mix hex.audit` before each deploy (worth adding to CI).
 
-- [ ] **Protect the topic suggestion form** 🤖
-  `POST /topic-suggestions` is public with no limits.
-  - [ ] Max length on suggestion text (changeset validation)
-  - [ ] Hidden honeypot field to catch bots
-  - [ ] Simple per-IP rate limit
+- [x] **Protect the topic suggestion form** 🤖
+  - [x] Max 255 characters (changeset + `maxlength`). Longer input used to crash the insert
+        with a 500, since the column is `varchar(255)`
+  - [x] Off-screen honeypot field (`website`); filled-in posts get the normal "thanks" but aren't saved
+  - [x] Per-IP rate limit: 5 posts per 10 minutes (`config :topic_suggestion_rate_limit`), ETS-backed
+        `RateLimiter`, no new dependencies. In prod the IP comes from the right-most
+        `X-Forwarded-For` entry (Railway's proxy). Revisit if Cloudflare is ever put in front
+  - [ ] 🙋 After deploying: submit one suggestion on the live site and check it appears at
+        `/topic-suggestions`, to confirm Railway's `X-Forwarded-For` behaves as expected
 
 ## 2. Should have
 

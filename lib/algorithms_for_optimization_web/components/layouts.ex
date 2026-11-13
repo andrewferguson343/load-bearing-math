@@ -141,8 +141,34 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         <div class="lbm-modal-body">
           <h3>Suggest a Topic</h3>
           <p>Got something that belongs on this list? Drop it below.</p>
-          <.form for={%{}} action={~p"/topic-suggestions"} method="post" class="lbm-suggest-form">
-            <.input type="text" name="suggestion" value="" />
+          <.form
+            for={%{}}
+            id="suggest-topic-form"
+            action={~p"/topic-suggestions"}
+            method="post"
+            class="lbm-suggest-form"
+          >
+            <.input
+              type="text"
+              name="suggestion"
+              id="suggest-topic-input"
+              value=""
+              maxlength={AlgorithmsForOptimization.TopicSuggestion.max_length()}
+              aria-label="Your topic suggestion"
+            />
+            <%!-- Honeypot: hidden from people (and screen readers), but bots fill in every field.
+                 A plain <input> on purpose; it must not look like the styled .input fields. --%>
+            <div class="lbm-honeypot" aria-hidden="true">
+              <label for="suggest-topic-website">Leave this field empty</label>
+              <input
+                type="text"
+                id="suggest-topic-website"
+                name={AlgorithmsForOptimizationWeb.TopicSuggestionController.honeypot_field()}
+                value=""
+                tabindex="-1"
+                autocomplete="off"
+              />
+            </div>
             <.button variant="primary">Suggest it</.button>
           </.form>
         </div>

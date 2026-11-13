@@ -232,6 +232,17 @@ h1, h2, h3 {
   background: var(--color-base-200);
 }
 
+/* Spam honeypot in the suggestion form: off-screen rather than display:none,
+   since some bots skip fields they can tell are hidden. */
+.lbm-honeypot {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 .lbm-brand-name,
 .lbm-brand-subtitle {
   white-space: nowrap;

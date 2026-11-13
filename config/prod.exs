@@ -31,3 +31,7 @@ config :logger, level: :info
 
 # Runtime production configuration, including reading
 # of environment variables, is done on config/runtime.exs.
+
+# Railway's proxy sits in front of the app, so the visitor's IP comes from
+# X-Forwarded-For (see TopicSuggestionController.client_ip/1).
+config :algorithms_for_optimization, trust_x_forwarded_for: true

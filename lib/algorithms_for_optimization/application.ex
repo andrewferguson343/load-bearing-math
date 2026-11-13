@@ -12,6 +12,7 @@ defmodule AlgorithmsForOptimization.Application do
       AlgorithmsForOptimization.Repo,
       {DNSCluster, query: Application.get_env(:algorithms_for_optimization, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: AlgorithmsForOptimization.PubSub},
+      AlgorithmsForOptimizationWeb.RateLimiter,
       # Start a worker by calling: AlgorithmsForOptimization.Worker.start_link(arg)
       # {AlgorithmsForOptimization.Worker, arg},
       # Start to serve requests, typically the last entry
