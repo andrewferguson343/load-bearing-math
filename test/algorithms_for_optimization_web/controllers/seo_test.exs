@@ -63,6 +63,9 @@ defmodule AlgorithmsForOptimizationWeb.SEOTest do
       assert response_content_type(conn, :xml)
       assert body =~ "/cosine-similarity-math</loc>"
       assert body =~ "/topics</loc>"
+      assert body =~ "/about</loc>"
+      assert body =~ "/collections/linear-algebra</loc>"
+      refute body =~ "/collections/systems</loc>"
       refute body =~ "/pagerank</loc>"
       refute body =~ "/topic-suggestions"
     end

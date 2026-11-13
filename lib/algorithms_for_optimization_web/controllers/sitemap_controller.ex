@@ -6,10 +6,10 @@ defmodule AlgorithmsForOptimizationWeb.SitemapController do
   """
   use AlgorithmsForOptimizationWeb, :controller
 
-  alias AlgorithmsForOptimization.Topics
+  alias AlgorithmsForOptimization.{Collections, Topics}
   alias AlgorithmsForOptimizationWeb.SEO
 
-  @static_pages ["/", "/topics", "/sources"]
+  @static_pages ["/", "/about", "/topics", "/sources"]
 
   def robots(conn, _params) do
     body = """
@@ -55,7 +55,13 @@ defmodule AlgorithmsForOptimizationWeb.SitemapController do
           lesson.path,
           do: lesson.path
 
-    Enum.uniq(@static_pages ++ lesson_paths)
+    # Only collections with at least one public topic, so empty "coming soon" pages stay out.
+    collection_paths =
+      for collection <- Collections.all(),
+          Topics.in_collection(collection.id) != [],
+          do: Collections.path(collection)
+
+    Enum.uniq(@static_pages ++ collection_paths ++ lesson_paths)
   end
 
   defp xml_escape(string) do

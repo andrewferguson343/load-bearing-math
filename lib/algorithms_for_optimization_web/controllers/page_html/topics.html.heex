@@ -1,18 +1,4 @@
 <Layouts.app flash={@flash}>
-  <style>
-    .lbm-topic-index { max-width: 720px; margin: 2.5rem auto 0; border-top: 1px solid var(--color-base-300); }
-    .lbm-topic-entry { display: block; padding: 1.5rem 0.75rem; border-bottom: 1px solid var(--color-base-300); text-decoration: none; transition: background-color 0.2s ease, padding-left 0.2s ease; }
-    .lbm-topic-entry:hover { background-color: var(--color-base-200); padding-left: 1.25rem; }
-    .lbm-topic-entry:hover .lbm-topic-entry-arrow { transform: translateX(0.25rem); }
-    .lbm-topic-entry-title-row { display: flex; align-items: baseline; gap: 0.75rem; }
-    .lbm-topic-entry-number { font-family: var(--font-mono); font-size: 1rem; font-weight: 600; color: color-mix(in oklch, var(--color-base-content) 65%, transparent); }
-    .lbm-topic-entry-title { font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; color: var(--color-primary); display: flex; align-items: center; gap: 0.5rem; margin: 0; }
-    .lbm-topic-entry-arrow { display: inline-block; transition: transform 0.2s ease; }
-    .lbm-topic-entry-description { font-size: 0.9rem; line-height: 1.6; color: var(--color-base-content); margin: 0.4rem 0 0 0; }
-    .lbm-sources-link { display: block; max-width: 720px; margin: 1rem auto 0; text-align: right; font-size: 0.8rem; color: color-mix(in oklch, var(--color-base-content) 72%, transparent); text-decoration: none; }
-    .lbm-sources-link:hover { text-decoration: underline; }
-  </style>
-
   <div class="lbm-hero">
     <h1 class="lbm-hero-title">Table of Contents</h1>
     <p class="lbm-hero-lede">
@@ -21,21 +7,26 @@
     </p>
   </div>
 
-  <div class="lbm-topic-index">
-    <.link
-      :for={topic <- @topics}
-      navigate={AlgorithmsForOptimization.Topics.entry_path(topic)}
-      class="lbm-topic-entry"
-    >
-      <div class="lbm-topic-entry-title-row">
-        <span class="lbm-topic-entry-number">{topic.number}</span>
-        <h2 class="lbm-topic-entry-title">
-          {topic.label} <span class="lbm-topic-entry-arrow" aria-hidden="true">&rarr;</span>
-        </h2>
-      </div>
-      <p class="lbm-topic-entry-description">{topic.description}</p>
-    </.link>
-  </div>
+  <section
+    :for={{collection, topics} <- @groups}
+    id={"topics-#{collection.slug}"}
+    class="lbm-topic-group"
+    aria-labelledby={"topics-#{collection.slug}-heading"}
+  >
+    <h2 id={"topics-#{collection.slug}-heading"} class="lbm-topic-group-title">
+      <.link navigate={collection_path(collection)}>{collection.name}</.link>
+    </h2>
+    <div class="lbm-topic-index">
+      <.topic_entry :for={topic <- topics} topic={topic} />
+    </div>
+  </section>
+
+  <section :if={@ungrouped != []} id="topics-reference" class="lbm-topic-group">
+    <h2 class="lbm-topic-group-title">Reference</h2>
+    <div class="lbm-topic-index">
+      <.topic_entry :for={topic <- @ungrouped} topic={topic} />
+    </div>
+  </section>
 
   <.link navigate="/sources" class="lbm-sources-link">Sources cited</.link>
 </Layouts.app>
