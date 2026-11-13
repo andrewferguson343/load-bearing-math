@@ -19,17 +19,16 @@ Last reviewed: 2026-11-12
   - [x] 🙋 Host chosen: Railway (builds the repo `Dockerfile`)
   - [x] 🙋 Railway → service → Settings → Networking → **Custom Domain**: add `loadbearingmath.com`
   - [x] 🙋 Porkbun DNS: apex `ALIAS` → `oaqf0kb2.up.railway.app`, plus `_railway-verify` TXT
-  - [ ] 🙋 Wait for Railway to show the domain as verified / certificate issued
-        (as of 2026-11-12 it still serves the `*.up.railway.app` cert)
+  - [ ] 🙋 Wait for Railway to show the domain as verified / certificate issued.
+        Rechecked 2026-11-12 (Andrew reports hosting done): public DNS (1.1.1.1, 8.8.8.8) and
+        the server still serve the `*.up.railway.app` cert, so HTTPS on the apex still fails
   - [ ] 🙋 Railway: also add `www.loadbearingmath.com`; in Porkbun add an explicit `www` CNAME to its
-        Railway target. The wildcard `*` CNAME → `uixie.porkbun.com` currently catches `www` and
-        forwards it to `loadbearingmath-com.l.ink`; delete the wildcard unless you want other
-        subdomains forwarded
+        Railway target. Rechecked 2026-11-12: public DNS still resolves `www` via the wildcard
+        `*` CNAME → `uixie.porkbun.com` (forwards to `loadbearingmath-com.l.ink`)
   - [ ] 🤖 Redirect `www` → apex in the app (canonical tags already use the apex)
-  - [ ] 🙋 Confirm Railway variables: `DATABASE_URL` (from the Railway Postgres), `SECRET_KEY_BASE`,
-        `PHX_HOST=loadbearingmath.com`, `ADMIN_USERNAME`, `ADMIN_PASSWORD`
-  - [ ] 🤝 Migrations: the release start script doesn't run them. Set Railway's **pre-deploy command**
-        to `/app/bin/migrate`, or 🤖 add a `railway.json` that does it
+  - [x] 🙋 Railway variables set: `DATABASE_URL` (from the Railway Postgres), `SECRET_KEY_BASE`,
+        `PHX_HOST=loadbearingmath.com`, `ADMIN_USERNAME`, `ADMIN_PASSWORD` (confirmed by Andrew)
+  - [x] 🤝 Migrations: Railway **pre-deploy command** `/app/bin/migrate` (confirmed by Andrew)
   - [ ] 🤝 Confirm HTTPS works and LiveView connects (`check_origin` already allows both domains)
 
 - [x] **Shrink the JavaScript bundle** 🤖
