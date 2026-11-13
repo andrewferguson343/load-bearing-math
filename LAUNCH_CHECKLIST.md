@@ -45,8 +45,11 @@ Last reviewed: 2026-11-12
   Escape, link tap, or Suggest a Topic. Theme buttons got aria-labels. Checked at 320, 375,
   768 and desktop, light and dark.
 
-- [ ] **Patch Bandit security advisories** 🤖
-  `bandit 1.12.5` has several HIGH advisories. Run `mix deps.update bandit`, rerun tests.
+- [x] **Patch dependency security advisories** 🤖
+  `mix hex.audit` is clean. Updated: bandit 1.12.5 → 1.14.1 (+ thousand_island 1.6.0),
+  ecto 3.14.2 → 3.14.3 (HIGH), phoenix_html 4.3.0 → 4.4.0, decimal 3.1.1 → 3.2.0,
+  mint 1.10.1 → 1.11.0, lazy_html 0.1.12 → 0.1.14 (test only).
+  Re-run `mix hex.audit` before each deploy (worth adding to CI).
 
 - [ ] **Protect the topic suggestion form** 🤖
   `POST /topic-suggestions` is public with no limits.
@@ -59,13 +62,9 @@ Last reviewed: 2026-11-12
 - [ ] **Branded 404 / 500 pages** 🤖
   Prod currently shows plain-text "Not Found". Use the site layout with a link back to Topics.
 
-- [ ] **CI on GitHub Actions** 🤖
-  Run compile (warnings as errors), format check, and tests on every push. Optionally deploy from `main`.
-
-- [ ] **Get `mix precommit` passing** 🤖
-  - [ ] Add a `.formatter.exs` (it's missing, so `mix format` errors)
-  - [ ] Fix unused-variable warnings in `line_search.ex` and `simple_bracketing.ex`
-  - [ ] Fix or update the stale `/overview` test (fails because that topic is gated)
+- [ ] **CI/CD** 🤝
+  Tracked in detail in [CI_CD_CHECKLIST.md](CI_CD_CHECKLIST.md): getting `mix precommit`
+  passing, the GitHub Actions workflow, protecting `main`, and gating Railway deploys on CI.
 
 - [ ] **Privacy-friendly analytics** 🤝
   🙋 Pick one (Plausible, Fathom, or self-hosted Umami); 🤖 wire in the script.
