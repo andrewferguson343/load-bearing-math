@@ -102,11 +102,11 @@ defmodule AlgorithmsForOptimizationWeb.OptimizationLive do
     <Layouts.app flash={@flash} current_scope={assigns[:current_scope]}>
       <div class="lbm-lesson">
         <Layouts.lesson_toc active_topic={:optimization} active_lesson={:optimization} />
-
         <div class="lbm-prose">
           <h1 id="page-heading">An Optimal Optimization Overview</h1>
 
           <h2>Finding a starting point</h2>
+
           <p>
             Before an algorithm can zero in on a minimum, it first needs to know roughly where to look.
             Bracketing is how we answer that. In short, Starting from some point, take a step, and keep expanding
@@ -116,6 +116,7 @@ defmodule AlgorithmsForOptimizationWeb.OptimizationLive do
 
           <div class="lbm-demo">
             <h3>Try it yourself</h3>
+
             <p>
               Pick a function below, choose a starting point, and see what interval the bracketing
               algorithm comes back with.
@@ -137,11 +138,11 @@ defmodule AlgorithmsForOptimizationWeb.OptimizationLive do
                 label="Expansion factor"
                 value="2"
                 step="any"
-              />
-              <.button variant="primary">Bracket it</.button>
+              /> <.button variant="primary">Bracket it</.button>
             </form>
 
             <p :if={@error} class="lbm-demo-error">{@error}</p>
+
             <p :if={@result} class="lbm-demo-result">
               Bracket: [{elem(@result, 0) |> Float.round(4)}, {elem(@result, 1) |> Float.round(4)}]
             </p>

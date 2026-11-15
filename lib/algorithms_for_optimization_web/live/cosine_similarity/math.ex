@@ -85,7 +85,6 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityMathLive do
     <Layouts.app flash={@flash} current_scope={assigns[:current_scope]}>
       <div class="lbm-lesson">
         <Layouts.lesson_toc active_topic={:cosine_similarity} active_lesson={:math} />
-
         <div class="lbm-prose">
           <h1 id="page-heading">An Introduction to the Math</h1>
 
@@ -96,6 +95,7 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityMathLive do
             magnitude and direction. There are two standard notations for vectors: we can write a vector as $\langle 1, 1 \rangle$ or as $1\mathbf i + 1\mathbf j$. Both of these mean the same thing
             and can be plotted on a graph similarly to cartesian coordinates.
           </p>
+
           <div
             id="vector-chart"
             role="figure"
@@ -111,6 +111,7 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityMathLive do
             We can expand this definition to 3 dimensions by adding a third orthogonal line to our plane. Unlike regular 2d cartesian coordinates which are known as
             ordered pairs in the (x,y) format, 3 dimensions uses the (x,y,z) format. In vector land we denote these as $\langle 1, 2, 3 \rangle$, or $1\mathbf i + 2\mathbf j + 3\mathbf k$.
           </p>
+
           <div
             id="vector-3d-chart"
             role="figure"
@@ -123,15 +124,19 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityMathLive do
           </div>
 
           <h2>The Magnitude of a vector</h2>
+
           <p>
             If we have a vector $\mathbf a = \langle a_1, a_2, a_3 \rangle$, we can find its magnitude by applying the following formula:
           </p>
+
           <p>{"$$\\sqrt{a_1^2 + a_2^2 + a_3^2}$$"}</p>
+
           <p>This is denoted as $\|\mathbf a\|$.</p>
 
           <p>Cool, so now we know the basics of vectors, now just one last thing.</p>
 
           <h2>The Dot Product</h2>
+
           <p>
             The Dot Product is a technique used to find the product of two vectors. The output of the dot product is always a real number. Vectors go in, one number comes out.
             The formal definition for the product of two vectors $\mathbf a$ and $\mathbf b$ in two dimensional space is $a_1 b_1 + a_2 b_2$. If we want to take the dot product of a vector
@@ -139,10 +144,13 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityMathLive do
           </p>
 
           <h2>The <i>other</i> Dot Product</h2>
+
           <p>
             But Andrew, this is about cosine similarity! Where is the trigonometry? Where is the cosine? Yes, there is another kinda worse form of the Dot Product.
           </p>
+
           <p>$$\mathbf a \cdot \mathbf b = \|\mathbf a\| \|\mathbf b\| \cos\theta$$</p>
+
           <p>As you can probably guess, this form is what we will spend our time working with.</p>
 
           <h2>That's all the background info. Let's get started...</h2>
