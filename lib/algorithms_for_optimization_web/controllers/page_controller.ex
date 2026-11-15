@@ -17,7 +17,8 @@ defmodule AlgorithmsForOptimizationWeb.PageController do
   def about(conn, _params) do
     render(conn, :about,
       page_title: "About",
-      page_description: "[PLACEHOLDER: About page meta description]"
+      page_description:
+        "Load Bearing Math demystifies the math behind everyday systems. Written by Andrew Ferguson, a computer scientist with a minor in mathematics who tutors math and computer science."
     )
   end
 

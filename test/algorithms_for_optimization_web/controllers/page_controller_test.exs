@@ -62,13 +62,24 @@ defmodule AlgorithmsForOptimizationWeb.PageControllerTest do
     test "footer links to the about page", %{conn: conn} do
       assert has?(doc(conn, ~p"/"), ~s(#footer-about[href="/about"]))
     end
+
+    test "header and mobile menu link to the about page", %{conn: conn} do
+      page = doc(conn, ~p"/")
+
+      assert has?(page, ~s(.lbm-nav a[href="/about"]))
+      assert has?(page, ~s(#mobile-nav a[href="/about"]))
+    end
   end
 
-  test "GET /about keeps the intro letter", %{conn: conn} do
+  test "GET /about has every section and points to topics first", %{conn: conn} do
     page = doc(conn, ~p"/about")
 
-    assert has?(page, "#about-page")
-    assert page |> LazyHTML.query("h1") |> LazyHTML.text() =~ "Behind It All"
+    for id <- ~w(about-page about-mission about-who about-teaching about-site about-personal) do
+      assert has?(page, "##{id}"), "missing ##{id}"
+    end
+
+    assert has?(page, ~s(#about-topics[href="/topics"]))
+    assert has?(page, ~s(#about-services[href="/services"]))
   end
 
   describe "topics page" do

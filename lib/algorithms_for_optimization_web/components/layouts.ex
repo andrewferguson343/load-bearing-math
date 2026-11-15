@@ -75,6 +75,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
             <.link navigate={~p"/"} class="lbm-nav-link">Home</.link>
             <.link navigate={~p"/topics"} class="lbm-nav-link">Topics</.link>
             <.link navigate={~p"/services"} class="lbm-nav-link">Services</.link>
+            <.link navigate={~p"/about"} class="lbm-nav-link">About</.link>
             <button type="button" class="lbm-nav-cta" phx-click={show_suggest_modal()}>
               Suggest a Topic
             </button>
@@ -106,6 +107,9 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         </.link>
         <.link navigate={~p"/services"} class="lbm-mobile-nav-link" phx-click={hide_mobile_nav()}>
           Services
+        </.link>
+        <.link navigate={~p"/about"} class="lbm-mobile-nav-link" phx-click={hide_mobile_nav()}>
+          About
         </.link>
         <button
           type="button"
