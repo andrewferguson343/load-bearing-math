@@ -45,7 +45,9 @@ defmodule AlgorithmsForOptimizationWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/about", PageController, :about
     get "/topics", PageController, :topics
+    get "/collections/:slug", PageController, :collection
     post "/topic-suggestions", TopicSuggestionController, :create
 
     live "/sources", SourcesLive

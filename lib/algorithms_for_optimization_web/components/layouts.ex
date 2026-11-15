@@ -199,7 +199,8 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
   # Opening remembers where focus was (`return_focus_to`, or the clicked button by default) and
   # puts the cursor in the suggestion field; closing hands focus back. From the mobile menu the
   # clicked button disappears as the menu closes, so focus returns to the menu button instead.
-  defp show_suggest_modal(js \\ %JS{}, return_focus_to \\ nil) do
+  # Public so page templates (e.g. the landing page footer) can open the same dialog.
+  def show_suggest_modal(js \\ %JS{}, return_focus_to \\ nil) do
     js
     |> JS.push_focus(if(return_focus_to, do: [to: return_focus_to], else: []))
     |> JS.show(

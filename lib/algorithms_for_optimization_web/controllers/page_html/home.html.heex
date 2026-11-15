@@ -1,42 +1,167 @@
 <Layouts.app flash={@flash}>
-  <style>
-    .lbm-hero-lede { text-align: left; margin-bottom: 1.25rem; }
-    .lbm-hero-lede:last-of-type { margin-bottom: 0; }
-    .lbm-hero-cta { margin-top: 2rem; text-align: center; }
-  </style>
+  <div class="lbm-landing">
+    <%!-- Hero --%>
+    <section
+      id="landing-hero"
+      class="lbm-hero lbm-landing-hero"
+      aria-labelledby="landing-hero-title"
+    >
+      <%!-- PLACEHOLDER: lorem ipsum sized like the real copy (pitch ~6-8 words, intro 2-3 sentences). Replace before merging. --%>
+      <h1 id="landing-hero-title" class="lbm-hero-title">
+        [PLACEHOLDER] Lorem ipsum dolor sit amet consectetur
+      </h1>
+      <p class="lbm-hero-lede">
+        [PLACEHOLDER] Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.
+      </p>
+      <div class="lbm-landing-hero-actions">
+        <.button
+          :if={@featured}
+          id="hero-start"
+          navigate={AlgorithmsForOptimization.Topics.entry_path(@featured)}
+          variant="primary"
+        >
+          Start with {@featured.label} <span aria-hidden="true">&rarr;</span>
+        </.button>
+        <.button id="hero-browse" navigate={~p"/topics"}>Browse everything</.button>
+      </div>
+    </section>
 
-  <div class="lbm-hero">
-    <h1 class="lbm-hero-title">What's Behind It All</h1>
-    <p class="lbm-hero-lede">
-      This is a running collection of short, hands-on walkthroughs connecting math most of us haven't
-      touched since school to the systems we work with every day: optimization, rate limiters,
-      autoscalers, search, all of it.
-    </p>
-    <p class="lbm-hero-lede">
-      As software engineering matured, a lot of the math underneath it got abstracted away, and we're
-      watching that happen all over again with AI. I think it matters to remember where these ideas come
-      from, no matter how technical you are, so I want this to be for everybody. Anyone should be able to
-      drop into the first topic and walk away able to solve a simple problem themselves.
-    </p>
-    <p class="lbm-hero-lede">
-      The math on these pages is worked out by me, not Claude, which means it will occasionally be
-      wrong. The worked examples sit behind a button so you can skip them, or click through and check my
-      work. Please tell me if you find any discrepancies.
-    </p>
-    <p class="lbm-hero-lede">
-      The idea came from two places. First, I need the Elixir practice. Second, I'm in the final stretch
-      of my own education and need to review all of this anyway, so if I'm up past midnight cursing a
-      math problem, I might as well write down what I learn and share it.
-    </p>
-    <p class="lbm-hero-lede">
-      Lastly, I love math, or at least the idea of it. There's a suggestions button up at the top of this
-      page. Please use it. If something gets a lot of requests, I'll research it. Promise. Kinda. I'm not doing it if it's too hard.
-    </p>
+    <%!-- Featured --%>
+    <section :if={@featured} id="landing-featured" aria-labelledby="featured-heading">
+      <.section_heading id="featured-heading" title="Featured" />
+      <.link
+        id={"featured-#{@featured.id}"}
+        navigate={AlgorithmsForOptimization.Topics.entry_path(@featured)}
+        class="lbm-featured-card"
+      >
+        <div class="lbm-featured-meta">
+          <span class="lbm-tag">{kind_label(@featured.kind)}</span>
+          <span>
+            {pluralize(
+              AlgorithmsForOptimization.Topics.published_lesson_count(@featured),
+              "lesson"
+            )}
+          </span>
+        </div>
+        <h3 class="lbm-featured-title">
+          {@featured.label} <span class="lbm-topic-entry-arrow" aria-hidden="true">&rarr;</span>
+        </h3>
+        <p class="lbm-featured-summary">{@featured.description}</p>
+      </.link>
+    </section>
 
-    <div class="lbm-hero-cta">
-      <.button navigate={~p"/topics"} variant="primary">
-        See the full table of contents <span aria-hidden="true">&rarr;</span>
-      </.button>
-    </div>
+    <%!-- Recently posted --%>
+    <section id="landing-recent" aria-labelledby="recent-heading">
+      <.section_heading
+        id="recent-heading"
+        title="Recently posted"
+        link={~p"/topics"}
+        link_label="All topics"
+      />
+      <ol class="lbm-recent-list">
+        <li :for={topic <- @recent} id={"recent-#{topic.id}"}>
+          <.link
+            navigate={AlgorithmsForOptimization.Topics.entry_path(topic)}
+            class="lbm-recent-item"
+          >
+            <div class="lbm-recent-meta">
+              <time :if={topic.published_on} datetime={Date.to_iso8601(topic.published_on)}>
+                {format_date(topic.published_on)}
+              </time>
+              <span :if={is_nil(topic.published_on)}>{format_date(nil)}</span>
+              <span class="lbm-tag lbm-tag--muted">{kind_label(topic.kind)}</span>
+              <span
+                :if={AlgorithmsForOptimization.Topics.new?(topic, @today)}
+                class="lbm-tag lbm-tag--new"
+              >
+                New
+              </span>
+            </div>
+            <h3 class="lbm-recent-title">{topic.label}</h3>
+            <p class="lbm-recent-summary">
+              {AlgorithmsForOptimization.Topics.card_summary(topic)}
+            </p>
+          </.link>
+        </li>
+      </ol>
+    </section>
+
+    <%!-- Collections --%>
+    <section id="landing-collections" aria-labelledby="collections-heading">
+      <.section_heading id="collections-heading" title="Collections" />
+      <div class="lbm-collection-grid">
+        <.link
+          :for={card <- @collections}
+          id={"collection-#{card.collection.slug}"}
+          navigate={collection_path(card.collection)}
+          class="lbm-collection-card"
+        >
+          <h3 class="lbm-collection-name">{card.collection.name}</h3>
+          <p class="lbm-collection-description">{card.collection.description}</p>
+          <p class="lbm-collection-count">
+            <%= cond do %>
+              <% card.count > 0 and card.upcoming > 0 -> %>
+                {pluralize(card.count, "topic")} · {card.upcoming} more coming
+              <% card.count > 0 -> %>
+                {pluralize(card.count, "topic")}
+              <% true -> %>
+                Coming soon
+            <% end %>
+          </p>
+        </.link>
+      </div>
+    </section>
+
+    <%!-- Point Loads --%>
+    <section
+      id="landing-point-loads"
+      class="lbm-point-loads"
+      aria-labelledby="point-loads-heading"
+    >
+      <.section_heading
+        id="point-loads-heading"
+        title={@point_loads_collection.name}
+        link={collection_path(@point_loads_collection)}
+        link_label="All Point Loads"
+      >
+        <:tagline>{@point_loads_collection.description}</:tagline>
+      </.section_heading>
+      <div class="lbm-point-load-strip">
+        <.link
+          :for={topic <- @point_loads}
+          id={"point-load-#{topic.id}"}
+          navigate={AlgorithmsForOptimization.Topics.entry_path(topic)}
+          class="lbm-point-load-card"
+        >
+          <h3 class="lbm-point-load-title">{topic.label}</h3>
+          <p class="lbm-point-load-summary">
+            {AlgorithmsForOptimization.Topics.card_summary(topic)}
+          </p>
+        </.link>
+        <%!-- Until the first Point Load is published, show placeholder cards. --%>
+        <div
+          :for={n <- 1..3}
+          :if={@point_loads == []}
+          class="lbm-point-load-card lbm-point-load-card--placeholder"
+        >
+          <h3 class="lbm-point-load-title">[PLACEHOLDER: Point Load {n} title]</h3>
+          <p class="lbm-point-load-summary">[PLACEHOLDER: Point Load {n} one-liner]</p>
+        </div>
+      </div>
+    </section>
+
+    <%!-- Footer --%>
+    <footer id="landing-footer" class="lbm-landing-footer">
+      <nav aria-label="Footer">
+        <.link navigate={~p"/about"} id="footer-about">About</.link>
+        <.link navigate={~p"/topics"}>All topics</.link>
+        <.link navigate={~p"/sources"}>Sources cited</.link>
+        <button type="button" id="footer-suggest" phx-click={Layouts.show_suggest_modal()}>
+          Suggest a topic
+        </button>
+      </nav>
+    </footer>
   </div>
 </Layouts.app>

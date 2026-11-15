@@ -1,0 +1,21 @@
+<Layouts.app flash={@flash}>
+  <div id={"collection-page-#{@collection.slug}"} class="lbm-hero">
+    <p class="lbm-eyebrow">Collection</p>
+    <h1 class="lbm-hero-title">{@collection.name}</h1>
+    <p class="lbm-hero-lede">{@collection.description}</p>
+  </div>
+
+  <div :if={@topics != []} id="collection-topics" class="lbm-topic-index">
+    <.topic_entry :for={topic <- @topics} topic={topic} />
+  </div>
+
+  <p :if={@topics == []} id="collection-empty" class="lbm-collection-empty">
+    Nothing here yet. Coming soon.
+  </p>
+
+  <p :if={@topics != [] and @upcoming > 0} class="lbm-collection-empty">
+    {@upcoming} more on the way.
+  </p>
+
+  <.link navigate={~p"/topics"} class="lbm-sources-link">All topics</.link>
+</Layouts.app>

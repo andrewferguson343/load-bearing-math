@@ -3,6 +3,14 @@ defmodule AlgorithmsForOptimization.Topics do
   Registry of the site's topic "series" (Optimization, Cosine Similarity, ...).
   Keep a topic off `:public_topics` in config while you work on it, then add
   its id to the list and redeploy when you're ready to share it.
+
+  Landing page fields on each topic:
+
+    * `collection` - id from `AlgorithmsForOptimization.Collections` (or `nil`)
+    * `kind` - `:series` for multi-part topics, `:point_load` for single-page quickies
+    * `published_on` - `Date` it went public, drives "Recently posted" (`nil` sorts last)
+    * `summary` - one line for cards; `card_summary/1` falls back to `description`
+    * `featured` - the landing page's featured topic (first visible one wins)
   """
 
   @dev_routes? Application.compile_env(:algorithms_for_optimization, :dev_routes, false)
@@ -11,6 +19,13 @@ defmodule AlgorithmsForOptimization.Topics do
   @topics [
     %{
       id: :cosine_similarity,
+      collection: :linear_algebra,
+      kind: :series,
+      # [PLACEHOLDER: publish date] e.g. ~D[2026-11-01]
+      published_on: nil,
+      # [PLACEHOLDER: one-line card summary]; cards fall back to the description
+      summary: nil,
+      featured: true,
       number: "01",
       label: "Cosine Similarity",
       description:
@@ -45,6 +60,13 @@ defmodule AlgorithmsForOptimization.Topics do
     },
     %{
       id: :leaky_bucket,
+      collection: :differential_equations,
+      kind: :series,
+      # [PLACEHOLDER: publish date] e.g. ~D[2026-11-01]
+      published_on: nil,
+      # [PLACEHOLDER: one-line card summary]; cards fall back to the description
+      summary: nil,
+      featured: false,
       number: "02",
       label: "The Leaky Bucket",
       description:
@@ -55,6 +77,13 @@ defmodule AlgorithmsForOptimization.Topics do
     },
     %{
       id: :markov_chains,
+      collection: :linear_algebra,
+      kind: :series,
+      # [PLACEHOLDER: publish date] e.g. ~D[2026-11-01]
+      published_on: nil,
+      # [PLACEHOLDER: one-line card summary]; cards fall back to the description
+      summary: nil,
+      featured: false,
       number: "03",
       label: "Markov Chains",
       description:
@@ -65,6 +94,13 @@ defmodule AlgorithmsForOptimization.Topics do
     },
     %{
       id: :pagerank,
+      collection: :linear_algebra,
+      kind: :series,
+      # [PLACEHOLDER: publish date] e.g. ~D[2026-11-01]
+      published_on: nil,
+      # [PLACEHOLDER: one-line card summary]; cards fall back to the description
+      summary: nil,
+      featured: false,
       number: "04",
       label: "PageRank",
       description:
@@ -75,6 +111,13 @@ defmodule AlgorithmsForOptimization.Topics do
     },
     %{
       id: :metastable_failures,
+      collection: :systems,
+      kind: :series,
+      # [PLACEHOLDER: publish date] e.g. ~D[2026-11-01]
+      published_on: nil,
+      # [PLACEHOLDER: one-line card summary]; cards fall back to the description
+      summary: nil,
+      featured: false,
       number: "05",
       label: "Metastable Failures",
       description:
@@ -85,6 +128,13 @@ defmodule AlgorithmsForOptimization.Topics do
     },
     %{
       id: :damped_oscillators,
+      collection: :differential_equations,
+      kind: :series,
+      # [PLACEHOLDER: publish date] e.g. ~D[2026-11-01]
+      published_on: nil,
+      # [PLACEHOLDER: one-line card summary]; cards fall back to the description
+      summary: nil,
+      featured: false,
       number: "06",
       label: "Damped Oscillators",
       description:
@@ -95,6 +145,13 @@ defmodule AlgorithmsForOptimization.Topics do
     },
     %{
       id: :eulers_method,
+      collection: :differential_equations,
+      kind: :series,
+      # [PLACEHOLDER: publish date] e.g. ~D[2026-11-01]
+      published_on: nil,
+      # [PLACEHOLDER: one-line card summary]; cards fall back to the description
+      summary: nil,
+      featured: false,
       number: "07",
       label: "Euler's Method",
       description:
@@ -105,6 +162,13 @@ defmodule AlgorithmsForOptimization.Topics do
     },
     %{
       id: :optimization,
+      collection: :systems,
+      kind: :series,
+      # [PLACEHOLDER: publish date] e.g. ~D[2026-11-01]
+      published_on: nil,
+      # [PLACEHOLDER: one-line card summary]; cards fall back to the description
+      summary: nil,
+      featured: false,
       number: "08",
       label: "Optimization Algorithms",
       description:
@@ -128,6 +192,13 @@ defmodule AlgorithmsForOptimization.Topics do
     },
     %{
       id: :mathematics_appendix,
+      collection: nil,
+      kind: :series,
+      # [PLACEHOLDER: publish date] e.g. ~D[2026-11-01]
+      published_on: nil,
+      # [PLACEHOLDER: one-line card summary]; cards fall back to the description
+      summary: nil,
+      featured: false,
       number: "09",
       label: "Mathematics Appendix",
       description:
@@ -151,4 +222,42 @@ defmodule AlgorithmsForOptimization.Topics do
   def public?(topic_id) do
     @dev_routes? or topic_id in @public_topics
   end
+
+  @doc "The visible topic flagged `featured`, or `nil`."
+  def featured, do: Enum.find(visible(), & &1.featured)
+
+  @doc "The newest `limit` visible topics by `published_on`; undated ones come last."
+  def recent(limit \\ 5) do
+    {dated, undated} = Enum.split_with(visible(), & &1.published_on)
+
+    dated
+    |> Enum.sort_by(& &1.published_on, {:desc, Date})
+    |> Kernel.++(undated)
+    |> Enum.take(limit)
+  end
+
+  @doc "Visible topics of one kind (`:series` or `:point_load`), newest first."
+  def by_kind(kind), do: recent(length(@topics)) |> Enum.filter(&(&1.kind == kind))
+
+  @doc "Visible topics in a collection, in registry order."
+  def in_collection(collection_id), do: Enum.filter(visible(), &(&1.collection == collection_id))
+
+  @doc "How many topics in a collection are still unpublished (a count only, never names)."
+  def upcoming_count(collection_id) do
+    Enum.count(@topics, &(&1.collection == collection_id and not public?(&1.id)))
+  end
+
+  @doc "Published within the last `days` days of `today`."
+  def new?(topic, today \\ Date.utc_today(), days \\ 14)
+  def new?(%{published_on: nil}, _today, _days), do: false
+
+  def new?(%{published_on: date}, today, days) do
+    Date.diff(today, date) in 0..days
+  end
+
+  @doc "One-line text for cards: `summary` if set, otherwise the full `description`."
+  def card_summary(topic), do: topic[:summary] || topic.description
+
+  @doc "Lessons with a page, i.e. not the \"Soon\" placeholders."
+  def published_lesson_count(topic), do: Enum.count(topic.lessons, & &1.path)
 end
