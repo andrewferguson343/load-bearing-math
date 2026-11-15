@@ -1,0 +1,20 @@
+# Keep LF in the working tree on every platform. The HEEx formatter mishandles
+# CRLF on Windows, so local `mix format` must see the same LF files CI does.
+* text=auto eol=lf
+
+# cmd.exe needs CRLF to run batch files reliably (labels and goto break on LF).
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary files: never touch line endings or diff as text.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.eot binary

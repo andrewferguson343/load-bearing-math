@@ -1,0 +1,129 @@
+<Layouts.app flash={@flash}>
+  <div class="lbm-landing">
+    <%!-- Hero --%>
+    <section id="services-hero" class="lbm-hero lbm-landing-hero" aria-labelledby="services-title">
+      <p class="lbm-eyebrow">Services</p>
+      <h1 id="services-title" class="lbm-hero-title">
+        Mathematics and computer science, taught properly.
+      </h1>
+      <p class="lbm-hero-lede">
+        One-on-one tutoring and supplemental teaching, from algebra and trigonometry through
+        calculus, linear algebra and differential equations, plus programming, data structures and
+        algorithms.
+        Whether you're catching up, getting ahead, or taking on a full course from the beginning, the
+        goal is the same: understand it well enough to solve problems on your own.
+      </p>
+      <div class="lbm-landing-hero-actions">
+        <.button href="#inquiry" variant="primary" id="services-cta">
+          Get in touch <span aria-hidden="true">&darr;</span>
+        </.button>
+        <.button navigate={~p"/topics"} id="services-see-topics">Browse topics covered</.button>
+      </div>
+    </section>
+
+    <%!-- Offerings --%>
+    <section id="services-offerings" aria-labelledby="offerings-heading">
+      <h2 id="offerings-heading" class="lbm-landing-heading-title lbm-services-heading">
+        Offerings
+      </h2>
+      <div class="lbm-offering-grid">
+        <article
+          :for={offering <- @offerings}
+          id={"offering-#{offering.id}"}
+          class={["lbm-offering-card", offering.highlighted && "lbm-offering-card--highlighted"]}
+        >
+          <h3 class="lbm-offering-name">{offering.name}</h3>
+          <p class="lbm-offering-best-for">
+            <span class="lbm-tag lbm-tag--muted">Best for</span>
+            <span>{offering.best_for}</span>
+          </p>
+          <p class="lbm-offering-price">
+            <span class="lbm-offering-amount">{offering.price}</span>
+            <span class="lbm-offering-price-note">{offering.price_note}</span>
+          </p>
+          <p class="lbm-offering-description">{offering.description}</p>
+          <ul class="lbm-offering-includes">
+            <li :for={item <- offering.includes}>
+              <.icon name="hero-check-micro" class="size-4 lbm-offering-check" />
+              <span>{item}</span>
+            </li>
+          </ul>
+          <a href="#inquiry" class="lbm-offering-cta">Ask about this</a>
+        </article>
+      </div>
+    </section>
+
+    <%!-- Proof: topics already covered on the site --%>
+    <section :if={@sample_topics != []} id="services-proof" aria-labelledby="proof-heading">
+      <h2 id="proof-heading" class="lbm-landing-heading-title lbm-services-heading">
+        Topics covered
+      </h2>
+      <p class="lbm-services-intro">
+        A sample of the topics covered on this site, each one worked through step by step. They're
+        free to read, and they give a good feel for how sessions go.
+      </p>
+      <div class="lbm-collection-grid">
+        <.link
+          :for={topic <- @sample_topics}
+          id={"proof-#{topic.id}"}
+          navigate={AlgorithmsForOptimization.Topics.entry_path(topic)}
+          class="lbm-collection-card"
+        >
+          <h3 class="lbm-collection-name">{topic.label}</h3>
+          <p class="lbm-collection-description">
+            {AlgorithmsForOptimization.Topics.card_summary(topic)}
+          </p>
+        </.link>
+      </div>
+    </section>
+
+    <%!-- Inquiry form --%>
+    <section id="inquiry" class="lbm-inquiry" aria-labelledby="inquiry-heading">
+      <h2 id="inquiry-heading" class="lbm-inquiry-title">Get in touch</h2>
+      <p class="lbm-services-intro">
+        Share a little about the student, the class or subject, and what you'd like to work on.
+        Replies usually go out within two business days.
+      </p>
+      <.form
+        for={@form}
+        id="inquiry-form"
+        action={~p"/services/inquiries" <> "#inquiry"}
+        method="post"
+        class="lbm-inquiry-form"
+      >
+        <div class="lbm-inquiry-row">
+          <.input field={@form[:name]} type="text" label="Name" autocomplete="name" required />
+          <.input field={@form[:email]} type="email" label="Email" autocomplete="email" required />
+        </div>
+        <.input
+          field={@form[:offering]}
+          type="select"
+          label="What are you interested in?"
+          prompt="Not sure yet"
+          options={@offering_options}
+        />
+        <.input
+          field={@form[:message]}
+          type="textarea"
+          label="What would you like help with?"
+          rows="6"
+          maxlength={AlgorithmsForOptimization.TutoringInquiry.max_message()}
+          required
+        />
+        <%!-- Honeypot: hidden from people and screen readers; bots fill in every field. --%>
+        <div class="lbm-honeypot" aria-hidden="true">
+          <label for="inquiry-company-website">Leave this field empty</label>
+          <input
+            type="text"
+            id="inquiry-company-website"
+            name={AlgorithmsForOptimizationWeb.ServicesController.honeypot_field()}
+            value=""
+            tabindex="-1"
+            autocomplete="off"
+          />
+        </div>
+        <.button variant="primary" id="inquiry-submit">Send message</.button>
+      </.form>
+    </section>
+  </div>
+</Layouts.app>

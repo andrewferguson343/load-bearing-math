@@ -37,8 +37,8 @@ defmodule AlgorithmsForOptimizationWeb.SEO do
   def url(path), do: AlgorithmsForOptimizationWeb.Endpoint.url() <> path
 
   @doc "Full document title, matching what `live_title` renders."
-  def full_title(nil), do: "#{@site_name} · #{@author}"
-  def full_title(page_title), do: "#{page_title} · #{@author}"
+  def full_title(nil), do: @site_name
+  def full_title(page_title), do: "#{page_title} · #{@site_name}"
 
   @doc "JSON-LD for a lesson page, as an HTML-safe JSON string."
   def lesson_json_ld(%{
@@ -60,7 +60,7 @@ defmodule AlgorithmsForOptimizationWeb.SEO do
       "teaches" => topic.label,
       "isPartOf" => %{"@type" => "Course", "name" => topic.label},
       "author" => %{"@type" => "Person", "name" => @author},
-      "publisher" => %{"@type" => "Person", "name" => @author}
+      "publisher" => %{"@type" => "Organization", "name" => @site_name}
     }
     |> Jason.encode!(escape: :html_safe)
   end

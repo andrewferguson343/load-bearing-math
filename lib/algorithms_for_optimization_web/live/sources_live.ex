@@ -10,7 +10,7 @@ defmodule AlgorithmsForOptimizationWeb.SourcesLive do
     <Layouts.app flash={@flash} current_scope={assigns[:current_scope]}>
       <div class="lbm-prose" style="max-width: 720px; margin: 2.5rem auto 0;">
         <h1 id="page-heading">Sources Cited</h1>
-        <p>The books and datasets referenced across this site's lessons.</p>
+        <p>The books and datasets referenced across this site's topics.</p>
         <ul>
           <li><em>Algorithms for Optimization</em> by Kochenderfer and Wheeler</li>
           <li><em>Calculus: Early Transcendentals</em> by Stewart, Clegg, and Watson</li>

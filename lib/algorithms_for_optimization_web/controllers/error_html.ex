@@ -59,7 +59,6 @@ defmodule AlgorithmsForOptimizationWeb.ErrorHTML do
             <a href="/" class="lbm-brand">
               <div class="lbm-brand-text">
                 <span class="lbm-brand-name">Load Bearing Math</span>
-                <span class="lbm-brand-subtitle">by Andrew Ferguson</span>
               </div>
             </a>
           </div>

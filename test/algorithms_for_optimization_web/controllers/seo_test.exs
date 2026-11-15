@@ -30,6 +30,19 @@ defmodule AlgorithmsForOptimizationWeb.SEOTest do
       assert %{"@type" => "WebSite", "name" => "Load Bearing Math"} = Jason.decode!(json_ld)
     end
 
+    test "titles use the site name, never a personal byline", %{conn: conn} do
+      home = conn |> get(~p"/") |> html_response(200)
+      services = conn |> get(~p"/services") |> html_response(200)
+
+      assert home |> head() |> LazyHTML.query("title") |> LazyHTML.text() =~
+               ~r/^\s*Load Bearing Math\s*$/
+
+      assert services |> head() |> LazyHTML.query("title") |> LazyHTML.text() =~
+               "Services · Load Bearing Math"
+
+      refute home =~ "by Andrew Ferguson"
+    end
+
     test "lesson page has its own description and LearningResource JSON-LD", %{conn: conn} do
       {:ok, _view, html} = live(conn, ~p"/cosine-similarity-math")
       doc = head(html)
@@ -54,6 +67,7 @@ defmodule AlgorithmsForOptimizationWeb.SEOTest do
 
       assert body =~ ~r{Sitemap: https?://[^/]+/sitemap\.xml}
       assert body =~ "Disallow: /topic-suggestions"
+      assert body =~ "Disallow: /tutoring-inquiries"
     end
 
     test "sitemap lists public lessons only", %{conn: conn} do
@@ -64,6 +78,7 @@ defmodule AlgorithmsForOptimizationWeb.SEOTest do
       assert body =~ "/cosine-similarity-math</loc>"
       assert body =~ "/topics</loc>"
       assert body =~ "/about</loc>"
+      assert body =~ "/services</loc>"
       assert body =~ "/collections/linear-algebra</loc>"
       refute body =~ "/collections/systems</loc>"
       refute body =~ "/pagerank</loc>"

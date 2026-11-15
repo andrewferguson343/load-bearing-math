@@ -68,13 +68,13 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         <a href="/" class="lbm-brand">
           <div class="lbm-brand-text">
             <span class="lbm-brand-name">Load Bearing Math</span>
-            <span class="lbm-brand-subtitle">by Andrew Ferguson</span>
           </div>
         </a>
         <div class="lbm-header-right">
           <nav class="lbm-nav" aria-label="Main">
             <.link navigate={~p"/"} class="lbm-nav-link">Home</.link>
             <.link navigate={~p"/topics"} class="lbm-nav-link">Topics</.link>
+            <.link navigate={~p"/services"} class="lbm-nav-link">Services</.link>
             <button type="button" class="lbm-nav-cta" phx-click={show_suggest_modal()}>
               Suggest a Topic
             </button>
@@ -103,6 +103,9 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         </.link>
         <.link navigate={~p"/topics"} class="lbm-mobile-nav-link" phx-click={hide_mobile_nav()}>
           Topics
+        </.link>
+        <.link navigate={~p"/services"} class="lbm-mobile-nav-link" phx-click={hide_mobile_nav()}>
+          Services
         </.link>
         <button
           type="button"
@@ -242,7 +245,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
       assign(assigns, :current, AlgorithmsForOptimization.Topics.fetch!(assigns.active_topic))
 
     ~H"""
-    <aside class="lbm-toc" aria-label="Lesson navigation">
+    <aside class="lbm-toc" aria-label="Topic navigation">
       <p class="lbm-toc-eyebrow">{@current.label}</p>
 
       <.toc_lesson :for={lesson <- @current.lessons} lesson={lesson} active_lesson={@active_lesson} />
