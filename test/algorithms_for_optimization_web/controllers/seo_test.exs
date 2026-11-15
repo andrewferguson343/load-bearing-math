@@ -54,6 +54,7 @@ defmodule AlgorithmsForOptimizationWeb.SEOTest do
 
       assert body =~ ~r{Sitemap: https?://[^/]+/sitemap\.xml}
       assert body =~ "Disallow: /topic-suggestions"
+      assert body =~ "Disallow: /tutoring-inquiries"
     end
 
     test "sitemap lists public lessons only", %{conn: conn} do
@@ -64,6 +65,7 @@ defmodule AlgorithmsForOptimizationWeb.SEOTest do
       assert body =~ "/cosine-similarity-math</loc>"
       assert body =~ "/topics</loc>"
       assert body =~ "/about</loc>"
+      assert body =~ "/services</loc>"
       assert body =~ "/collections/linear-algebra</loc>"
       refute body =~ "/collections/systems</loc>"
       refute body =~ "/pagerank</loc>"

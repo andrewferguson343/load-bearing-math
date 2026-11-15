@@ -84,6 +84,11 @@ config :algorithms_for_optimization, :topic_suggestion_rate_limit,
   limit: 5,
   window_ms: :timer.minutes(10)
 
+# Throttle the tutoring inquiry form on /services per visitor IP.
+config :algorithms_for_optimization, :inquiry_rate_limit,
+  limit: 3,
+  window_ms: :timer.minutes(10)
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
