@@ -3,16 +3,21 @@
     <%!-- Hero --%>
     <section id="services-hero" class="lbm-hero lbm-landing-hero" aria-labelledby="services-title">
       <p class="lbm-eyebrow">Services</p>
-      <h1 id="services-title" class="lbm-hero-title">[PLACEHOLDER: services headline]</h1>
+      <h1 id="services-title" class="lbm-hero-title">
+        Mathematics and computer science, taught properly.
+      </h1>
       <p class="lbm-hero-lede">
-        [PLACEHOLDER: two or three sentences on who the tutoring is for and how it supplements
-        what they're already learning]
+        One-on-one tutoring and supplemental teaching, from algebra and trigonometry through
+        calculus, linear algebra and differential equations, plus programming, data structures and
+        algorithms.
+        Whether you're catching up, getting ahead, or taking on a full course from the beginning, the
+        goal is the same: understand it well enough to solve problems on your own.
       </p>
       <div class="lbm-landing-hero-actions">
         <.button href="#inquiry" variant="primary" id="services-cta">
           Get in touch <span aria-hidden="true">&darr;</span>
         </.button>
-        <.button navigate={~p"/topics"} id="services-see-lessons">See the free lessons</.button>
+        <.button navigate={~p"/topics"} id="services-see-topics">Browse topics covered</.button>
       </div>
     </section>
 
@@ -28,6 +33,10 @@
           class={["lbm-offering-card", offering.highlighted && "lbm-offering-card--highlighted"]}
         >
           <h3 class="lbm-offering-name">{offering.name}</h3>
+          <p class="lbm-offering-best-for">
+            <span class="lbm-tag lbm-tag--muted">Best for</span>
+            <span>{offering.best_for}</span>
+          </p>
           <p class="lbm-offering-price">
             <span class="lbm-offering-amount">{offering.price}</span>
             <span class="lbm-offering-price-note">{offering.price_note}</span>
@@ -44,13 +53,14 @@
       </div>
     </section>
 
-    <%!-- Proof: the published lessons --%>
+    <%!-- Proof: topics already covered on the site --%>
     <section :if={@sample_topics != []} id="services-proof" aria-labelledby="proof-heading">
       <h2 id="proof-heading" class="lbm-landing-heading-title lbm-services-heading">
-        See how I teach
+        Topics covered
       </h2>
       <p class="lbm-services-intro">
-        [PLACEHOLDER: a line pointing people at the free lessons as a sample of your teaching]
+        A sample of the topics covered on this site, each one worked through step by step. They're
+        free to read, and they give a good feel for how sessions go.
       </p>
       <div class="lbm-collection-grid">
         <.link
@@ -71,7 +81,8 @@
     <section id="inquiry" class="lbm-inquiry" aria-labelledby="inquiry-heading">
       <h2 id="inquiry-heading" class="lbm-inquiry-title">Get in touch</h2>
       <p class="lbm-services-intro">
-        [PLACEHOLDER: what to include in the message and how soon you'll reply]
+        Share a little about the student, the class or subject, and what you'd like to work on.
+        Replies usually go out within two business days.
       </p>
       <.form
         for={@form}
@@ -111,7 +122,7 @@
             autocomplete="off"
           />
         </div>
-        <.button variant="primary" id="inquiry-submit">Send</.button>
+        <.button variant="primary" id="inquiry-submit">Send message</.button>
       </.form>
     </section>
   </div>

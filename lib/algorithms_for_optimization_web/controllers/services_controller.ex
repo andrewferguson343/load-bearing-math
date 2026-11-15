@@ -75,13 +75,14 @@ defmodule AlgorithmsForOptimizationWeb.ServicesController do
       sample_topics: AlgorithmsForOptimization.Topics.visible() |> Enum.take(3),
       form: Phoenix.Component.to_form(changeset, as: :inquiry),
       page_title: "Services",
-      page_description: "[PLACEHOLDER: Services page meta description]"
+      page_description:
+        "Private tutoring in mathematics and computer science, from algebra through differential equations, plus programming, data structures and algorithms."
     )
   end
 
   defp thanks(conn) do
     conn
-    |> put_flash(:info, "[PLACEHOLDER: thank-you message after an inquiry is sent]")
+    |> put_flash(:info, "Thanks, your message is in. You'll hear back soon.")
     |> redirect(to: ~p"/services")
   end
 end

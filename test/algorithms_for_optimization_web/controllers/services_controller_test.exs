@@ -29,6 +29,11 @@ defmodule AlgorithmsForOptimizationWeb.ServicesControllerTest do
 
       for offering <- Services.offerings() do
         assert has?(page, "#offering-#{offering.id}")
+
+        assert page
+               |> LazyHTML.query("#offering-#{offering.id} .lbm-offering-best-for")
+               |> LazyHTML.text() =~
+                 offering.best_for
       end
 
       assert has?(page, ~s(#inquiry-form[action="/services/inquiries#inquiry"]))

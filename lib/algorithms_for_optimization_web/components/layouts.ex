@@ -68,7 +68,6 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         <a href="/" class="lbm-brand">
           <div class="lbm-brand-text">
             <span class="lbm-brand-name">Load Bearing Math</span>
-            <span class="lbm-brand-subtitle">by Andrew Ferguson</span>
           </div>
         </a>
         <div class="lbm-header-right">
@@ -246,7 +245,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
       assign(assigns, :current, AlgorithmsForOptimization.Topics.fetch!(assigns.active_topic))
 
     ~H"""
-    <aside class="lbm-toc" aria-label="Lesson navigation">
+    <aside class="lbm-toc" aria-label="Topic navigation">
       <p class="lbm-toc-eyebrow">{@current.label}</p>
 
       <.toc_lesson :for={lesson <- @current.lessons} lesson={lesson} active_lesson={@active_lesson} />

@@ -196,14 +196,6 @@ h1, h2, h3 {
   color: var(--color-base-content);
 }
 
-.lbm-brand-subtitle {
-  font-size: 0.65rem;
-  color: color-mix(in oklch, var(--color-base-content) 70%, transparent);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-top: 2px;
-}
-
 .lbm-header-right {
   display: flex;
   align-items: center;
@@ -291,8 +283,7 @@ h1, h2, h3 {
   overflow: hidden;
 }
 
-.lbm-brand-name,
-.lbm-brand-subtitle {
+.lbm-brand-name {
   white-space: nowrap;
 }
 
@@ -840,6 +831,17 @@ a.lbm-featured-card:hover .lbm-topic-entry-arrow { transform: translateX(0.25rem
   font-size: 1.15rem;
   font-weight: 700;
   color: var(--color-primary);
+}
+
+.lbm-offering-best-for {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.5rem;
+  margin-top: -0.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: color-mix(in oklch, var(--color-base-content) 85%, transparent);
 }
 
 .lbm-offering-price {
