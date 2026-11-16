@@ -12,9 +12,9 @@ defmodule AlgorithmsForOptimizationWeb.MetastableFailuresLive do
         <Layouts.lesson_toc active_topic={:metastable_failures} active_lesson={:overview} />
         <div class="lbm-prose">
           <h1 id="page-heading">Metastable Failures</h1>
-          
+
           <h2>Why a system can stay down after the trigger is gone</h2>
-          
+
           <p>
             A traffic spike hits, retries pile up, latency climbs, more retries fire, and the system settles
             into a new normal: slow and failing, even after the original spike has long since passed. That's
@@ -25,7 +25,7 @@ defmodule AlgorithmsForOptimizationWeb.MetastableFailuresLive do
           </p>
         </div>
       </div>
-       <Layouts.topic_end_note active_topic={:metastable_failures} active_lesson={:overview} />
+      <Layouts.topic_end_note active_topic={:metastable_failures} active_lesson={:overview} />
     </Layouts.app>
     """
   end

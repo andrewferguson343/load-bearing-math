@@ -50,7 +50,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
             <span class="lbm-brand-name">Load Bearing Math</span>
           </div>
         </a>
-        
+
         <div class="lbm-header-right">
           <nav class="lbm-nav" aria-label="Main">
             <.link navigate={~p"/"} class="lbm-nav-link">Home</.link>
@@ -61,11 +61,11 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
               Suggest a topic
             </button>
           </nav>
-          
+
           <div class="lbm-header-theme">
             <.theme_toggle />
           </div>
-          
+
           <button
             type="button"
             id="mobile-nav-toggle"
@@ -80,24 +80,24 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
           </button>
         </div>
       </div>
-      
+
       <nav id="mobile-nav" class="lbm-mobile-nav" aria-label="Main">
         <.link navigate={~p"/"} class="lbm-mobile-nav-link" phx-click={hide_mobile_nav()}>
           Home
         </.link>
-        
+
         <.link navigate={~p"/topics"} class="lbm-mobile-nav-link" phx-click={hide_mobile_nav()}>
           Topics
         </.link>
-        
+
         <.link navigate={~p"/services"} class="lbm-mobile-nav-link" phx-click={hide_mobile_nav()}>
           Services
         </.link>
-        
+
         <.link navigate={~p"/about"} class="lbm-mobile-nav-link" phx-click={hide_mobile_nav()}>
           About
         </.link>
-        
+
         <button
           type="button"
           class="lbm-nav-cta lbm-mobile-nav-cta"
@@ -105,7 +105,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         >
           Suggest a topic
         </button>
-        
+
         <div class="lbm-mobile-nav-theme">
           <span>Theme</span> <.theme_toggle />
         </div>
@@ -134,12 +134,12 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         >
           <.icon name="hero-x-mark" class="size-5" />
         </button>
-        
+
         <div class="lbm-modal-body">
           <h3 id="suggest-topic-title">Suggest a topic</h3>
-          
+
           <p>Got something that belongs on this list? Drop it below.</p>
-          
+
           <.form
             for={%{}}
             id="suggest-topic-form"
@@ -168,7 +168,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
                 autocomplete="off"
               />
             </div>
-             <.button variant="primary">Suggest it</.button>
+            <.button variant="primary">Suggest it</.button>
           </.form>
         </div>
       </.focus_wrap>
@@ -191,7 +191,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         </button>
       </nav>
     </footer>
-     <.flash_group flash={@flash} />
+    <.flash_group flash={@flash} />
     """
   end
 
@@ -259,7 +259,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
     ~H"""
     <aside class="lbm-toc" aria-label="Topic navigation">
       <p class="lbm-toc-eyebrow">{@current.label}</p>
-       <.type_badge kind={@current.kind} class="lbm-toc-type" />
+      <.type_badge kind={@current.kind} class="lbm-toc-type" />
       <.toc_lesson :for={lesson <- @current.lessons} lesson={lesson} active_lesson={@active_lesson} />
       <div
         :if={@active_topic == :optimization and @active_lesson == :appendix}
@@ -267,12 +267,12 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
       >
         <a href="#derivatives" class="lbm-toc-subitem">Derivatives</a>
       </div>
-      
+
       <div :if={@tags != []} class="lbm-toc-tags">
         <p class="lbm-toc-eyebrow">Subjects</p>
-         <.tag_links id="topic-tags" tags={@tags} />
+        <.tag_links id="topic-tags" tags={@tags} />
       </div>
-      
+
       <nav
         :if={@prerequisites != []}
         id="topic-prerequisites"
@@ -280,7 +280,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         aria-label="Before you start"
       >
         <p class="lbm-toc-eyebrow">Before you start</p>
-        
+
         <.link
           :for={foundation <- @prerequisites}
           navigate={AlgorithmsForOptimization.Topics.entry_path(foundation)}
@@ -337,7 +337,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
       >
         All
       </.link>
-      
+
       <.link
         :for={kind <- @kinds}
         navigate={kind.path}
@@ -478,7 +478,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         {gettext("Attempting to reconnect")}
         <.icon name="hero-arrow-path" class="ml-1 size-3 motion-safe:animate-spin" />
       </.flash>
-      
+
       <.flash
         id="server-error"
         kind={:error}
@@ -514,7 +514,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
       >
         <.icon name="hero-computer-desktop-micro" class="size-4 opacity-75 hover:opacity-100" />
       </button>
-      
+
       <button
         class="flex p-2 cursor-pointer w-1/3"
         phx-click={JS.dispatch("phx:set-theme")}
@@ -523,7 +523,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
       >
         <.icon name="hero-sun-micro" class="size-4 opacity-75 hover:opacity-100" />
       </button>
-      
+
       <button
         class="flex p-2 cursor-pointer w-1/3"
         phx-click={JS.dispatch("phx:set-theme")}

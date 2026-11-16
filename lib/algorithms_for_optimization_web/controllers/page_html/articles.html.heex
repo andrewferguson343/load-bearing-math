@@ -1,15 +1,15 @@
 <Layouts.app flash={@flash}>
   <div id="articles-page" class="lbm-hero">
     <p class="lbm-eyebrow">Type</p>
-    
+
     <h1 class="lbm-hero-title">Articles</h1>
-    
+
     <p class="lbm-hero-lede">
       The multi-part walkthroughs: each one takes a single idea from the math up to the system it's
       holding together, in a few short pages.
     </p>
   </div>
-  
+
   <div class="lbm-browse">
     <Layouts.kind_switcher kinds={@kinds} active={:series} />
     <nav
@@ -21,7 +21,7 @@
       <Layouts.tag_links tags={@tags} />
     </nav>
   </div>
-  
+
   <section
     :for={{collection, topics} <- @groups}
     id={"articles-#{collection.slug}"}
@@ -31,22 +31,22 @@
     <h2 id={"articles-#{collection.slug}-heading"} class="lbm-topic-group-title">
       <.link navigate={collection_path(collection)}>{collection.name}</.link>
     </h2>
-    
+
     <div class="lbm-topic-index">
       <.topic_entry :for={{topic, n} <- Enum.with_index(topics, 1)} topic={topic} number={n} />
     </div>
   </section>
-  
+
   <section :if={@ungrouped != []} id="articles-reference" class="lbm-topic-group">
     <h2 class="lbm-topic-group-title">Reference</h2>
-    
+
     <div class="lbm-topic-index">
       <.topic_entry :for={{topic, n} <- Enum.with_index(@ungrouped, 1)} topic={topic} number={n} />
     </div>
   </section>
-  
+
   <p :if={@groups == [] and @ungrouped == []} id="articles-empty" class="lbm-collection-empty">
     Nothing here yet. Coming soon.
   </p>
-   <.link navigate={~p"/topics"} class="lbm-sources-link">All topics</.link>
+  <.link navigate={~p"/topics"} class="lbm-sources-link">All topics</.link>
 </Layouts.app>

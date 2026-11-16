@@ -104,24 +104,24 @@ defmodule AlgorithmsForOptimizationWeb.OptimizationLive do
         <Layouts.lesson_toc active_topic={:optimization} active_lesson={:optimization} />
         <div class="lbm-prose">
           <h1 id="page-heading">An Optimal Optimization Overview</h1>
-          
+
           <h2>Finding a starting point</h2>
-          
+
           <p>
             Before an algorithm can zero in on a minimum, it first needs to know roughly where to look.
             Bracketing is how we answer that. In short, Starting from some point, take a step, and keep expanding
             that step until the function starts getting worse again. Once that happens, you know the
             minimum is trapped somewhere between your last two points.
           </p>
-          
+
           <div class="lbm-demo">
             <h3>Try it yourself</h3>
-            
+
             <p>
               Pick a function below, choose a starting point, and see what interval the bracketing
               algorithm comes back with.
             </p>
-            
+
             <form phx-submit="bracket" phx-change="preview" class="lbm-demo-form">
               <.input
                 type="select"
@@ -140,13 +140,13 @@ defmodule AlgorithmsForOptimizationWeb.OptimizationLive do
                 step="any"
               /> <.button variant="primary">Bracket it</.button>
             </form>
-            
+
             <p :if={@error} class="lbm-demo-error">{@error}</p>
-            
+
             <p :if={@result} class="lbm-demo-result">
               Bracket: [{elem(@result, 0) |> Float.round(4)}, {elem(@result, 1) |> Float.round(4)}]
             </p>
-            
+
             <div
               id="bracketing-function-chart"
               role="figure"
@@ -160,7 +160,7 @@ defmodule AlgorithmsForOptimizationWeb.OptimizationLive do
           </div>
         </div>
       </div>
-       <Layouts.topic_end_note active_topic={:optimization} active_lesson={:optimization} />
+      <Layouts.topic_end_note active_topic={:optimization} active_lesson={:optimization} />
     </Layouts.app>
     """
   end

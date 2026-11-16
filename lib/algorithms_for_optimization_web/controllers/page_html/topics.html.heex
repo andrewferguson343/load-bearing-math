@@ -1,15 +1,15 @@
 <Layouts.app flash={@flash}>
   <div class="lbm-hero">
     <p class="lbm-eyebrow">Topics</p>
-    
+
     <h1 class="lbm-hero-title">Table of contents</h1>
-    
+
     <p class="lbm-hero-lede">
       Short, hands-on walkthroughs of the math holding up everyday engineering. Pick a topic below to
       start; new ones get added as they're ready.
     </p>
   </div>
-  
+
   <div class="lbm-browse">
     <Layouts.kind_switcher kinds={@kinds} active={:all} />
     <nav
@@ -21,7 +21,7 @@
       <Layouts.tag_links tags={@tags} />
     </nav>
   </div>
-  
+
   <section
     :for={{collection, topics} <- @groups}
     id={"topics-#{collection.slug}"}
@@ -31,18 +31,18 @@
     <h2 id={"topics-#{collection.slug}-heading"} class="lbm-topic-group-title">
       <.link navigate={collection_path(collection)}>{collection.name}</.link>
     </h2>
-    
+
     <div class="lbm-topic-index">
       <.topic_entry :for={{topic, n} <- Enum.with_index(topics, 1)} topic={topic} number={n} />
     </div>
   </section>
-  
+
   <section :if={@ungrouped != []} id="topics-reference" class="lbm-topic-group">
     <h2 class="lbm-topic-group-title">Reference</h2>
-    
+
     <div class="lbm-topic-index">
       <.topic_entry :for={{topic, n} <- Enum.with_index(@ungrouped, 1)} topic={topic} number={n} />
     </div>
   </section>
-   <.link navigate="/sources" class="lbm-sources-link">Sources cited</.link>
+  <.link navigate="/sources" class="lbm-sources-link">Sources cited</.link>
 </Layouts.app>
