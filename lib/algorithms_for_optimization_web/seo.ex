@@ -13,9 +13,14 @@ defmodule AlgorithmsForOptimizationWeb.SEO do
 
   @site_name "Load Bearing Math"
   @author "Andrew Ferguson"
-  @default_description "Short, hands-on walkthroughs connecting the math you haven't touched since school to the systems you work with every day: search, rate limiters, autoscalers, optimization, and more."
+  # The home page's <title>: the brand plus what the site is, so it reads well in search results.
+  @home_title "Load Bearing Math: The math holding up the world around you"
+  @default_description "Short, hands-on walkthroughs of the math behind everyday systems: search, rate limiters, autoscalers, optimization, and more."
+  # Search engines show roughly this many characters of a description; longer ones get cut.
+  @description_max 155
 
   def site_name, do: @site_name
+  def home_title, do: @home_title
   def author, do: @author
   def default_description, do: @default_description
 
@@ -37,8 +42,80 @@ defmodule AlgorithmsForOptimizationWeb.SEO do
   def url(path), do: AlgorithmsForOptimizationWeb.Endpoint.url() <> path
 
   @doc "Full document title, matching what `live_title` renders."
-  def full_title(nil), do: @site_name
+  def full_title(nil), do: @home_title
   def full_title(page_title), do: "#{page_title} · #{@site_name}"
+
+  @doc """
+  A page description trimmed to what search results show. Topic blurbs are often longer, so
+  this cuts at the last word that fits and adds an ellipsis instead of letting Google truncate.
+  """
+  def meta_description(description) when byte_size(description) <= @description_max,
+    do: description
+
+  def meta_description(description) do
+    if String.length(description) <= @description_max do
+      description
+    else
+      cut = String.slice(description, 0, @description_max - 1)
+      trimmed = cut |> String.replace(~r/\s+\S*$/u, "") |> String.trim_trailing(",;:.")
+      trimmed <> "…"
+    end
+  end
+
+  @doc "JSON-LD for the About page: the person behind the site."
+  def person_json_ld do
+    %{
+      "@context" => "https://schema.org",
+      "@type" => "Person",
+      "name" => @author,
+      "url" => url("/about"),
+      "description" =>
+        "Computer scientist with a minor in mathematics who writes Load Bearing Math and tutors math and computer science.",
+      "knowsAbout" => [
+        "Mathematics",
+        "Computer science",
+        "Linear algebra",
+        "Calculus",
+        "Differential equations",
+        "Probability",
+        "Optimization",
+        "Systems engineering"
+      ]
+    }
+    |> Jason.encode!(escape: :html_safe)
+  end
+
+  @doc "JSON-LD for the Services page: tutoring as a service, with each offering and its price."
+  def tutoring_service_json_ld(offerings) do
+    %{
+      "@context" => "https://schema.org",
+      "@type" => "Service",
+      "name" => "Math and computer science tutoring",
+      "serviceType" => "Tutoring",
+      "url" => url("/services"),
+      "provider" => %{"@type" => "Person", "name" => @author, "url" => url("/about")},
+      "hasOfferCatalog" => %{
+        "@type" => "OfferCatalog",
+        "name" => "Tutoring offerings",
+        "itemListElement" => Enum.map(offerings, &offer_json/1)
+      }
+    }
+    |> Jason.encode!(escape: :html_safe)
+  end
+
+  # "$60" becomes a numeric price; "Custom" has none, so it's listed without one.
+  defp offer_json(offering) do
+    base = %{
+      "@type" => "Offer",
+      "name" => offering.name,
+      "description" => offering.description
+    }
+
+    case Regex.run(~r/^\$(\d+(?:\.\d+)?)$/, offering.price) do
+      [_, amount] -> Map.merge(base, %{"price" => amount, "priceCurrency" => "USD"})
+      nil -> base
+    end
+  end
 
   @doc "JSON-LD for a lesson page, as an HTML-safe JSON string."
   def lesson_json_ld(%{

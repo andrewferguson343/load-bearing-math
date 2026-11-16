@@ -34,11 +34,11 @@ defmodule AlgorithmsForOptimizationWeb.SEOTest do
       home = conn |> get(~p"/") |> html_response(200)
       services = conn |> get(~p"/services") |> html_response(200)
 
-      assert home |> head() |> LazyHTML.query("title") |> LazyHTML.text() =~
-               ~r/^\s*Load Bearing Math\s*$/
+      assert home |> head() |> LazyHTML.query("title") |> LazyHTML.text() |> String.trim() ==
+               AlgorithmsForOptimizationWeb.SEO.home_title()
 
       assert services |> head() |> LazyHTML.query("title") |> LazyHTML.text() =~
-               "Services · Load Bearing Math"
+               "Math and Computer Science Tutoring · Load Bearing Math"
 
       refute home =~ "by Andrew Ferguson"
     end
@@ -59,6 +59,48 @@ defmodule AlgorithmsForOptimizationWeb.SEOTest do
                "author" => %{"name" => "Andrew Ferguson"}
              } = Jason.decode!(json_ld)
     end
+  end
+
+  describe "descriptions and structured data" do
+    alias AlgorithmsForOptimizationWeb.SEO
+
+    test "long descriptions are trimmed at a word boundary for search results" do
+      long = String.duplicate("word ", 60)
+      trimmed = SEO.meta_description(long)
+
+      assert String.length(trimmed) <= 155
+      assert String.ends_with?(trimmed, "word…")
+      assert SEO.meta_description("Short and sweet.") == "Short and sweet."
+    end
+
+    test "every page's description fits in search results", %{conn: conn} do
+      for path <- [~p"/", ~p"/about", ~p"/services", ~p"/sources", ~p"/leaky-bucket"] do
+        html = conn |> get(path) |> html_response(200)
+        description = html |> head() |> attr(~s(meta[name="description"]), "content")
+
+        assert String.length(description) <= 155, "#{path}: #{String.length(description)} chars"
+      end
+    end
+
+    test "About has Person JSON-LD", %{conn: conn} do
+      json = conn |> get(~p"/about") |> html_response(200) |> head() |> json_ld()
+      assert %{"@type" => "Person", "name" => "Andrew Ferguson"} = json
+    end
+
+    test "Services has Service JSON-LD with priced offers", %{conn: conn} do
+      json = conn |> get(~p"/services") |> html_response(200) |> head() |> json_ld()
+
+      assert %{"@type" => "Service", "hasOfferCatalog" => %{"itemListElement" => offers}} = json
+      assert %{"name" => "Tutoring", "price" => "60", "priceCurrency" => "USD"} = hd(offers)
+      assert Enum.any?(offers, &(&1["name"] == "Full Course" and not Map.has_key?(&1, "price")))
+    end
+  end
+
+  defp json_ld(doc) do
+    doc
+    |> LazyHTML.query(~s(script[type="application/ld+json"]))
+    |> LazyHTML.text()
+    |> Jason.decode!()
   end
 
   describe "crawler files" do

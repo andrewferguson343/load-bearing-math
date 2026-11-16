@@ -71,10 +71,11 @@ defmodule AlgorithmsForOptimizationWeb.ServicesController do
     render(conn, :show,
       offerings: Services.offerings(),
       offering_options: Services.select_options(),
-      # The published lessons double as proof of expertise.
+      # The published topics double as proof of expertise (a writing sample, not a syllabus).
       sample_topics: AlgorithmsForOptimization.Topics.visible() |> Enum.take(3),
       form: Phoenix.Component.to_form(changeset, as: :inquiry),
-      page_title: "Services",
+      page_title: "Math and Computer Science Tutoring",
+      json_ld: AlgorithmsForOptimizationWeb.SEO.tutoring_service_json_ld(Services.offerings()),
       page_description:
         "Private tutoring in mathematics and computer science, from algebra through differential equations, plus programming, data structures, and algorithms."
     )

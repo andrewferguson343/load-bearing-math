@@ -2,7 +2,12 @@ defmodule AlgorithmsForOptimizationWeb.SourcesLive do
   use AlgorithmsForOptimizationWeb, :live_view
 
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, page_title: "Sources cited")}
+    {:ok,
+     assign(socket,
+       page_title: "Sources cited",
+       page_description:
+         "The books and datasets behind Load Bearing Math's topics, from optimization and calculus textbooks to the GloVe word vectors."
+     )}
   end
 
   def render(assigns) do

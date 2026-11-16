@@ -502,9 +502,10 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
   attr :page_description, :string, default: nil
   attr :canonical_path, :string, default: nil
   attr :seo_lesson, :map, default: nil, doc: "%{topic: topic, lesson: lesson} on lesson pages"
+  attr :json_ld, :string, default: nil, doc: "page-specific JSON-LD (e.g. About, Services)"
 
   def seo_meta(assigns) do
-    description = assigns.page_description || SEO.default_description()
+    description = SEO.meta_description(assigns.page_description || SEO.default_description())
 
     json_ld =
       cond do
@@ -516,6 +517,9 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
               path: assigns.canonical_path || assigns.seo_lesson.lesson.path
             })
           )
+
+        assigns.json_ld ->
+          assigns.json_ld
 
         assigns.canonical_path == "/" ->
           SEO.website_json_ld()
