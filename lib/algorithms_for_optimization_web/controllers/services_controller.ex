@@ -76,7 +76,7 @@ defmodule AlgorithmsForOptimizationWeb.ServicesController do
       form: Phoenix.Component.to_form(changeset, as: :inquiry),
       page_title: "Services",
       page_description:
-        "Private tutoring in mathematics and computer science, from algebra through differential equations, plus programming, data structures and algorithms."
+        "Private tutoring in mathematics and computer science, from algebra through differential equations, plus programming, data structures, and algorithms."
     )
   end
 

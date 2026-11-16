@@ -10,13 +10,6 @@ defmodule AlgorithmsForOptimizationWeb.PageHTML do
 
   embed_templates "page_html/*"
 
-  @doc "Short display date, e.g. \"Nov 13, 2026\"."
-  def format_date(nil), do: "[PLACEHOLDER: date]"
-  def format_date(date), do: Calendar.strftime(date, "%b %-d, %Y")
-
-  def kind_label(:point_load), do: "Point Load"
-  def kind_label(_series), do: "Series"
-
   def pluralize(1, word), do: "1 #{word}"
   def pluralize(n, word), do: "#{n} #{word}s"
 
@@ -36,6 +29,10 @@ defmodule AlgorithmsForOptimizationWeb.PageHTML do
           {@topic.label} <span class="lbm-topic-entry-arrow" aria-hidden="true">&rarr;</span>
         </h3>
         <p class="lbm-topic-entry-description">{@topic.description}</p>
+        <div class="lbm-topic-entry-badges">
+          <Layouts.type_badge kind={@topic.kind} />
+          <Layouts.tag_labels tags={AlgorithmsForOptimization.Tags.for_topic(@topic)} />
+        </div>
       </div>
     </.link>
     """

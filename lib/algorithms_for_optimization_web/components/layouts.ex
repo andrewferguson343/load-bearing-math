@@ -37,26 +37,6 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
 
   def app(assigns) do
     ~H"""
-    <style>
-      .lbm-nav-cta {
-        font-family: var(--font-heading);
-        font-size: 0.8rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        background: var(--color-primary);
-        color: var(--color-primary-content);
-        border: none;
-        border-radius: 999px;
-        padding: 0.5rem 1rem;
-        cursor: pointer;
-        transition: filter 0.2s ease, transform 0.2s ease;
-      }
-      .lbm-nav-cta:hover { filter: brightness(1.1); transform: translateY(-1px); }
-      .lbm-suggest-form { display: flex; gap: 0.5rem; align-items: flex-start; flex-wrap: wrap; margin-top: 1rem; }
-      .lbm-suggest-form .fieldset { margin-bottom: 0; flex: 1 1 260px; }
-    </style>
-
     <header
       id="site-header"
       class="lbm-header"
@@ -77,7 +57,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
             <.link navigate={~p"/services"} class="lbm-nav-link">Services</.link>
             <.link navigate={~p"/about"} class="lbm-nav-link">About</.link>
             <button type="button" class="lbm-nav-cta" phx-click={show_suggest_modal()}>
-              Suggest a Topic
+              Suggest a topic
             </button>
           </nav>
           <div class="lbm-header-theme">
@@ -116,7 +96,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
           class="lbm-nav-cta lbm-mobile-nav-cta"
           phx-click={hide_mobile_nav() |> show_suggest_modal("#mobile-nav-toggle")}
         >
-          Suggest a Topic
+          Suggest a topic
         </button>
         <div class="lbm-mobile-nav-theme">
           <span>Theme</span>
@@ -148,7 +128,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
           <.icon name="hero-x-mark" class="size-5" />
         </button>
         <div class="lbm-modal-body">
-          <h3 id="suggest-topic-title">Suggest a Topic</h3>
+          <h3 id="suggest-topic-title">Suggest a topic</h3>
           <p>Got something that belongs on this list? Drop it below.</p>
           <.form
             for={%{}}
@@ -187,6 +167,20 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
     <main id="main-content" class="lbm-main" phx-hook="KatexRender">
       {render_slot(@inner_block)}
     </main>
+
+    <footer id="site-footer" class="lbm-site-footer">
+      <nav aria-label="Footer">
+        <.link navigate={~p"/about"} id="footer-about">About</.link>
+        <.link navigate={~p"/services"} id="footer-services">Services</.link>
+        <.link navigate={~p"/work-with-me"} id="footer-work">Work with me</.link>
+        <.link navigate={~p"/topics"} id="footer-topics">All topics</.link>
+        <.link navigate={~p"/sources"} id="footer-sources">Sources cited</.link>
+        <.link navigate={~p"/privacy"} id="footer-privacy">Privacy</.link>
+        <button type="button" id="footer-suggest" phx-click={show_suggest_modal()}>
+          Suggest a topic
+        </button>
+      </nav>
+    </footer>
 
     <.flash_group flash={@flash} />
     """
@@ -251,10 +245,12 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
       assigns
       |> assign(:current, current)
       |> assign(:prerequisites, AlgorithmsForOptimization.Topics.prerequisites(current))
+      |> assign(:tags, AlgorithmsForOptimization.Tags.for_topic(current))
 
     ~H"""
     <aside class="lbm-toc" aria-label="Topic navigation">
       <p class="lbm-toc-eyebrow">{@current.label}</p>
+      <.type_badge kind={@current.kind} class="lbm-toc-type" />
 
       <.toc_lesson :for={lesson <- @current.lessons} lesson={lesson} active_lesson={@active_lesson} />
 
@@ -263,6 +259,11 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         class="lbm-toc-sublist"
       >
         <a href="#derivatives" class="lbm-toc-subitem">Derivatives</a>
+      </div>
+
+      <div :if={@tags != []} class="lbm-toc-tags">
+        <p class="lbm-toc-eyebrow">Subjects</p>
+        <.tag_links id="topic-tags" tags={@tags} />
       </div>
 
       <nav
@@ -281,6 +282,57 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         </.link>
       </nav>
     </aside>
+    """
+  end
+
+  @doc """
+  Subject tags as clickable links to their `/tags/<slug>` pages. Use outside cards that are
+  already links (links can't be nested); inside those, use `tag_labels/1`.
+  """
+  attr :tags, :list, required: true, doc: "tag maps from AlgorithmsForOptimization.Tags"
+  attr :id, :string, default: nil
+  attr :class, :string, default: nil
+
+  def tag_links(assigns) do
+    ~H"""
+    <ul :if={@tags != []} id={@id} class={["lbm-tags", @class]}>
+      <li :for={tag <- @tags}>
+        <.link navigate={AlgorithmsForOptimization.Tags.path(tag)} class="lbm-tag-chip">
+          {tag.label}
+        </.link>
+      </li>
+    </ul>
+    """
+  end
+
+  @doc "Subject tags as plain labels, for inside cards that are themselves links."
+  attr :tags, :list, required: true
+
+  def tag_labels(assigns) do
+    ~H"""
+    <ul :if={@tags != []} class="lbm-tags lbm-tags--labels" aria-label="Subjects">
+      <li :for={tag <- @tags}><span class="lbm-tag-chip">{tag.label}</span></li>
+    </ul>
+    """
+  end
+
+  @doc "Display name for a topic's kind."
+  def kind_label(:foundation), do: "Foundation"
+  def kind_label(:point_load), do: "Point Load"
+  def kind_label(_series), do: "Article"
+
+  @doc """
+  A filled badge naming a topic's kind (Article, Foundation, Point Load). Subject tags are
+  outlined, so the two read differently side by side.
+  """
+  attr :kind, :atom, required: true
+  attr :class, :string, default: nil
+
+  def type_badge(assigns) do
+    ~H"""
+    <span class={["lbm-tag lbm-type-badge", "lbm-type-badge--#{@kind}", @class]}>
+      {kind_label(@kind)}
+    </span>
     """
   end
 

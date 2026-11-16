@@ -10,8 +10,7 @@ defmodule AlgorithmsForOptimizationWeb.PageControllerTest do
     test "renders every section", %{conn: conn} do
       page = doc(conn, ~p"/")
 
-      for id <- ~w(landing-hero landing-featured landing-recent landing-collections
-                   landing-foundations landing-point-loads landing-footer) do
+      for id <- ~w(landing-hero landing-featured landing-recent landing-collections site-footer) do
         assert has?(page, "##{id}"), "missing ##{id}"
       end
     end
@@ -47,11 +46,20 @@ defmodule AlgorithmsForOptimizationWeb.PageControllerTest do
       refute has?(page, "#collection-point-loads")
     end
 
-    test "the Foundations strip links to its collection page", %{conn: conn} do
+    test "empty Foundations and Point Loads sections are hidden, not shown as placeholders",
+         %{conn: conn} do
       page = doc(conn, ~p"/")
 
-      assert has?(page, ~s(#landing-foundations a[href="/collections/foundations"]))
+      # No foundation or Point Load is public in the test build yet.
+      refute has?(page, "#landing-foundations")
+      refute has?(page, "#landing-point-loads")
+      # The dev-only reminders only render when dev_routes is on (it's off in tests).
+      refute has?(page, "#dev-note-foundations")
       refute has?(page, "#collection-foundations")
+    end
+
+    test "the home page has no placeholder text left", %{conn: conn} do
+      refute conn |> get(~p"/") |> html_response(200) =~ "PLACEHOLDER"
     end
 
     test "never shows gated topics", %{conn: conn} do
@@ -68,6 +76,17 @@ defmodule AlgorithmsForOptimizationWeb.PageControllerTest do
 
     test "footer links to the about page", %{conn: conn} do
       assert has?(doc(conn, ~p"/"), ~s(#footer-about[href="/about"]))
+    end
+
+    test "every page has the site footer with its links", %{conn: conn} do
+      for path <- [~p"/", ~p"/topics", ~p"/about", ~p"/services", ~p"/work-with-me", ~p"/privacy"] do
+        page = doc(conn, path)
+
+        for id <- ~w(footer-about footer-services footer-work footer-topics footer-sources
+                     footer-privacy footer-suggest) do
+          assert has?(page, "#site-footer ##{id}"), "#{path} is missing ##{id}"
+        end
+      end
     end
 
     test "header and mobile menu link to the about page", %{conn: conn} do
@@ -111,24 +130,24 @@ defmodule AlgorithmsForOptimizationWeb.PageControllerTest do
     test "groups visible topics by collection", %{conn: conn} do
       page = doc(conn, ~p"/topics")
 
-      assert has?(page, "#topics-linear-algebra #topic-cosine_similarity")
-      assert has?(page, "#topics-differential-equations #topic-leaky_bucket")
+      assert has?(page, "#topics-search-and-ranking #topic-cosine_similarity")
+      assert has?(page, "#topics-reliability-and-control #topic-leaky_bucket")
       refute has?(page, "#topic-pagerank")
     end
   end
 
   describe "collection pages" do
     test "list the collection's visible topics only", %{conn: conn} do
-      page = doc(conn, ~p"/collections/linear-algebra")
+      page = doc(conn, ~p"/collections/search-and-ranking")
 
-      assert has?(page, "#collection-page-linear-algebra")
+      assert has?(page, "#collection-page-search-and-ranking")
       assert has?(page, "#topic-cosine_similarity")
       refute has?(page, "#topic-pagerank")
       refute has?(page, "#topic-markov_chains")
     end
 
     test "show an empty state when nothing is public yet", %{conn: conn} do
-      assert has?(doc(conn, ~p"/collections/systems"), "#collection-empty")
+      assert has?(doc(conn, ~p"/collections/simulation-and-optimization"), "#collection-empty")
     end
 
     test "404 for an unknown slug", %{conn: conn} do

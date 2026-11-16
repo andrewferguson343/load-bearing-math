@@ -16,7 +16,7 @@ defmodule AlgorithmsForOptimizationWeb.MathematicsAppendixLive do
 
           <h2>The shared toolbox</h2>
           <p>
-            Every series on this site leans on the same handful of mathematical ideas: derivatives,
+            Every topic on this site leans on the same handful of mathematical ideas: derivatives,
             gradients, vectors, eigenvectors, the occasional differential equation. Rather than
             re-deriving them every time they come up, this page is the one place to look them up.
           </p>

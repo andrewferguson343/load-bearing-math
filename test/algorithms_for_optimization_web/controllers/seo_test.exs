@@ -81,8 +81,8 @@ defmodule AlgorithmsForOptimizationWeb.SEOTest do
       assert body =~ "/services</loc>"
       assert body =~ "/privacy</loc>"
       assert body =~ "/work-with-me</loc>"
-      assert body =~ "/collections/linear-algebra</loc>"
-      refute body =~ "/collections/systems</loc>"
+      assert body =~ "/collections/search-and-ranking</loc>"
+      refute body =~ "/collections/simulation-and-optimization</loc>"
       refute body =~ "/pagerank</loc>"
       refute body =~ "/topic-suggestions"
     end

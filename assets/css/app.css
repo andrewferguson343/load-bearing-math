@@ -403,6 +403,34 @@ h1, h2, h3 {
   }
 }
 
+/* Header "Suggest a topic" button and the suggestion form in its dialog (Layouts.app) */
+.lbm-nav-cta {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: var(--color-primary);
+  color: var(--color-primary-content);
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.lbm-nav-cta:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+.lbm-suggest-form {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.lbm-suggest-form .fieldset { margin-bottom: 0; flex: 1 1 260px; }
+
 /* ======================================================================
    Hero / Page Intro
    ====================================================================== */
@@ -507,7 +535,7 @@ h1, h2, h3 {
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: color-mix(in oklch, var(--color-base-content) 70%, transparent);
+  color: var(--color-primary);
 }
 
 .lbm-topic-group .lbm-topic-index { margin-top: 0.75rem; }
@@ -713,12 +741,6 @@ a.lbm-featured-card:hover .lbm-topic-entry-arrow { transform: translateX(0.25rem
   color: color-mix(in oklch, var(--color-base-content) 70%, transparent);
 }
 
-.lbm-point-loads {
-  padding: 2rem;
-  border-radius: var(--radius-box);
-  background: color-mix(in oklch, var(--color-primary) 8%, var(--color-base-100));
-}
-
 .lbm-point-load-strip {
   display: grid;
   grid-auto-flow: column;
@@ -732,12 +754,16 @@ a.lbm-featured-card:hover .lbm-topic-entry-arrow { transform: translateX(0.25rem
 .lbm-point-load-card {
   scroll-snap-align: start;
   padding: 1.25rem;
-  background: var(--color-base-100);
 }
 
-.lbm-point-load-card--placeholder { border-style: dashed; }
-
-.lbm-foundation-card { background: var(--color-base-200); }
+/* Dev-only reminder where an empty landing section is hidden on the live site */
+.lbm-dev-note {
+  padding: 0.9rem 1.1rem;
+  border: 1px dashed var(--color-warning);
+  border-radius: var(--radius-box);
+  font-size: 0.85rem;
+  color: color-mix(in oklch, var(--color-base-content) 80%, transparent);
+}
 
 .lbm-foundation-step {
   display: block;
@@ -755,13 +781,14 @@ a.lbm-featured-card:hover .lbm-topic-entry-arrow { transform: translateX(0.25rem
   margin-bottom: 0.35rem;
 }
 
-.lbm-landing-footer {
+.lbm-site-footer {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
   border-top: 1px solid var(--color-base-300);
-  padding-top: 1.5rem;
-  margin-top: -1rem;
 }
 
-.lbm-landing-footer nav {
+.lbm-site-footer nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -769,8 +796,8 @@ a.lbm-featured-card:hover .lbm-topic-entry-arrow { transform: translateX(0.25rem
   font-size: 0.9rem;
 }
 
-.lbm-landing-footer a,
-.lbm-landing-footer button {
+.lbm-site-footer a,
+.lbm-site-footer button {
   color: color-mix(in oklch, var(--color-base-content) 75%, transparent);
   text-decoration: none;
   background: none;
@@ -781,8 +808,8 @@ a.lbm-featured-card:hover .lbm-topic-entry-arrow { transform: translateX(0.25rem
   transition: color 0.2s ease;
 }
 
-.lbm-landing-footer a:hover,
-.lbm-landing-footer button:hover { color: var(--color-primary); }
+.lbm-site-footer a:hover,
+.lbm-site-footer button:hover { color: var(--color-primary); }
 
 /* Flash toasts open just below the sticky header and above it in the stacking order;
    at daisyUI's defaults (top, z-50) they were tucked underneath it with only a sliver showing. */
@@ -1042,8 +1069,7 @@ a.lbm-featured-card:hover .lbm-topic-entry-arrow { transform: translateX(0.25rem
 
 @media (max-width: 640px) {
   .lbm-landing { gap: 3rem; }
-  .lbm-featured-card,
-  .lbm-point-loads { padding: 1.25rem; }
+  .lbm-featured-card { padding: 1.25rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1104,6 +1130,82 @@ a.lbm-featured-card:hover .lbm-topic-entry-arrow { transform: translateX(0.25rem
     padding-bottom: 1.5rem;
     margin-bottom: 1rem;
   }
+}
+
+/* Type badges (Layouts.type_badge): filled, one tint per kind. Subject tags below are outlined. */
+.lbm-type-badge--series { background: color-mix(in oklch, var(--color-primary) 18%, transparent); }
+.lbm-type-badge--foundation { background: color-mix(in oklch, var(--color-secondary) 28%, transparent); }
+.lbm-type-badge--point_load { background: color-mix(in oklch, var(--color-accent) 24%, transparent); }
+
+.lbm-topic-entry-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+}
+
+.lbm-topic-entry-badges .lbm-tags--labels { margin-top: 0; }
+
+.lbm-toc-type {
+  align-self: flex-start;
+  margin: -0.25rem 0 0.5rem;
+}
+
+/* Subject tags (Layouts.tag_links / tag_labels) */
+.lbm-tags {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.lbm-tags--labels { margin-top: 0.6rem; }
+
+.lbm-tag-chip {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-base-300);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: color-mix(in oklch, var(--color-base-content) 80%, transparent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+a.lbm-tag-chip {
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+a.lbm-tag-chip:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.lbm-subject-browse {
+  max-width: 720px;
+  margin: 2rem auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 0.9rem;
+}
+
+.lbm-subject-browse-label {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: color-mix(in oklch, var(--color-base-content) 70%, transparent);
+}
+
+.lbm-toc-tags {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--color-base-300);
 }
 
 .lbm-toc-prereqs {

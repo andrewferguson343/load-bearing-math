@@ -1,11 +1,22 @@
 <Layouts.app flash={@flash}>
   <div class="lbm-hero">
-    <h1 class="lbm-hero-title">Table of Contents</h1>
+    <p class="lbm-eyebrow">Topics</p>
+    <h1 class="lbm-hero-title">Table of contents</h1>
     <p class="lbm-hero-lede">
-      Short, hands-on breakdowns of the math holding up everyday engineering. Pick a series below to
-      start, new ones get added as they're ready.
+      Short, hands-on walkthroughs of the math holding up everyday engineering. Pick a topic below to
+      start; new ones get added as they're ready.
     </p>
   </div>
+
+  <nav
+    :if={@tags != []}
+    id="browse-by-subject"
+    class="lbm-subject-browse"
+    aria-label="Browse by subject"
+  >
+    <p class="lbm-subject-browse-label">Browse by subject</p>
+    <Layouts.tag_links tags={@tags} />
+  </nav>
 
   <section
     :for={{collection, topics} <- @groups}
