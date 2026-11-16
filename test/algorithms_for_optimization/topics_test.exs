@@ -7,7 +7,7 @@ defmodule AlgorithmsForOptimization.TopicsTest do
     collection_ids = Enum.map(Collections.all(), & &1.id)
 
     for topic <- Topics.all() do
-      assert topic.kind in [:series, :point_load], "#{topic.id}: bad kind"
+      assert topic.kind in [:series, :point_load, :foundation], "#{topic.id}: bad kind"
       assert is_nil(topic.collection) or topic.collection in collection_ids, "#{topic.id}"
       assert is_nil(topic.published_on) or match?(%Date{}, topic.published_on)
       assert is_boolean(topic.featured)

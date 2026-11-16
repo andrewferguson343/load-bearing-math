@@ -197,7 +197,7 @@ defmodule AlgorithmsForOptimization.Topics do
       summary: nil,
       featured: false,
       # Foundation ids to read first, shown as "Before you start" (see Topics.prerequisites/1)
-      prerequisites: [],
+      prerequisites: [:derivatives],
       number: "08",
       label: "Optimization Algorithms",
       description:
@@ -237,6 +237,48 @@ defmodule AlgorithmsForOptimization.Topics do
         "The shared toolbox behind every topic on this site: derivatives, gradients, linear algebra, eigenvectors. One place to look things up instead of re-deriving them in the middle of a topic on something else.",
       lessons: [
         %{key: :overview, number: "00", label: "Overview", path: "/mathematics-appendix"}
+      ]
+    },
+    # Foundations: single-page primers. Registry order is the suggested reading order.
+    %{
+      id: :derivatives,
+      tags: [:calculus],
+      collection: :foundations,
+      kind: :foundation,
+      # Set to the date it goes public: orders "Recently posted" and drives the "New" badge (not shown).
+      published_on: nil,
+      # Optional one-line card summary; cards fall back to the description
+      summary:
+        "What a derivative measures, how to read it off a graph, and why a slope of zero is where every optimizer wants to end up.",
+      featured: false,
+      prerequisites: [],
+      number: "10",
+      label: "Derivatives and Slope",
+      description:
+        "A derivative is the slope of a curve at a single point: how fast something is changing right now. It's the one idea under gradient descent, control loops, and every \"rate of\" number you've ever put on a dashboard.",
+      lessons: [
+        %{key: :overview, number: "00", label: "Overview", path: "/derivatives"}
+      ]
+    },
+    # Point Loads: single-page quickies, one equation each.
+    %{
+      id: :littles_law,
+      tags: [:probability],
+      collection: :point_loads,
+      kind: :point_load,
+      # Set to the date it goes public: orders "Recently posted" and drives the "New" badge (not shown).
+      published_on: nil,
+      # Optional one-line card summary; cards fall back to the description
+      summary:
+        "L = λW. Three letters that tell you how many requests are in flight, and why your worker pool is already too small.",
+      featured: false,
+      prerequisites: [],
+      number: "11",
+      label: "Little's Law",
+      description:
+        "The number of things in a system equals how fast they arrive times how long they stay. L = λW holds for any queue you can draw a box around, from a web server's request pool to the line at the DMV, and it's the fastest sanity check in capacity planning.",
+      lessons: [
+        %{key: :overview, number: "00", label: "Overview", path: "/littles-law"}
       ]
     }
   ]
