@@ -12,9 +12,9 @@ defmodule AlgorithmsForOptimizationWeb.DampedOscillatorsLive do
         <Layouts.lesson_toc active_topic={:damped_oscillators} active_lesson={:overview} />
         <div class="lbm-prose">
           <h1 id="page-heading">Damped Oscillators</h1>
-          
+
           <h2>Why autoscalers overshoot and oscillate</h2>
-          
+
           <p>
             Load climbs, the autoscaler adds pods, load drops because now there's too much capacity, the
             autoscaler removes pods, load climbs again. Watch the pod count over time and it looks exactly
@@ -24,7 +24,7 @@ defmodule AlgorithmsForOptimizationWeb.DampedOscillatorsLive do
           </p>
         </div>
       </div>
-       <Layouts.topic_end_note active_topic={:damped_oscillators} active_lesson={:overview} />
+      <Layouts.topic_end_note active_topic={:damped_oscillators} active_lesson={:overview} />
     </Layouts.app>
     """
   end

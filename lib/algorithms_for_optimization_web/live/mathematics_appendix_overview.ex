@@ -12,9 +12,9 @@ defmodule AlgorithmsForOptimizationWeb.MathematicsAppendixLive do
         <Layouts.lesson_toc active_topic={:mathematics_appendix} active_lesson={:overview} />
         <div class="lbm-prose">
           <h1 id="page-heading">Mathematics Appendix</h1>
-          
+
           <h2>The shared toolbox</h2>
-          
+
           <p>
             Every topic on this site leans on the same handful of mathematical ideas: derivatives,
             gradients, vectors, eigenvectors, the occasional differential equation. Rather than
@@ -22,7 +22,7 @@ defmodule AlgorithmsForOptimizationWeb.MathematicsAppendixLive do
           </p>
         </div>
       </div>
-       <Layouts.topic_end_note active_topic={:mathematics_appendix} active_lesson={:overview} />
+      <Layouts.topic_end_note active_topic={:mathematics_appendix} active_lesson={:overview} />
     </Layouts.app>
     """
   end

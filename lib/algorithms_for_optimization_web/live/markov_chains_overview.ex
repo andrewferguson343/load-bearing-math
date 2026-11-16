@@ -12,9 +12,9 @@ defmodule AlgorithmsForOptimizationWeb.MarkovChainsLive do
         <Layouts.lesson_toc active_topic={:markov_chains} active_lesson={:overview} />
         <div class="lbm-prose">
           <h1 id="page-heading">Markov Chains</h1>
-          
+
           <h2>Where do users end up in the long run?</h2>
-          
+
           <p>
             Every user flow is secretly a state machine: sign up, browse, checkout, abandon, come back
             next week. Draw an arrow for every transition and attach a probability to each one, and you've
@@ -25,7 +25,7 @@ defmodule AlgorithmsForOptimizationWeb.MarkovChainsLive do
           </p>
         </div>
       </div>
-       <Layouts.topic_end_note active_topic={:markov_chains} active_lesson={:overview} />
+      <Layouts.topic_end_note active_topic={:markov_chains} active_lesson={:overview} />
     </Layouts.app>
     """
   end

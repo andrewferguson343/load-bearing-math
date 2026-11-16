@@ -12,9 +12,9 @@ defmodule AlgorithmsForOptimizationWeb.PageRankLive do
         <Layouts.lesson_toc active_topic={:pagerank} active_lesson={:overview} />
         <div class="lbm-prose">
           <h1 id="page-heading">PageRank</h1>
-          
+
           <h2>Finding the most important node in any graph</h2>
-          
+
           <p>
             A link from one page to another is a vote, but not all votes count the same: a link from an
             important page should carry more weight than a link from an obscure one. Write that rule down
@@ -25,7 +25,7 @@ defmodule AlgorithmsForOptimizationWeb.PageRankLive do
           </p>
         </div>
       </div>
-       <Layouts.topic_end_note active_topic={:pagerank} active_lesson={:overview} />
+      <Layouts.topic_end_note active_topic={:pagerank} active_lesson={:overview} />
     </Layouts.app>
     """
   end

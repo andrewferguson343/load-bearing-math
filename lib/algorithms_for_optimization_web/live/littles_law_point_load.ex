@@ -16,23 +16,23 @@ defmodule AlgorithmsForOptimizationWeb.LittlesLawLive do
         <Layouts.lesson_toc active_topic={:littles_law} active_lesson={:overview} />
         <div class="lbm-prose">
           <h1 id="page-heading">Little's Law</h1>
-          
+
           <p>$$L = \lambda W$$</p>
-          
+
           <%!-- TODO(andrew): the write-up. Suggested shape for a Point Load:
                1. The equation and what each letter is (L in the system, λ arrival rate, W time in system).
                2. One worked example: 200 req/s at 50 ms each means 10 in flight, so a pool of 8 is underwater.
                3. Why it holds for any box you can draw (no assumptions about the arrival distribution).
                4. Where it shows up: thread pools, connection pools, queue depth alerts, the leaky bucket. --%>
           <h2>More coming soon</h2>
-          
+
           <p>
             Check back soon, or use the suggest a topic button above if there's something specific
             you'd like covered first.
           </p>
         </div>
       </div>
-       <Layouts.topic_end_note active_topic={:littles_law} active_lesson={:overview} />
+      <Layouts.topic_end_note active_topic={:littles_law} active_lesson={:overview} />
     </Layouts.app>
     """
   end

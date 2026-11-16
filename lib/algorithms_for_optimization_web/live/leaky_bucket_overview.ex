@@ -12,7 +12,7 @@ defmodule AlgorithmsForOptimizationWeb.LeakyBucketLive do
         <Layouts.lesson_toc active_topic={:leaky_bucket} active_lesson={:overview} />
         <div class="lbm-prose">
           <h1 id="page-heading">The Leaky Bucket</h1>
-          
+
           <%!-- <h2>A differential equation holding back the flood</h2>
           <p>
             Picture a bucket with a hole in the bottom. Water drips in whenever a request comes in, and
@@ -23,13 +23,13 @@ defmodule AlgorithmsForOptimizationWeb.LeakyBucketLive do
             API you've ever hit.
           </p> --%>
           <h2>More coming soon</h2>
-          
+
           <p>
             Check back soon, or use the suggest a topic button above if there's something specific you'd like covered first.
           </p>
         </div>
       </div>
-       <Layouts.topic_end_note active_topic={:leaky_bucket} active_lesson={:overview} />
+      <Layouts.topic_end_note active_topic={:leaky_bucket} active_lesson={:overview} />
     </Layouts.app>
     """
   end

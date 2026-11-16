@@ -1,28 +1,28 @@
 <Layouts.app flash={@flash}>
   <div id={"collection-page-#{@collection.slug}"} class="lbm-hero">
     <p class="lbm-eyebrow">Collection</p>
-    
+
     <h1 class="lbm-hero-title">{@collection.name}</h1>
-    
+
     <p class="lbm-hero-lede">{@collection.description}</p>
   </div>
-  
+
   <%!-- Foundations and Point Loads double as types, so they get the type switcher with
        their segment active; the other collections don't. --%>
   <div :if={@active_kind} class="lbm-browse">
     <Layouts.kind_switcher kinds={@kinds} active={@active_kind} />
   </div>
-  
+
   <div :if={@topics != []} id="collection-topics" class="lbm-topic-index">
     <.topic_entry :for={{topic, n} <- Enum.with_index(@topics, 1)} topic={topic} number={n} />
   </div>
-  
+
   <p :if={@topics == []} id="collection-empty" class="lbm-collection-empty">
     Nothing here yet. Coming soon.
   </p>
-  
+
   <p :if={@topics != [] and @upcoming > 0} class="lbm-collection-empty">
     {@upcoming} more on the way.
   </p>
-   <.link navigate={~p"/topics"} class="lbm-sources-link">All topics</.link>
+  <.link navigate={~p"/topics"} class="lbm-sources-link">All topics</.link>
 </Layouts.app>
