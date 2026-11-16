@@ -24,6 +24,7 @@ defmodule AlgorithmsForOptimizationWeb.EulersMethodLive do
             stiff collision, and the error in each step compounds into the next one until a character is
             clipping through the floor or spinning off into space.
           </p>
+          <Layouts.topic_end_note active_topic={:eulers_method} active_lesson={:overview} />
         </div>
       </div>
     </Layouts.app>

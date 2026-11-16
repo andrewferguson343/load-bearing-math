@@ -20,6 +20,7 @@ defmodule AlgorithmsForOptimizationWeb.MathematicsAppendixLive do
             gradients, vectors, eigenvectors, the occasional differential equation. Rather than
             re-deriving them every time they come up, this page is the one place to look them up.
           </p>
+          <Layouts.topic_end_note active_topic={:mathematics_appendix} active_lesson={:overview} />
         </div>
       </div>
     </Layouts.app>

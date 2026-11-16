@@ -17,7 +17,17 @@ defmodule AlgorithmsForOptimizationWeb.PageController do
   def about(conn, _params) do
     render(conn, :about,
       page_title: "About",
-      page_description: "[PLACEHOLDER: About page meta description]"
+      page_description:
+        "Load Bearing Math demystifies the math behind everyday systems. Written by Andrew Ferguson, a computer scientist with a minor in mathematics who tutors math and computer science."
+    )
+  end
+
+  def privacy(conn, _params) do
+    render(conn, :privacy,
+      contact_email: Application.fetch_env!(:algorithms_for_optimization, :contact_email),
+      page_title: "Privacy",
+      page_description:
+        "What Load Bearing Math collects, why, and how to have it deleted. No analytics, no ads, no tracking."
     )
   end
 

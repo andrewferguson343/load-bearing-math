@@ -23,6 +23,7 @@ defmodule AlgorithmsForOptimizationWeb.MetastableFailuresLive do
             and you can see both equilibria, the healthy one and the failing one, along with the boundary you
             have to cross to get back.
           </p>
+          <Layouts.topic_end_note active_topic={:metastable_failures} active_lesson={:overview} />
         </div>
       </div>
     </Layouts.app>

@@ -112,6 +112,10 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityRealisticExampleLive do
           <p>
             You also got your first taste of linear algebra. See, it isn't that bad.
           </p>
+          <Layouts.topic_end_note
+            active_topic={:cosine_similarity}
+            active_lesson={:realistic_example}
+          />
         </div>
       </div>
     </Layouts.app>

@@ -62,13 +62,42 @@ defmodule AlgorithmsForOptimizationWeb.PageControllerTest do
     test "footer links to the about page", %{conn: conn} do
       assert has?(doc(conn, ~p"/"), ~s(#footer-about[href="/about"]))
     end
+
+    test "header and mobile menu link to the about page", %{conn: conn} do
+      page = doc(conn, ~p"/")
+
+      assert has?(page, ~s(.lbm-nav a[href="/about"]))
+      assert has?(page, ~s(#mobile-nav a[href="/about"]))
+    end
   end
 
-  test "GET /about keeps the intro letter", %{conn: conn} do
+  test "GET /about has every section and points to topics first", %{conn: conn} do
     page = doc(conn, ~p"/about")
 
-    assert has?(page, "#about-page")
-    assert page |> LazyHTML.query("h1") |> LazyHTML.text() =~ "Behind It All"
+    for id <- ~w(about-page about-mission about-who about-teaching about-site about-personal) do
+      assert has?(page, "##{id}"), "missing ##{id}"
+    end
+
+    assert has?(page, ~s(#about-topics[href="/topics"]))
+    assert has?(page, ~s(#about-services[href="/services"]))
+  end
+
+  describe "privacy page" do
+    test "explains what's collected and gives a deletion contact", %{conn: conn} do
+      page = doc(conn, ~p"/privacy")
+      email = Application.fetch_env!(:algorithms_for_optimization, :contact_email)
+
+      for id <- ~w(privacy-collect privacy-cookies privacy-dont privacy-keep privacy-hosting) do
+        assert has?(page, "##{id}"), "missing ##{id}"
+      end
+
+      assert has?(page, ~s(#privacy-contact[href="mailto:#{email}"]))
+    end
+
+    test "is linked from the landing footer and the inquiry form", %{conn: conn} do
+      assert has?(doc(conn, ~p"/"), ~s(#footer-privacy[href="/privacy"]))
+      assert has?(doc(conn, ~p"/services"), ~s(#inquiry-privacy-link[href="/privacy"]))
+    end
   end
 
   describe "topics page" do

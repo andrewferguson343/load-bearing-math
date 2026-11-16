@@ -1,0 +1,84 @@
+<Layouts.app flash={@flash}>
+  <article id="privacy-page" class="lbm-about">
+    <header class="lbm-hero lbm-about-hero">
+      <p class="lbm-eyebrow">Privacy</p>
+      <h1 class="lbm-hero-title">Privacy policy</h1>
+      <p class="lbm-hero-lede">
+        The short version: this site collects only what you choose to send, uses it only to reply to
+        you, and never sells or shares it. There are no analytics, ads or trackers.
+      </p>
+    </header>
+
+    <section
+      id="privacy-collect"
+      class="lbm-about-section"
+      aria-labelledby="privacy-collect-heading"
+    >
+      <h2 id="privacy-collect-heading">What's collected</h2>
+      <p>
+        <strong>Tutoring inquiries.</strong>
+        When you send the form on the <.link navigate={~p"/services"}>Services</.link>
+        page, your name, email address, the offering you picked and your message are saved so I can
+        reply. Only I can see them.
+      </p>
+      <p>
+        <strong>Topic suggestions.</strong>
+        The Suggest a Topic form saves only the text of your suggestion. It doesn't ask for your name
+        or email.
+      </p>
+      <p>
+        <strong>IP addresses.</strong>
+        Both forms briefly check your IP address to stop spam (a limit on how many messages can be
+        sent in a few minutes). It's held in memory for a short time and never saved.
+      </p>
+    </section>
+
+    <section
+      id="privacy-cookies"
+      class="lbm-about-section"
+      aria-labelledby="privacy-cookies-heading"
+    >
+      <h2 id="privacy-cookies-heading">Cookies and storage</h2>
+      <p>
+        The site sets one cookie, which the forms need to work securely. It doesn't track you across
+        sites. If you pick a light or dark theme, that choice is saved in your own browser and never
+        sent anywhere.
+      </p>
+    </section>
+
+    <section id="privacy-dont" class="lbm-about-section" aria-labelledby="privacy-dont-heading">
+      <h2 id="privacy-dont-heading">What isn't done</h2>
+      <p>
+        No analytics, no advertising, no tracking pixels, and no selling or sharing of your
+        information. Your email address is used only to reply to your inquiry.
+      </p>
+    </section>
+
+    <section id="privacy-keep" class="lbm-about-section" aria-labelledby="privacy-keep-heading">
+      <h2 id="privacy-keep-heading">Keeping and deleting</h2>
+      <p>
+        Inquiries are kept only as long as they're useful for replying and scheduling. You can ask
+        for yours to be deleted at any time by emailing <a
+          href={"mailto:#{@contact_email}"}
+          id="privacy-contact"
+        >{@contact_email}</a>.
+      </p>
+      <p>
+        If you're under 13, please have a parent or guardian send the inquiry for you.
+      </p>
+    </section>
+
+    <section
+      id="privacy-hosting"
+      class="lbm-about-section"
+      aria-labelledby="privacy-hosting-heading"
+    >
+      <h2 id="privacy-hosting-heading">Hosting and changes</h2>
+      <p>
+        The site and its database are hosted on Railway. If this policy changes, the date below will
+        change with it.
+      </p>
+      <p class="lbm-privacy-updated">Last updated November 15, 2026.</p>
+    </section>
+  </article>
+</Layouts.app>

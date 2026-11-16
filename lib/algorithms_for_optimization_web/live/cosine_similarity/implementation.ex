@@ -58,6 +58,7 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityImplementationLive do
             <p>Halo vs Counter Strike: {"$$\\frac{1}{\\sqrt 2 \\cdot 1} = \\frac{1}{\\sqrt 2}$$"}</p>
             <p>Halo vs Stellaris: {"$$\\frac{0}{\\sqrt 2 \\cdot 1} = 0$$"}</p>
           </.math_reveal>
+          <Layouts.topic_end_note active_topic={:cosine_similarity} active_lesson={:implementation} />
         </div>
       </div>
     </Layouts.app>

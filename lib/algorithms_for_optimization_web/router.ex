@@ -47,6 +47,7 @@ defmodule AlgorithmsForOptimizationWeb.Router do
 
     get "/", PageController, :home
     get "/about", PageController, :about
+    get "/privacy", PageController, :privacy
     get "/topics", PageController, :topics
     get "/collections/:slug", PageController, :collection
     get "/services", ServicesController, :show

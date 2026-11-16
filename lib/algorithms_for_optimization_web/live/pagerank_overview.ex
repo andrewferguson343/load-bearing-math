@@ -23,6 +23,7 @@ defmodule AlgorithmsForOptimizationWeb.PageRankLive do
             steady-state importance of every node in the graph, and it's the same math whether the graph
             is the web, a social network, or anything else you can draw as nodes and edges.
           </p>
+          <Layouts.topic_end_note active_topic={:pagerank} active_lesson={:overview} />
         </div>
       </div>
     </Layouts.app>

@@ -32,6 +32,7 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityLive do
             <li>A simple example, five video games turned into hand-picked vectors</li>
             <li>A more realistic example, real word embeddings, scaled up to 50 dimensions</li>
           </ul>
+          <Layouts.topic_end_note active_topic={:cosine_similarity} active_lesson={:overview} />
         </div>
       </div>
     </Layouts.app>

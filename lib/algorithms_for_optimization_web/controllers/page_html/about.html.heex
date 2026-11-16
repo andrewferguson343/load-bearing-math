@@ -1,43 +1,83 @@
 <Layouts.app flash={@flash}>
-  <style>
-    .lbm-hero-lede { text-align: left; margin-bottom: 1.25rem; }
-    .lbm-hero-lede:last-of-type { margin-bottom: 0; }
-    .lbm-hero-cta { margin-top: 2rem; text-align: center; }
-  </style>
+  <article id="about-page" class="lbm-about">
+    <header class="lbm-hero lbm-about-hero">
+      <p class="lbm-eyebrow">About</p>
+      <h1 class="lbm-hero-title">Making math less intimidating</h1>
+      <p class="lbm-hero-lede">
+        Load Bearing Math is a collection of short, hands-on walkthroughs of the math behind the
+        systems we use every day: search, rate limiters, autoscalers, optimization and more. The goal
+        is simple: demystify math.
+      </p>
+    </header>
 
-  <div id="about-page" class="lbm-hero">
-    <h1 class="lbm-hero-title">What's Behind It All</h1>
-    <p class="lbm-hero-lede">
-      This is a running collection of short, hands-on walkthroughs connecting math most of us haven't
-      touched since school to the systems we work with every day: optimization, rate limiters,
-      autoscalers, search, all of it.
-    </p>
-    <p class="lbm-hero-lede">
-      As software engineering matured, a lot of the math underneath it got abstracted away, and we're
-      watching that happen all over again with AI. I think it matters to remember where these ideas come
-      from, no matter how technical you are, so I want this to be for everybody. Anyone should be able to
-      drop into the first topic and walk away able to solve a simple problem themselves.
-    </p>
-    <p class="lbm-hero-lede">
-      The math on these pages is worked out by me, not Claude, which means it will occasionally be
-      wrong. The worked examples sit behind a button so you can skip them, or click through and check my
-      work. Please tell me if you find any discrepancies.
-    </p>
-    <p class="lbm-hero-lede">
-      The idea came from two places. First, I need the Elixir practice. Second, I'm in the final stretch
-      of my own education and need to review all of this anyway, so if I'm up past midnight cursing a
-      math problem, I might as well write down what I learn and share it.
-    </p>
-    <p class="lbm-hero-lede">
-      Lastly, I love math, or at least the idea of it. There's a suggestions button up at the top of this
-      page. Please use it. If something gets a lot of requests, I'll research it. Promise. Kinda. I'm not doing it if it's too hard.
-    </p>
+    <section id="about-mission" class="lbm-about-section">
+      <p>
+        Most math aversion isn't about ability. It's the overwhelming feeling of looking at a problem
+        all at once. That feeling fades as the problem gets broken into smaller pieces, and once things
+        start clicking, it's one of the most enjoyable feelings there is. It took until calculus for all
+        of it to click for me, so if it hasn't clicked for you yet, you're in good company.
+      </p>
+      <p>
+        So much of computer science, and of the technology around us, is built on mathematics. As
+        software matured, a lot of that math got abstracted away, and the same thing is happening again
+        with AI. It's worth remembering where these ideas come from, however technical you are.
+      </p>
+    </section>
 
-    <div class="lbm-hero-cta">
-      <.button navigate={~p"/topics"} variant="primary">
-        See the full table of contents <span aria-hidden="true">&rarr;</span>
+    <section id="about-who" class="lbm-about-section" aria-labelledby="about-who-heading">
+      <h2 id="about-who-heading">Who's behind it</h2>
+      <p>
+        I'm Andrew Ferguson. I have a B.S. in Computer Science with a minor in Mathematics, and since
+        graduating I've worked across a wide range of technical fields, including aerospace, space
+        systems, cybersecurity and large-scale systems integration. Nearly all of it runs on the kind of
+        math you'll find on this site.
+      </p>
+      <p>
+        Teaching has run alongside the engineering. I tutored math and science in college, and today I
+        mentor through the SkillBridge program, helping service members sharpen their engineering
+        skills as they move into industry.
+      </p>
+    </section>
+
+    <section
+      id="about-teaching"
+      class="lbm-about-section"
+      aria-labelledby="about-teaching-heading"
+    >
+      <h2 id="about-teaching-heading">How I teach</h2>
+      <p>
+        We work real problems, and as often as possible we look at where the math actually gets used.
+        "You'll never use this" is one of the most common things said about math, and it's rarely
+        true: cosine similarity is how search engines decide what counts as similar, and the leaky
+        bucket is how servers keep from being overwhelmed.
+      </p>
+      <p>
+        Students work through the problems themselves, with me as a guide, and we come back to the ideas
+        later to reinforce them so they stick.
+      </p>
+    </section>
+
+    <section id="about-site" class="lbm-about-section" aria-labelledby="about-site-heading">
+      <h2 id="about-site-heading">About the topics</h2>
+      <p>
+        Every topic here is worked out by hand. The worked examples sit behind a button so you can skip
+        them, or click through and check the work. If you find a mistake, please tell me. And if there's
+        something you'd like to see covered, use the Suggest a Topic button at the top of the page.
+      </p>
+    </section>
+
+    <section id="about-personal" class="lbm-about-section">
+      <p class="lbm-about-personal">
+        Outside of math, I'm based in New Hampshire and have lived all over New England. I like skiing,
+        gaming and reading, and spending time with my dog, cat and newborn.
+      </p>
+    </section>
+
+    <div class="lbm-landing-hero-actions">
+      <.button navigate={~p"/topics"} variant="primary" id="about-topics">
+        Browse the topics <span aria-hidden="true">&rarr;</span>
       </.button>
+      <.button navigate={~p"/services"} id="about-services">Tutoring services</.button>
     </div>
-  </div>
-  <%!-- Moved verbatim from the old home page; the landing page now lives in home.html.heex. --%>
+  </article>
 </Layouts.app>

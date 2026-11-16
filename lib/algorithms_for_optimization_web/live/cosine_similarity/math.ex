@@ -154,6 +154,7 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityMathLive do
           <p>As you can probably guess, this form is what we will spend our time working with.</p>
 
           <h2>That's all the background info. Let's get started...</h2>
+          <Layouts.topic_end_note active_topic={:cosine_similarity} active_lesson={:math} />
         </div>
       </div>
     </Layouts.app>
