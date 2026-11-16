@@ -60,20 +60,20 @@ defmodule AlgorithmsForOptimizationWeb.DerivativesLive do
     <Layouts.app flash={@flash} current_scope={assigns[:current_scope]}>
       <div class="lbm-lesson">
         <Layouts.lesson_toc active_topic={:derivatives} active_lesson={:overview} />
-
         <div class="lbm-prose">
           <h1 id="page-heading">Derivatives and Slope</h1>
-
+          
           <%!-- TODO(andrew): intro. What a derivative measures and why anyone outside a
                calculus class would care: rate of change, "how fast is this moving right now". --%>
           <h2>Rate of change</h2>
+          
           <p>
             A derivative is the rate of change of a function at a single point. Not the average
             change over some stretch, but how fast the function is changing right at $x$. Take a
             look at the curve below. It's steep in some places and flat in others, and the
             derivative is the number that says which, at any point you pick.
           </p>
-
+          
           <div
             id="curve-chart"
             role="figure"
@@ -84,14 +84,15 @@ defmodule AlgorithmsForOptimizationWeb.DerivativesLive do
             style="width: 100%; height: 400px;"
           >
           </div>
-
+          
           <h2>The tangent line</h2>
+          
           <p>
             The easiest way to see a derivative is to draw it. A tangent line touches the curve at
             exactly one point without crossing it there, and its slope is the derivative at that
             point. Below is the same curve with the tangent line drawn at $x = 1$.
           </p>
-
+          
           <div
             id="tangent-line-chart"
             role="figure"
@@ -102,55 +103,61 @@ defmodule AlgorithmsForOptimizationWeb.DerivativesLive do
             style="width: 100%; height: 400px;"
           >
           </div>
-
+          
           <.math_reveal id="the-tangent-line" label="How did we get this tangent line?">
             <h3>Finding a tangent line</h3>
-
+            
             <p>For any differentiable function, the steps are the same:</p>
-
+            
             <ul>
               <li>Take the derivative of the function</li>
+              
               <li>Choose a point on the curve</li>
+              
               <li>Plug the x value of the point into the derivative to get the slope</li>
+              
               <li>Plug the x value of the point into the original equation to get the y value</li>
+              
               <li>Plug into point-slope form</li>
+              
               <li>Simplify</li>
             </ul>
-
+            
             <h4>Worked example</h4>
-
+            
             <p>Our function is $$f(x) = x^4 - 3x^2 + x$$</p>
-
+            
             <p>Take the derivative: $$f'(x) = 4x^3 - 6x + 1$$</p>
-
+            
             <p>
               Using $x = 1$ as the example point, plug 1 into both the original function and the
               derivative.
             </p>
-
+            
             <p>
               $$f(1) = 1^4 - 3(1)^2 + 1$$
               $$f(1) = 1 - 3 + 1$$
               $$f(1) = -1$$
             </p>
-
+            
             <p>
               $$f'(1) = 4(1)^3 - 6(1) + 1$$
               $$f'(1) = 4 - 6 + 1$$
               $$f'(1) = -1$$
             </p>
-
+            
             <p>Plug the values into point-slope form for a line, $y - y_1 = m(x - x_1)$:</p>
-
+            
             <p>$$y - (-1) = -1(x - 1)$$</p>
-
+            
             <p>Which simplifies to $y = -x$, tangent to the curve at the point $(1, -1)$.</p>
           </.math_reveal>
-
+          
           <%!-- TODO(andrew): the payoff section. Slope zero at the bottom of a valley (and the
                top of a hill), so "find the minimum" becomes "find where the derivative is zero".
                This is the hook the Optimization series hangs on. --%>
           <h2>Why slope zero matters</h2>
+          
           <p>
             Look at the bottom of either valley in the curve. A tangent line drawn there would be
             perfectly flat: slope zero. The same is true at the top of the hump in the middle. So
@@ -158,13 +165,12 @@ defmodule AlgorithmsForOptimizationWeb.DerivativesLive do
             places where the derivative is zero. That one observation is the starting point for
             every optimization algorithm on this site.
           </p>
-
+          
           <%!-- TODO(andrew): optional. The formal limit definition, or a link to it on the
                Optimization appendix (/appendix#derivatives) once that series is public. --%>
-
-          <Layouts.topic_end_note active_topic={:derivatives} active_lesson={:overview} />
         </div>
       </div>
+       <Layouts.topic_end_note active_topic={:derivatives} active_lesson={:overview} />
     </Layouts.app>
     """
   end

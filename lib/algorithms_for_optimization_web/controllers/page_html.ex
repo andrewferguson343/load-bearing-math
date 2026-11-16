@@ -13,8 +13,13 @@ defmodule AlgorithmsForOptimizationWeb.PageHTML do
   def pluralize(1, word), do: "1 #{word}"
   def pluralize(n, word), do: "#{n} #{word}s"
 
-  @doc "A row in a list of topics: number, title, summary, arrow. Used on the topic and collection pages."
+  @doc """
+  A row in a list of topics: number, title, summary, arrow. Used on the topic, collection,
+  tag and articles pages. `number` is the row's position in the list it's rendered in,
+  so every list counts from 01.
+  """
   attr :topic, :map, required: true
+  attr :number, :integer, required: true
 
   def topic_entry(assigns) do
     ~H"""
@@ -23,7 +28,7 @@ defmodule AlgorithmsForOptimizationWeb.PageHTML do
       navigate={Topics.entry_path(@topic)}
       class="lbm-topic-entry"
     >
-      <span class="lbm-topic-entry-number">{@topic.number}</span>
+      <span class="lbm-topic-entry-number">{String.pad_leading("#{@number}", 2, "0")}</span>
       <div class="lbm-topic-entry-body">
         <h3 class="lbm-topic-entry-title">
           {@topic.label} <span class="lbm-topic-entry-arrow" aria-hidden="true">&rarr;</span>

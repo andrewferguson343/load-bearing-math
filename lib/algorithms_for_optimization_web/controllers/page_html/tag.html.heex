@@ -8,7 +8,7 @@
   </div>
 
   <div :if={@topics != []} id="tag-topics" class="lbm-topic-index">
-    <.topic_entry :for={topic <- @topics} topic={topic} />
+    <.topic_entry :for={{topic, n} <- Enum.with_index(@topics, 1)} topic={topic} number={n} />
   </div>
 
   <p :if={@topics == []} id="tag-empty" class="lbm-collection-empty">

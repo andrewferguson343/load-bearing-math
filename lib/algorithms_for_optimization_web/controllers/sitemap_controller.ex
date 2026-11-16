@@ -9,7 +9,16 @@ defmodule AlgorithmsForOptimizationWeb.SitemapController do
   alias AlgorithmsForOptimization.{Collections, Tags, Topics}
   alias AlgorithmsForOptimizationWeb.SEO
 
-  @static_pages ["/", "/about", "/services", "/work-with-me", "/topics", "/sources", "/privacy"]
+  @static_pages [
+    "/",
+    "/about",
+    "/services",
+    "/work-with-me",
+    "/topics",
+    "/articles",
+    "/sources",
+    "/privacy"
+  ]
 
   def robots(conn, _params) do
     body = """

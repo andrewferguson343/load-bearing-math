@@ -40,22 +40,39 @@ defmodule AlgorithmsForOptimizationWeb.PageController do
   def topics(conn, _params) do
     visible = Topics.visible()
 
-    groups =
-      for collection <- Collections.all(),
-          topics = Enum.filter(visible, &(&1.collection == collection.id)),
-          topics != [],
-          do: {collection, topics}
-
-    ungrouped = Enum.filter(visible, &is_nil(&1.collection))
-
     render(conn, :topics,
-      groups: groups,
-      ungrouped: ungrouped,
+      groups: grouped_by_collection(visible),
+      ungrouped: Enum.filter(visible, &is_nil(&1.collection)),
+      kinds: Topics.used_kinds(),
       tags: Topics.used_tags(),
       page_title: "Topics",
       page_description:
         "Every Load Bearing Math topic in one place, each one a short, hands-on walkthrough of the math behind everyday engineering."
     )
+  end
+
+  # The Articles type page: every visible multi-part topic, grouped like the Topics page.
+  # Foundations and Point Loads are listed by their collection pages instead.
+  def articles(conn, _params) do
+    articles = Enum.filter(Topics.visible(), &(&1.kind == :series))
+
+    render(conn, :articles,
+      groups: grouped_by_collection(articles),
+      ungrouped: Enum.filter(articles, &is_nil(&1.collection)),
+      kinds: Topics.used_kinds(),
+      tags: Topics.used_tags(),
+      page_title: "Articles",
+      page_description:
+        "Every Load Bearing Math article: multi-part, hands-on walkthroughs of the math behind everyday engineering, grouped by what it's used for."
+    )
+  end
+
+  # {collection, topics} pairs in collection order, skipping collections with nothing to show.
+  defp grouped_by_collection(topics) do
+    for collection <- Collections.all(),
+        in_collection = Enum.filter(topics, &(&1.collection == collection.id)),
+        in_collection != [],
+        do: {collection, in_collection}
   end
 
   def tag(conn, %{"slug" => slug}) do
@@ -74,9 +91,13 @@ defmodule AlgorithmsForOptimizationWeb.PageController do
   def collection(conn, %{"slug" => slug}) do
     collection = Collections.get_by_slug(slug) || raise AlgorithmsForOptimizationWeb.NotFoundError
 
+    kind = Enum.find(Topics.kinds(), &(&1[:collection] == collection.id))
+
     render(conn, :collection,
       collection: collection,
       topics: Topics.in_collection(collection.id),
+      kinds: Topics.used_kinds(),
+      active_kind: kind && kind.id,
       upcoming: Topics.upcoming_count(collection.id),
       page_title: collection.name,
       page_description:

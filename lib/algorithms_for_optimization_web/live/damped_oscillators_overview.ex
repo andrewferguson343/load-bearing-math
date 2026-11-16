@@ -10,11 +10,11 @@ defmodule AlgorithmsForOptimizationWeb.DampedOscillatorsLive do
     <Layouts.app flash={@flash} current_scope={assigns[:current_scope]}>
       <div class="lbm-lesson">
         <Layouts.lesson_toc active_topic={:damped_oscillators} active_lesson={:overview} />
-
         <div class="lbm-prose">
           <h1 id="page-heading">Damped Oscillators</h1>
-
+          
           <h2>Why autoscalers overshoot and oscillate</h2>
+          
           <p>
             Load climbs, the autoscaler adds pods, load drops because now there's too much capacity, the
             autoscaler removes pods, load climbs again. Watch the pod count over time and it looks exactly
@@ -22,9 +22,9 @@ defmodule AlgorithmsForOptimizationWeb.DampedOscillatorsLive do
             down quickly, settles down slowly, or never settles at all depends on one thing, how much
             damping is in the loop, and that's a dial you can actually turn.
           </p>
-          <Layouts.topic_end_note active_topic={:damped_oscillators} active_lesson={:overview} />
         </div>
       </div>
+       <Layouts.topic_end_note active_topic={:damped_oscillators} active_lesson={:overview} />
     </Layouts.app>
     """
   end

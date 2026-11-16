@@ -10,11 +10,11 @@ defmodule AlgorithmsForOptimizationWeb.PageRankLive do
     <Layouts.app flash={@flash} current_scope={assigns[:current_scope]}>
       <div class="lbm-lesson">
         <Layouts.lesson_toc active_topic={:pagerank} active_lesson={:overview} />
-
         <div class="lbm-prose">
           <h1 id="page-heading">PageRank</h1>
-
+          
           <h2>Finding the most important node in any graph</h2>
+          
           <p>
             A link from one page to another is a vote, but not all votes count the same: a link from an
             important page should carry more weight than a link from an obscure one. Write that rule down
@@ -23,9 +23,9 @@ defmodule AlgorithmsForOptimizationWeb.PageRankLive do
             steady-state importance of every node in the graph, and it's the same math whether the graph
             is the web, a social network, or anything else you can draw as nodes and edges.
           </p>
-          <Layouts.topic_end_note active_topic={:pagerank} active_lesson={:overview} />
         </div>
       </div>
+       <Layouts.topic_end_note active_topic={:pagerank} active_lesson={:overview} />
     </Layouts.app>
     """
   end
