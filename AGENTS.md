@@ -9,6 +9,22 @@ everyday engineering. Repo: `andrewferguson343/load-bearing-math`. Hosted on Rai
 > never add them as remotes or target them. Every PR targets
 > **`andrewferguson343/load-bearing-math`, base `main`**.
 
+## Content authorship
+
+**Andrew writes the content. Agents don't.** Unless he expressly asks for it in the request,
+never write or edit:
+
+- article prose, headings, captions, or any language a reader sees on a topic page;
+- the mathematics: derivations, worked examples, formulas, or their explanations;
+- algorithms and their implementations (the functions in `lib/algorithms_for_optimization/`
+  that a topic demonstrates).
+
+What agents may do without asking: move content around, scaffold pages and routes, wire up
+registry entries, generate plots and charts he asks for, build features he requests, fix bugs,
+and change styling. When a scaffold needs text to stand in, use a `TODO(andrew)` comment or
+a clearly marked placeholder, not draft prose. Card summaries and descriptions in
+`topics.ex` count as content too: leave them for him or mark them as placeholders.
+
 ## Git & deploy workflow
 
 `main` is protected: it only changes through merged pull requests, and every merge to `main`
