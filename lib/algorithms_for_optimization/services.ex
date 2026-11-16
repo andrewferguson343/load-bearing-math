@@ -15,7 +15,7 @@ defmodule AlgorithmsForOptimization.Services do
       price: "$60",
       price_note: "per hour",
       description:
-        "One-on-one help with the math or computer science you're working on right now: homework, a course that's gotten away from you, or an exam coming up.",
+        "One-on-one help with the math or computer science topic you're working on right now: homework, a course that's gotten away from you, or an exam coming up.",
       includes: [
         "Sessions built around your own coursework",
         "Bring homework, notes or practice exams",
@@ -40,20 +40,21 @@ defmodule AlgorithmsForOptimization.Services do
       # Visually emphasized as the suggested option.
       highlighted: true
     },
-    # DRAFT for review. Quietly aimed at homeschooling families (parents who want the math
-    # taught for them) without naming them: a whole course, structured and reported on.
+    # A whole course, taught one-on-one with more depth than a typical classroom. Homeschooling
+    # families are one audience ("learning at home"), alongside students taking a subject their
+    # school doesn't offer or doing a course over the summer, so it doesn't read as homeschool-only.
     %{
       id: :tier_three,
       name: "Full Course",
-      best_for: "Students who need a structured curriculum, or are ready for calculus and beyond",
+      best_for: "Students who want a complete, structured course outside the classroom",
       price: "Custom",
       price_note: "priced based on the curriculum",
       description:
-        "A complete course, taught from start to finish and built from the ground up, for learning a subject on its own rather than alongside a class.",
+        "A full math or computer science course, planned and taught one-on-one, that covers each subject in more depth than a typical classroom. A good fit for students learning at home, taking a subject their school doesn't offer, or working through a course over the summer.",
       includes: [
-        "A full lesson plan, mapped out from the first session to the last",
-        "Teaching, practice problems, and checkpoints along the way",
-        "Regular progress updates for the family"
+        "A full curriculum, mapped out from the first session to the last",
+        "One-on-one teaching, practice problems, and regular checkpoints",
+        "Progress updates for students and families"
       ],
       highlighted: false
     }

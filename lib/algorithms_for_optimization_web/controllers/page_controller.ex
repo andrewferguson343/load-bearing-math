@@ -23,7 +23,8 @@ defmodule AlgorithmsForOptimizationWeb.PageController do
     render(conn, :about,
       page_title: "About",
       page_description:
-        "Load Bearing Math demystifies the math behind everyday systems. Written by Andrew Ferguson, a computer scientist with a minor in mathematics who tutors math and computer science."
+        "Andrew Ferguson, the computer scientist behind Load Bearing Math, on demystifying math and how he teaches it.",
+      json_ld: AlgorithmsForOptimizationWeb.SEO.person_json_ld()
     )
   end
 
@@ -78,7 +79,8 @@ defmodule AlgorithmsForOptimizationWeb.PageController do
       topics: Topics.in_collection(collection.id),
       upcoming: Topics.upcoming_count(collection.id),
       page_title: collection.name,
-      page_description: collection.description
+      page_description:
+        "#{collection.description} Short, hands-on walkthroughs from Load Bearing Math."
     )
   end
 

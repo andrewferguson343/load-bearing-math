@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content={get_csrf_token()} /> <.live_title
-      default="Load Bearing Math"
+      default={AlgorithmsForOptimizationWeb.SEO.home_title()}
       suffix={assigns[:page_title] && " · Load Bearing Math"}
       phx-no-format
     >{assigns[:page_title]}</.live_title>
@@ -13,6 +13,7 @@
       page_description={assigns[:page_description]}
       canonical_path={assigns[:canonical_path]}
       seo_lesson={assigns[:seo_lesson]}
+      json_ld={assigns[:json_ld]}
     /> <link rel="icon" href={~p"/images/favicon.svg"} type="image/svg+xml" />
     <link rel="icon" href={~p"/favicon.ico"} sizes="any" />
     <link rel="apple-touch-icon" href={~p"/images/apple-touch-icon.png"} />
