@@ -84,6 +84,10 @@ config :algorithms_for_optimization, :topic_suggestion_rate_limit,
   limit: 5,
   window_ms: :timer.minutes(10)
 
+# Where visitors send privacy and data-deletion requests (shown on /privacy).
+# PLACEHOLDER until go-live: set up this mailbox, or change the address here.
+config :algorithms_for_optimization, :contact_email, "privacy@loadbearingmath.com"
+
 # Throttle the tutoring inquiry form on /services per visitor IP.
 config :algorithms_for_optimization, :inquiry_rate_limit,
   limit: 3,

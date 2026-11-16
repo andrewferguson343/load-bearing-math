@@ -23,6 +23,7 @@ defmodule AlgorithmsForOptimizationWeb.MarkovChainsLive do
             That question has a clean answer, and it's the same math that ranks web pages and models
             customer churn.
           </p>
+          <Layouts.topic_end_note active_topic={:markov_chains} active_lesson={:overview} />
         </div>
       </div>
     </Layouts.app>

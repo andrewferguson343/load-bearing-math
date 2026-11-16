@@ -28,6 +28,7 @@ defmodule AlgorithmsForOptimizationWeb.AppendixLive do
           <p>
             {"$$f'(x) = \\lim_{\\Delta x \\to 0} \\frac{(x + \\Delta x)^4 - 3(x + \\Delta x)^2 + (x + \\Delta x) - (x^4 - 3x^2 + x)}{\\Delta x}$$"}
           </p>
+          <Layouts.topic_end_note active_topic={:optimization} active_lesson={:appendix} />
         </div>
       </div>
     </Layouts.app>

@@ -264,6 +264,34 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
     """
   end
 
+  @doc """
+  A quiet one-line pointer to tutoring at the end of a topic. Renders only on the topic's
+  last published page, so multi-part topics show it once rather than on every part.
+
+      <Layouts.topic_end_note active_topic={:leaky_bucket} active_lesson={:overview} />
+  """
+  attr :active_topic, :atom, required: true
+  attr :active_lesson, :atom, required: true
+
+  def topic_end_note(assigns) do
+    last_key =
+      assigns.active_topic
+      |> AlgorithmsForOptimization.Topics.fetch!()
+      |> Map.fetch!(:lessons)
+      |> Enum.filter(& &1.path)
+      |> List.last()
+      |> Map.fetch!(:key)
+
+    assigns = assign(assigns, :show?, last_key == assigns.active_lesson)
+
+    ~H"""
+    <p :if={@show?} id="topic-end-note" class="lbm-topic-end-note">
+      Want to work through topics like this one-on-one?
+      <.link navigate={~p"/services"}>Tutoring is available <span aria-hidden="true">&rarr;</span></.link>
+    </p>
+    """
+  end
+
   attr :lesson, :map, required: true
   attr :active_lesson, :atom, required: true
 

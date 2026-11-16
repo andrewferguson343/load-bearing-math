@@ -59,6 +59,7 @@ defmodule AlgorithmsForOptimizationWeb.OverviewLive do
               <span class="lbm-lesson-footer-title">A Mathematical Overview (coming soon)</span>
             </div>
           </div>
+          <Layouts.topic_end_note active_topic={:optimization} active_lesson={:overview} />
         </div>
       </div>
     </Layouts.app>

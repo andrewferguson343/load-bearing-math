@@ -82,6 +82,24 @@ defmodule AlgorithmsForOptimizationWeb.PageControllerTest do
     assert has?(page, ~s(#about-services[href="/services"]))
   end
 
+  describe "privacy page" do
+    test "explains what's collected and gives a deletion contact", %{conn: conn} do
+      page = doc(conn, ~p"/privacy")
+      email = Application.fetch_env!(:algorithms_for_optimization, :contact_email)
+
+      for id <- ~w(privacy-collect privacy-cookies privacy-dont privacy-keep privacy-hosting) do
+        assert has?(page, "##{id}"), "missing ##{id}"
+      end
+
+      assert has?(page, ~s(#privacy-contact[href="mailto:#{email}"]))
+    end
+
+    test "is linked from the landing footer and the inquiry form", %{conn: conn} do
+      assert has?(doc(conn, ~p"/"), ~s(#footer-privacy[href="/privacy"]))
+      assert has?(doc(conn, ~p"/services"), ~s(#inquiry-privacy-link[href="/privacy"]))
+    end
+  end
+
   describe "topics page" do
     test "groups visible topics by collection", %{conn: conn} do
       page = doc(conn, ~p"/topics")

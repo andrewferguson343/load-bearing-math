@@ -283,6 +283,7 @@ defmodule AlgorithmsForOptimizationWeb.MathematicsLive do
 
             <p>{"$$\\frac{\\partial f}{\\partial x} = 2x$$"}</p>
           </.math_reveal>
+          <Layouts.topic_end_note active_topic={:optimization} active_lesson={:math} />
         </div>
       </div>
     </Layouts.app>

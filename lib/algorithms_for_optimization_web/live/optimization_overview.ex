@@ -158,6 +158,7 @@ defmodule AlgorithmsForOptimizationWeb.OptimizationLive do
             >
             </div>
           </div>
+          <Layouts.topic_end_note active_topic={:optimization} active_lesson={:optimization} />
         </div>
       </div>
     </Layouts.app>

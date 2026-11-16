@@ -28,6 +28,7 @@ defmodule AlgorithmsForOptimizationWeb.LeakyBucketLive do
           <p>
             Check back soon, or use the suggest a topic button above if there's something specific you'd like covered first.
           </p>
+          <Layouts.topic_end_note active_topic={:leaky_bucket} active_lesson={:overview} />
         </div>
       </div>
     </Layouts.app>

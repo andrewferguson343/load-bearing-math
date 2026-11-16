@@ -22,6 +22,7 @@ defmodule AlgorithmsForOptimizationWeb.DampedOscillatorsLive do
             down quickly, settles down slowly, or never settles at all depends on one thing, how much
             damping is in the loop, and that's a dial you can actually turn.
           </p>
+          <Layouts.topic_end_note active_topic={:damped_oscillators} active_lesson={:overview} />
         </div>
       </div>
     </Layouts.app>
