@@ -19,24 +19,25 @@ defmodule AlgorithmsForOptimization.Collections do
       order: 0
     },
     %{
-      id: :systems,
-      slug: "systems",
-      name: "[PLACEHOLDER: Collection One name]",
-      description: "[PLACEHOLDER: Collection One one-line description]",
+      id: :search_and_ranking,
+      slug: "search-and-ranking",
+      name: "Search & Ranking",
+      description:
+        "How computers decide what's similar, what matters most, and where things end up.",
       order: 1
     },
     %{
-      id: :linear_algebra,
-      slug: "linear-algebra",
-      name: "[PLACEHOLDER: Collection Two name]",
-      description: "[PLACEHOLDER: Collection Two one-line description]",
+      id: :reliability_and_control,
+      slug: "reliability-and-control",
+      name: "Reliability & Control",
+      description: "The math that keeps systems steady under load, and explains how they fail.",
       order: 2
     },
     %{
-      id: :differential_equations,
-      slug: "differential-equations",
-      name: "[PLACEHOLDER: Collection Three name]",
-      description: "[PLACEHOLDER: Collection Three one-line description]",
+      id: :simulation_and_optimization,
+      slug: "simulation-and-optimization",
+      name: "Simulation & Optimization",
+      description: "How machines step through time and search for the best answer.",
       order: 3
     },
     %{

@@ -1,7 +1,7 @@
 defmodule AlgorithmsForOptimizationWeb.PageController do
   use AlgorithmsForOptimizationWeb, :controller
 
-  alias AlgorithmsForOptimization.{Collections, Topics}
+  alias AlgorithmsForOptimization.{Collections, Tags, Topics}
 
   def home(conn, _params) do
     render(conn, :home,
@@ -13,7 +13,9 @@ defmodule AlgorithmsForOptimizationWeb.PageController do
       foundations: Topics.in_collection(:foundations) |> Enum.take(4),
       point_loads_collection: Collections.fetch!(:point_loads),
       point_loads: Topics.by_kind(:point_load) |> Enum.take(4),
-      today: Date.utc_today()
+      today: Date.utc_today(),
+      # Dev builds show reminders where empty sections are hidden on the live site.
+      dev_routes?: Application.get_env(:algorithms_for_optimization, :dev_routes, false)
     )
   end
 
@@ -48,9 +50,23 @@ defmodule AlgorithmsForOptimizationWeb.PageController do
     render(conn, :topics,
       groups: groups,
       ungrouped: ungrouped,
+      tags: Topics.used_tags(),
       page_title: "Topics",
       page_description:
-        "Every Load Bearing Math series in one place, each one a short, hands-on walkthrough of the math behind everyday engineering."
+        "Every Load Bearing Math topic in one place, each one a short, hands-on walkthrough of the math behind everyday engineering."
+    )
+  end
+
+  def tag(conn, %{"slug" => slug}) do
+    tag = Tags.get_by_slug(slug) || raise AlgorithmsForOptimizationWeb.NotFoundError
+
+    render(conn, :tag,
+      tag: tag,
+      topics: Topics.with_tag(tag.id),
+      other_tags: Enum.reject(Topics.used_tags(), &(&1.id == tag.id)),
+      page_title: tag.label,
+      page_description:
+        "Every Load Bearing Math topic that uses #{tag.label}: short, hands-on walkthroughs of the math behind everyday systems."
     )
   end
 

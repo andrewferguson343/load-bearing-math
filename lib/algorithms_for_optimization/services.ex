@@ -20,7 +20,7 @@ defmodule AlgorithmsForOptimization.Services do
         "Sessions built around your own coursework",
         "Bring homework, notes or practice exams",
         "Math: algebra and trigonometry through differential equations",
-        "Computer science: programming, data structures, algorithms and the math behind them"
+        "Computer science: programming, data structures, algorithms, and the math behind them"
       ],
       highlighted: false
     },
@@ -52,7 +52,7 @@ defmodule AlgorithmsForOptimization.Services do
         "A complete course, taught from start to finish and built from the ground up, for learning a subject on its own rather than alongside a class.",
       includes: [
         "A full lesson plan, mapped out from the first session to the last",
-        "Teaching, practice problems and checkpoints along the way",
+        "Teaching, practice problems, and checkpoints along the way",
         "Regular progress updates for the family"
       ],
       highlighted: false

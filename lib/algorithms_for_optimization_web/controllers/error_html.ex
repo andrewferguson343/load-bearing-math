@@ -71,7 +71,7 @@ defmodule AlgorithmsForOptimizationWeb.ErrorHTML do
             <p class="lbm-hero-lede">{@message}</p>
             <nav class="lbm-error-actions" aria-label="Where to next">
               <a href="/" class="lbm-error-button lbm-error-button--primary">Back to home</a>
-              <a href="/topics" class="lbm-error-button">Browse topics</a>
+              <a href="/topics" class="lbm-error-button">Browse all topics</a>
             </nav>
           </section>
         </main>

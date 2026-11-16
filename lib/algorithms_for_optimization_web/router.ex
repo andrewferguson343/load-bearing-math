@@ -51,6 +51,7 @@ defmodule AlgorithmsForOptimizationWeb.Router do
     get "/privacy", PageController, :privacy
     get "/topics", PageController, :topics
     get "/collections/:slug", PageController, :collection
+    get "/tags/:slug", PageController, :tag
     get "/work-with-me", WorkController, :show
     post "/work-with-me", WorkController, :create
     get "/services", ServicesController, :show

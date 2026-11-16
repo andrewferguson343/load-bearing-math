@@ -6,7 +6,7 @@ defmodule AlgorithmsForOptimizationWeb.SitemapController do
   """
   use AlgorithmsForOptimizationWeb, :controller
 
-  alias AlgorithmsForOptimization.{Collections, Topics}
+  alias AlgorithmsForOptimization.{Collections, Tags, Topics}
   alias AlgorithmsForOptimizationWeb.SEO
 
   @static_pages ["/", "/about", "/services", "/work-with-me", "/topics", "/sources", "/privacy"]
@@ -63,7 +63,10 @@ defmodule AlgorithmsForOptimizationWeb.SitemapController do
           Topics.in_collection(collection.id) != [],
           do: Collections.path(collection)
 
-    Enum.uniq(@static_pages ++ collection_paths ++ lesson_paths)
+    # Only tags that a public topic uses, for the same reason.
+    tag_paths = Enum.map(Topics.used_tags(), &Tags.path/1)
+
+    Enum.uniq(@static_pages ++ collection_paths ++ tag_paths ++ lesson_paths)
   end
 
   defp xml_escape(string) do

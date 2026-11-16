@@ -9,9 +9,11 @@ defmodule AlgorithmsForOptimization.Topics do
     * `collection` - id from `AlgorithmsForOptimization.Collections` (or `nil`)
     * `kind` - `:series` for multi-part topics, `:point_load` for single-page quickies,
       `:foundation` for single-page primers on the basics (collection `:foundations`)
-    * `published_on` - `Date` it went public, drives "Recently posted" (`nil` sorts last)
+    * `published_on` - `Date` it went public; orders "Recently posted" and drives the "New"
+      badge. Not displayed (`nil` sorts last).
     * `summary` - one line for cards; `card_summary/1` falls back to `description`
     * `featured` - the landing page's featured topic (first visible one wins)
+    * `tags` - subject tag ids from `AlgorithmsForOptimization.Tags` (a topic can have several)
     * `prerequisites` - ids of foundation topics to read first; shown as "Before you start"
       in the topic's sidebar. Only public ones appear.
   """
@@ -22,11 +24,12 @@ defmodule AlgorithmsForOptimization.Topics do
   @topics [
     %{
       id: :cosine_similarity,
-      collection: :linear_algebra,
+      tags: [:linear_algebra, :trigonometry],
+      collection: :search_and_ranking,
       kind: :series,
-      # [PLACEHOLDER: publish date] e.g. ~D[2026-11-01]
-      published_on: nil,
-      # [PLACEHOLDER: one-line card summary]; cards fall back to the description
+      # Set to the date it goes public: orders "Recently posted" and drives the "New" badge (not shown).
+      published_on: ~D[2026-10-28],
+      # Optional one-line card summary; cards fall back to the description
       summary: nil,
       featured: true,
       # Foundation ids to read first, shown as "Before you start" (see Topics.prerequisites/1)
@@ -65,11 +68,12 @@ defmodule AlgorithmsForOptimization.Topics do
     },
     %{
       id: :leaky_bucket,
-      collection: :differential_equations,
+      tags: [:differential_equations],
+      collection: :reliability_and_control,
       kind: :series,
-      # [PLACEHOLDER: publish date] e.g. ~D[2026-11-01]
-      published_on: nil,
-      # [PLACEHOLDER: one-line card summary]; cards fall back to the description
+      # Set to the date it goes public: orders "Recently posted" and drives the "New" badge (not shown).
+      published_on: ~D[2026-11-03],
+      # Optional one-line card summary; cards fall back to the description
       summary: nil,
       featured: false,
       # Foundation ids to read first, shown as "Before you start" (see Topics.prerequisites/1)
@@ -84,11 +88,12 @@ defmodule AlgorithmsForOptimization.Topics do
     },
     %{
       id: :markov_chains,
-      collection: :linear_algebra,
+      tags: [:probability, :linear_algebra],
+      collection: :search_and_ranking,
       kind: :series,
-      # [PLACEHOLDER: publish date] e.g. ~D[2026-11-01]
+      # Set to the date it goes public: orders "Recently posted" and drives the "New" badge (not shown).
       published_on: nil,
-      # [PLACEHOLDER: one-line card summary]; cards fall back to the description
+      # Optional one-line card summary; cards fall back to the description
       summary: nil,
       featured: false,
       # Foundation ids to read first, shown as "Before you start" (see Topics.prerequisites/1)
@@ -103,11 +108,12 @@ defmodule AlgorithmsForOptimization.Topics do
     },
     %{
       id: :pagerank,
-      collection: :linear_algebra,
+      tags: [:linear_algebra, :graph_theory, :probability],
+      collection: :search_and_ranking,
       kind: :series,
-      # [PLACEHOLDER: publish date] e.g. ~D[2026-11-01]
+      # Set to the date it goes public: orders "Recently posted" and drives the "New" badge (not shown).
       published_on: nil,
-      # [PLACEHOLDER: one-line card summary]; cards fall back to the description
+      # Optional one-line card summary; cards fall back to the description
       summary: nil,
       featured: false,
       # Foundation ids to read first, shown as "Before you start" (see Topics.prerequisites/1)
@@ -122,11 +128,12 @@ defmodule AlgorithmsForOptimization.Topics do
     },
     %{
       id: :metastable_failures,
-      collection: :systems,
+      tags: [:differential_equations],
+      collection: :reliability_and_control,
       kind: :series,
-      # [PLACEHOLDER: publish date] e.g. ~D[2026-11-01]
+      # Set to the date it goes public: orders "Recently posted" and drives the "New" badge (not shown).
       published_on: nil,
-      # [PLACEHOLDER: one-line card summary]; cards fall back to the description
+      # Optional one-line card summary; cards fall back to the description
       summary: nil,
       featured: false,
       # Foundation ids to read first, shown as "Before you start" (see Topics.prerequisites/1)
@@ -141,11 +148,12 @@ defmodule AlgorithmsForOptimization.Topics do
     },
     %{
       id: :damped_oscillators,
-      collection: :differential_equations,
+      tags: [:differential_equations],
+      collection: :reliability_and_control,
       kind: :series,
-      # [PLACEHOLDER: publish date] e.g. ~D[2026-11-01]
+      # Set to the date it goes public: orders "Recently posted" and drives the "New" badge (not shown).
       published_on: nil,
-      # [PLACEHOLDER: one-line card summary]; cards fall back to the description
+      # Optional one-line card summary; cards fall back to the description
       summary: nil,
       featured: false,
       # Foundation ids to read first, shown as "Before you start" (see Topics.prerequisites/1)
@@ -160,11 +168,12 @@ defmodule AlgorithmsForOptimization.Topics do
     },
     %{
       id: :eulers_method,
-      collection: :differential_equations,
+      tags: [:differential_equations, :numerical_methods],
+      collection: :simulation_and_optimization,
       kind: :series,
-      # [PLACEHOLDER: publish date] e.g. ~D[2026-11-01]
+      # Set to the date it goes public: orders "Recently posted" and drives the "New" badge (not shown).
       published_on: nil,
-      # [PLACEHOLDER: one-line card summary]; cards fall back to the description
+      # Optional one-line card summary; cards fall back to the description
       summary: nil,
       featured: false,
       # Foundation ids to read first, shown as "Before you start" (see Topics.prerequisites/1)
@@ -179,11 +188,12 @@ defmodule AlgorithmsForOptimization.Topics do
     },
     %{
       id: :optimization,
-      collection: :systems,
+      tags: [:optimization, :calculus],
+      collection: :simulation_and_optimization,
       kind: :series,
-      # [PLACEHOLDER: publish date] e.g. ~D[2026-11-01]
+      # Set to the date it goes public: orders "Recently posted" and drives the "New" badge (not shown).
       published_on: nil,
-      # [PLACEHOLDER: one-line card summary]; cards fall back to the description
+      # Optional one-line card summary; cards fall back to the description
       summary: nil,
       featured: false,
       # Foundation ids to read first, shown as "Before you start" (see Topics.prerequisites/1)
@@ -211,11 +221,12 @@ defmodule AlgorithmsForOptimization.Topics do
     },
     %{
       id: :mathematics_appendix,
+      tags: [:calculus, :linear_algebra],
       collection: nil,
       kind: :series,
-      # [PLACEHOLDER: publish date] e.g. ~D[2026-11-01]
+      # Set to the date it goes public: orders "Recently posted" and drives the "New" badge (not shown).
       published_on: nil,
-      # [PLACEHOLDER: one-line card summary]; cards fall back to the description
+      # Optional one-line card summary; cards fall back to the description
       summary: nil,
       featured: false,
       # Foundation ids to read first, shown as "Before you start" (see Topics.prerequisites/1)
@@ -223,7 +234,7 @@ defmodule AlgorithmsForOptimization.Topics do
       number: "09",
       label: "Mathematics Appendix",
       description:
-        "The shared toolbox behind every series on this site: derivatives, gradients, linear algebra, eigenvectors. One place to look things up instead of re-deriving them in the middle of a lesson on something else.",
+        "The shared toolbox behind every topic on this site: derivatives, gradients, linear algebra, eigenvectors. One place to look things up instead of re-deriving them in the middle of a topic on something else.",
       lessons: [
         %{key: :overview, number: "00", label: "Overview", path: "/mathematics-appendix"}
       ]
@@ -274,6 +285,15 @@ defmodule AlgorithmsForOptimization.Topics do
   end
 
   def prerequisites(_topic), do: []
+
+  @doc "Visible topics carrying a tag, in registry order."
+  def with_tag(tag_id), do: Enum.filter(visible(), &(tag_id in Map.get(&1, :tags, [])))
+
+  @doc "Tags that at least one visible topic uses, in the Tags registry's display order."
+  def used_tags do
+    used = visible() |> Enum.flat_map(&Map.get(&1, :tags, [])) |> MapSet.new()
+    Enum.filter(AlgorithmsForOptimization.Tags.all(), &(&1.id in used))
+  end
 
   @doc "Visible topics in a collection, in registry order."
   def in_collection(collection_id), do: Enum.filter(visible(), &(&1.collection == collection_id))

@@ -1,0 +1,29 @@
+<Layouts.app flash={@flash}>
+  <div id={"tag-page-#{@tag.slug}"} class="lbm-hero">
+    <p class="lbm-eyebrow">Subject</p>
+    <h1 class="lbm-hero-title">{@tag.label}</h1>
+    <p class="lbm-hero-lede">
+      Topics on this site that use {@tag.label}.
+    </p>
+  </div>
+
+  <div :if={@topics != []} id="tag-topics" class="lbm-topic-index">
+    <.topic_entry :for={topic <- @topics} topic={topic} />
+  </div>
+
+  <p :if={@topics == []} id="tag-empty" class="lbm-collection-empty">
+    Nothing here yet. Coming soon.
+  </p>
+
+  <nav
+    :if={@other_tags != []}
+    id="other-subjects"
+    class="lbm-subject-browse"
+    aria-label="Other subjects"
+  >
+    <p class="lbm-subject-browse-label">Other subjects</p>
+    <Layouts.tag_links tags={@other_tags} />
+  </nav>
+
+  <.link navigate={~p"/topics"} class="lbm-sources-link">All topics</.link>
+</Layouts.app>
