@@ -1,0 +1,81 @@
+<Layouts.app flash={@flash}>
+  <article id="work-page" class="lbm-about">
+    <header class="lbm-hero lbm-about-hero">
+      <p class="lbm-eyebrow">Work with me</p>
+      <h1 class="lbm-hero-title">Selective engineering engagements</h1>
+      <p class="lbm-hero-lede">
+        I take on a small number of consulting, advisory and full-time engagements at a time, where
+        hard systems problems and the math underneath them actually matter.
+      </p>
+    </header>
+
+    <section id="work-areas" class="lbm-about-section" aria-labelledby="work-areas-heading">
+      <h2 id="work-areas-heading">Where I'm most useful</h2>
+      <ul class="lbm-work-areas">
+        <li>Aerospace and space systems</li>
+        <li>Cybersecurity</li>
+        <li>Large-scale and high-throughput systems integration</li>
+        <li>Turning the math behind a system into something a team can build on</li>
+      </ul>
+      <p>
+        More on my background is on the <.link navigate={~p"/about"}>About</.link> page.
+      </p>
+    </section>
+
+    <section id="work-how" class="lbm-about-section" aria-labelledby="work-how-heading">
+      <h2 id="work-how-heading">How it works</h2>
+      <p>
+        Send a short note about the work: what you're building, where you're stuck or what the role
+        is, and how you see me fitting in. I read every message and reply to the ones that are a good
+        fit.
+      </p>
+    </section>
+
+    <section id="work-inquiry" class="lbm-inquiry" aria-labelledby="work-inquiry-heading">
+      <h2 id="work-inquiry-heading" class="lbm-inquiry-title">Tell me about it</h2>
+      <.form
+        for={@form}
+        id="work-form"
+        action={~p"/work-with-me" <> "#work-inquiry"}
+        method="post"
+        class="lbm-inquiry-form"
+      >
+        <div class="lbm-inquiry-row">
+          <.input field={@form[:name]} type="text" label="Name" autocomplete="name" required />
+          <.input field={@form[:email]} type="email" label="Email" autocomplete="email" required />
+        </div>
+        <.input
+          field={@form[:organization]}
+          type="text"
+          label="Company or organization (optional)"
+          autocomplete="organization"
+        />
+        <.input
+          field={@form[:message]}
+          type="textarea"
+          label="The opportunity"
+          rows="7"
+          maxlength={AlgorithmsForOptimization.WorkInquiry.max_message()}
+          required
+        />
+        <%!-- Honeypot: hidden from people and screen readers; bots fill in every field. --%>
+        <div class="lbm-honeypot" aria-hidden="true">
+          <label for="work-company-website">Leave this field empty</label>
+          <input
+            type="text"
+            id="work-company-website"
+            name={AlgorithmsForOptimizationWeb.WorkController.honeypot_field()}
+            value=""
+            tabindex="-1"
+            autocomplete="off"
+          />
+        </div>
+        <.button variant="primary" id="work-submit">Send</.button>
+        <p class="lbm-inquiry-privacy">
+          Your details are only used to reply to you.
+          <.link navigate={~p"/privacy"}>Privacy</.link>
+        </p>
+      </.form>
+    </section>
+  </article>
+</Layouts.app>

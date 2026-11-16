@@ -69,7 +69,7 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityRealisticExampleLive do
             <h3>Try it</h3>
             <p>Pick a word and see which other words are its nearest neighbors.</p>
 
-            <form phx-change="select_word" class="lbm-demo-form">
+            <form id="word-picker-form" phx-change="select_word" class="lbm-demo-form">
               <.input
                 type="select"
                 name="word"

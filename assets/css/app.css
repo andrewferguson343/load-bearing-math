@@ -855,6 +855,30 @@ a.lbm-featured-card:hover .lbm-topic-entry-arrow { transform: translateX(0.25rem
 
 .lbm-inquiry-privacy { margin-top: 0.75rem; }
 
+.lbm-work-areas {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.lbm-work-areas li {
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.lbm-work-areas li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: var(--color-primary);
+}
+
 .lbm-about-personal {
   padding: 1.25rem 1.5rem;
   border-radius: var(--radius-box);
