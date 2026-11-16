@@ -748,7 +748,11 @@ a.lbm-featured-card:hover .lbm-topic-entry-arrow { transform: translateX(0.25rem
   gap: 1rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding-bottom: 0.25rem;
+  /* overflow-x: auto clips vertically too, so the card hover (2px lift + shadow) was cut off.
+     Pad the scroll box enough to hold it and pull it back with negative margins so nothing shifts. */
+  padding: 0.5rem 0.75rem 1rem;
+  margin: -0.5rem -0.75rem -0.75rem;
+  scroll-padding-inline: 0.75rem;
 }
 
 .lbm-point-load-card {

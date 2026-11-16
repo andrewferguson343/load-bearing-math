@@ -105,6 +105,18 @@ defmodule AlgorithmsForOptimizationWeb.Router do
       live "/eulers-method", EulersMethodLive
     end
 
+    # Foundations: single-page primers, one live_session each so TopicAuth gates them.
+    live_session :derivatives,
+      on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :derivatives} do
+      live "/derivatives", DerivativesLive
+    end
+
+    # Point Loads: single-page quickies, one equation each.
+    live_session :littles_law,
+      on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :littles_law} do
+      live "/littles-law", LittlesLawLive
+    end
+
     live_session :mathematics_appendix,
       on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :mathematics_appendix} do
       live "/mathematics-appendix", MathematicsAppendixLive
