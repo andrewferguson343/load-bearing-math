@@ -10,11 +10,11 @@ defmodule AlgorithmsForOptimizationWeb.EulersMethodLive do
     <Layouts.app flash={@flash} current_scope={assigns[:current_scope]}>
       <div class="lbm-lesson">
         <Layouts.lesson_toc active_topic={:eulers_method} active_lesson={:overview} />
-
         <div class="lbm-prose">
           <h1 id="page-heading">Euler's Method</h1>
-
+          
           <h2>Why game physics explode at large time steps</h2>
+          
           <p>
             A game can't solve the real differential equations of motion exactly, every frame, in real
             time, so it cheats: take the current velocity, multiply by a small time step, add that to
@@ -24,9 +24,9 @@ defmodule AlgorithmsForOptimizationWeb.EulersMethodLive do
             stiff collision, and the error in each step compounds into the next one until a character is
             clipping through the floor or spinning off into space.
           </p>
-          <Layouts.topic_end_note active_topic={:eulers_method} active_lesson={:overview} />
         </div>
       </div>
+       <Layouts.topic_end_note active_topic={:eulers_method} active_lesson={:overview} />
     </Layouts.app>
     """
   end

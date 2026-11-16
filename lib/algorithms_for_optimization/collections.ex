@@ -16,7 +16,9 @@ defmodule AlgorithmsForOptimization.Collections do
       name: "Foundations",
       description:
         "Short primers on the basics the other topics build on. Read them in order, or jump to the one you need.",
-      order: 0
+      # Sorts after the themed collections on the Topics page, just above Point Loads; the
+      # landing page places its strip explicitly and ignores this.
+      order: 98
     },
     %{
       id: :search_and_ranking,

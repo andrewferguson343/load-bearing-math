@@ -331,6 +331,36 @@ defmodule AlgorithmsForOptimization.Topics do
   @doc "Visible topics carrying a tag, in registry order."
   def with_tag(tag_id), do: Enum.filter(visible(), &(tag_id in Map.get(&1, :tags, [])))
 
+  # Topic kinds as browsable types. Foundations and Point Loads already have a page each
+  # (their collections), so those link there; Articles get their own page.
+  @kinds [
+    %{id: :series, label: "Articles", path: "/articles"},
+    %{
+      id: :foundation,
+      label: "Foundations",
+      path: "/collections/foundations",
+      collection: :foundations
+    },
+    %{
+      id: :point_load,
+      label: "Point Loads",
+      path: "/collections/point-loads",
+      collection: :point_loads
+    }
+  ]
+
+  @doc """
+  Every topic kind as a browsable type: `id`, `label`, the page that lists it, and for the
+  kinds whose page is a collection, that collection's id.
+  """
+  def kinds, do: @kinds
+
+  @doc "Kinds that at least one visible topic has, in display order."
+  def used_kinds do
+    used = visible() |> Enum.map(& &1.kind) |> MapSet.new()
+    Enum.filter(@kinds, &(&1.id in used))
+  end
+
   @doc "Tags that at least one visible topic uses, in the Tags registry's display order."
   def used_tags do
     used = visible() |> Enum.flat_map(&Map.get(&1, :tags, [])) |> MapSet.new()

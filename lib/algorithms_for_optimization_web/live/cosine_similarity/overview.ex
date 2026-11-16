@@ -10,31 +10,35 @@ defmodule AlgorithmsForOptimizationWeb.CosineSimilarityLive do
     <Layouts.app flash={@flash} current_scope={assigns[:current_scope]}>
       <div class="lbm-lesson">
         <Layouts.lesson_toc active_topic={:cosine_similarity} active_lesson={:overview} />
-
         <div class="lbm-prose">
           <h1 id="page-heading">Cosine Similarity</h1>
-
+          
           <h2>How could this possibly have anything to do with our jobs?</h2>
+          
           <p>
             We are all using AI every day to make ourselves more impactful at work. Even before this we had to
             put some vague questions into Google to hopefully find a solution to a very specific problem
             on Stack Overflow where some poor dev was probably getting yelled at by some other poor dev with nothing better to do.
           </p>
+          
           <p>
             But how does Claude actually know what you're looking for? How can it tell the meaning behind the words? I'm going to
             give a brief overview of how the mathematics behind all of this works, with a very small example (it gets out of hand pretty fast)
             to hopefully share some cool facts with the rest of everybody.
           </p>
-
+          
           <h2>Where we're headed</h2>
+          
           <ul>
             <li>A mathematical overview, vectors, magnitude, and the two forms of the dot product</li>
+            
             <li>A simple example, five video games turned into hand-picked vectors</li>
+            
             <li>A more realistic example, real word embeddings, scaled up to 50 dimensions</li>
           </ul>
-          <Layouts.topic_end_note active_topic={:cosine_similarity} active_lesson={:overview} />
         </div>
       </div>
+       <Layouts.topic_end_note active_topic={:cosine_similarity} active_lesson={:overview} />
     </Layouts.app>
     """
   end

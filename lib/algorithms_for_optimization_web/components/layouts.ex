@@ -50,6 +50,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
             <span class="lbm-brand-name">Load Bearing Math</span>
           </div>
         </a>
+        
         <div class="lbm-header-right">
           <nav class="lbm-nav" aria-label="Main">
             <.link navigate={~p"/"} class="lbm-nav-link">Home</.link>
@@ -60,9 +61,11 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
               Suggest a topic
             </button>
           </nav>
+          
           <div class="lbm-header-theme">
             <.theme_toggle />
           </div>
+          
           <button
             type="button"
             id="mobile-nav-toggle"
@@ -77,20 +80,24 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
           </button>
         </div>
       </div>
-
+      
       <nav id="mobile-nav" class="lbm-mobile-nav" aria-label="Main">
         <.link navigate={~p"/"} class="lbm-mobile-nav-link" phx-click={hide_mobile_nav()}>
           Home
         </.link>
+        
         <.link navigate={~p"/topics"} class="lbm-mobile-nav-link" phx-click={hide_mobile_nav()}>
           Topics
         </.link>
+        
         <.link navigate={~p"/services"} class="lbm-mobile-nav-link" phx-click={hide_mobile_nav()}>
           Services
         </.link>
+        
         <.link navigate={~p"/about"} class="lbm-mobile-nav-link" phx-click={hide_mobile_nav()}>
           About
         </.link>
+        
         <button
           type="button"
           class="lbm-nav-cta lbm-mobile-nav-cta"
@@ -98,9 +105,9 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         >
           Suggest a topic
         </button>
+        
         <div class="lbm-mobile-nav-theme">
-          <span>Theme</span>
-          <.theme_toggle />
+          <span>Theme</span> <.theme_toggle />
         </div>
       </nav>
     </header>
@@ -127,9 +134,12 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         >
           <.icon name="hero-x-mark" class="size-5" />
         </button>
+        
         <div class="lbm-modal-body">
           <h3 id="suggest-topic-title">Suggest a topic</h3>
+          
           <p>Got something that belongs on this list? Drop it below.</p>
+          
           <.form
             for={%{}}
             id="suggest-topic-form"
@@ -158,7 +168,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
                 autocomplete="off"
               />
             </div>
-            <.button variant="primary">Suggest it</.button>
+             <.button variant="primary">Suggest it</.button>
           </.form>
         </div>
       </.focus_wrap>
@@ -181,8 +191,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         </button>
       </nav>
     </footer>
-
-    <.flash_group flash={@flash} />
+     <.flash_group flash={@flash} />
     """
   end
 
@@ -250,22 +259,20 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
     ~H"""
     <aside class="lbm-toc" aria-label="Topic navigation">
       <p class="lbm-toc-eyebrow">{@current.label}</p>
-      <.type_badge kind={@current.kind} class="lbm-toc-type" />
-
+       <.type_badge kind={@current.kind} class="lbm-toc-type" />
       <.toc_lesson :for={lesson <- @current.lessons} lesson={lesson} active_lesson={@active_lesson} />
-
       <div
         :if={@active_topic == :optimization and @active_lesson == :appendix}
         class="lbm-toc-sublist"
       >
         <a href="#derivatives" class="lbm-toc-subitem">Derivatives</a>
       </div>
-
+      
       <div :if={@tags != []} class="lbm-toc-tags">
         <p class="lbm-toc-eyebrow">Subjects</p>
-        <.tag_links id="topic-tags" tags={@tags} />
+         <.tag_links id="topic-tags" tags={@tags} />
       </div>
-
+      
       <nav
         :if={@prerequisites != []}
         id="topic-prerequisites"
@@ -273,6 +280,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         aria-label="Before you start"
       >
         <p class="lbm-toc-eyebrow">Before you start</p>
+        
         <.link
           :for={foundation <- @prerequisites}
           navigate={AlgorithmsForOptimization.Topics.entry_path(foundation)}
@@ -302,6 +310,43 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         </.link>
       </li>
     </ul>
+    """
+  end
+
+  @doc """
+  A segmented control for browsing by topic kind: All, then one segment per kind that has a
+  public topic (Articles, Foundations, Point Loads). `active` is `:all` or a kind id; the
+  matching segment is filled and marked `aria-current`.
+
+      <Layouts.kind_switcher kinds={Topics.used_kinds()} active={:series} />
+  """
+  attr :kinds, :list,
+    required: true,
+    doc: "kind maps from AlgorithmsForOptimization.Topics.kinds/0"
+
+  attr :active, :atom, required: true, doc: ":all or a kind id"
+  attr :id, :string, default: "browse-by-type"
+
+  def kind_switcher(assigns) do
+    ~H"""
+    <nav :if={@kinds != []} id={@id} class="lbm-kind-switcher" aria-label="Browse by type">
+      <.link
+        navigate={~p"/topics"}
+        class={["lbm-kind-switcher-item", @active == :all && "is-active"]}
+        aria-current={@active == :all && "page"}
+      >
+        All
+      </.link>
+      
+      <.link
+        :for={kind <- @kinds}
+        navigate={kind.path}
+        class={["lbm-kind-switcher-item", @active == kind.id && "is-active"]}
+        aria-current={@active == kind.id && "page"}
+      >
+        {kind.label}
+      </.link>
+    </nav>
     """
   end
 
@@ -337,8 +382,9 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
   end
 
   @doc """
-  A quiet one-line pointer to tutoring at the end of a topic. Renders only on the topic's
-  last published page, so multi-part topics show it once rather than on every part.
+  A pointer to tutoring, rendered below the whole lesson block (sidebar and article) under
+  its own rule line so it reads as site furniture, not part of the article. Renders only on
+  the topic's last published page, so multi-part topics show it once rather than on every part.
 
       <Layouts.topic_end_note active_topic={:leaky_bucket} active_lesson={:overview} />
   """
@@ -357,10 +403,11 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
     assigns = assign(assigns, :show?, last_key == assigns.active_lesson)
 
     ~H"""
-    <p :if={@show?} id="topic-end-note" class="lbm-topic-end-note">
-      Want to work through topics like this one-on-one?
-      <.link navigate={~p"/services"}>Tutoring is available <span aria-hidden="true">&rarr;</span></.link>
-    </p>
+    <aside :if={@show?} id="topic-end-note" class="lbm-topic-end-note" aria-label="Tutoring">
+      <p>
+        Want help with this material? <.link navigate={~p"/services"}>Check out the tutoring services</.link>.
+      </p>
+    </aside>
     """
   end
 
@@ -375,8 +422,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
       number={@lesson.number}
       label={@lesson.label}
       active={@lesson.key == @active_lesson}
-    />
-    <.toc_upcoming :if={is_nil(@lesson.path)} number={@lesson.number} label={@lesson.label} />
+    /> <.toc_upcoming :if={is_nil(@lesson.path)} number={@lesson.number} label={@lesson.label} />
     """
   end
 
@@ -399,8 +445,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
   defp toc_upcoming(assigns) do
     ~H"""
     <span class="lbm-toc-item lbm-toc-item--upcoming">
-      <span class="lbm-toc-number">{@number}</span> {@label}
-      <span class="lbm-toc-tag">Soon</span>
+      <span class="lbm-toc-number">{@number}</span> {@label} <span class="lbm-toc-tag">Soon</span>
     </span>
     """
   end
@@ -418,9 +463,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
   def flash_group(assigns) do
     ~H"""
     <div id={@id} aria-live="polite">
-      <.flash kind={:info} flash={@flash} />
-      <.flash kind={:error} flash={@flash} />
-
+      <.flash kind={:info} flash={@flash} /> <.flash kind={:error} flash={@flash} />
       <.flash
         id="client-error"
         kind={:error}
@@ -435,7 +478,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         {gettext("Attempting to reconnect")}
         <.icon name="hero-arrow-path" class="ml-1 size-3 motion-safe:animate-spin" />
       </.flash>
-
+      
       <.flash
         id="server-error"
         kind={:error}
@@ -463,7 +506,6 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
     ~H"""
     <div class="card relative flex flex-row items-center border-2 border-base-300 bg-base-300 rounded-full">
       <div class="absolute w-1/3 h-full rounded-full border-1 border-base-200 bg-base-100 brightness-200 left-0 [[data-theme=light]_&]:left-1/3 [[data-theme=dark]_&]:left-2/3 [[data-theme-source=system]_&]:!left-0 transition-[left]" />
-
       <button
         class="flex p-2 cursor-pointer w-1/3"
         phx-click={JS.dispatch("phx:set-theme")}
@@ -472,7 +514,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
       >
         <.icon name="hero-computer-desktop-micro" class="size-4 opacity-75 hover:opacity-100" />
       </button>
-
+      
       <button
         class="flex p-2 cursor-pointer w-1/3"
         phx-click={JS.dispatch("phx:set-theme")}
@@ -481,7 +523,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
       >
         <.icon name="hero-sun-micro" class="size-4 opacity-75 hover:opacity-100" />
       </button>
-
+      
       <button
         class="flex p-2 cursor-pointer w-1/3"
         phx-click={JS.dispatch("phx:set-theme")}
@@ -538,8 +580,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
       |> assign(:share_image_url, SEO.url(~p"/images/og-image.png"))
 
     ~H"""
-    <meta name="description" content={@description} />
-    <meta name="author" content={SEO.author()} />
+    <meta name="description" content={@description} /> <meta name="author" content={SEO.author()} />
     <meta name="theme-color" content="#14a394" />
     <link :if={@canonical_url} rel="canonical" href={@canonical_url} />
     <meta property="og:site_name" content={SEO.site_name()} />
@@ -555,8 +596,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
     <meta
       property="og:image:alt"
       content="Load Bearing Math: short, hands-on walkthroughs of the math behind everyday engineering"
-    />
-    <meta name="twitter:card" content="summary_large_image" />
+    /> <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={@full_title} />
     <meta name="twitter:description" content={@description} />
     <meta name="twitter:image" content={@share_image_url} />

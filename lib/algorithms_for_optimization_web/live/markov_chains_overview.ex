@@ -10,11 +10,11 @@ defmodule AlgorithmsForOptimizationWeb.MarkovChainsLive do
     <Layouts.app flash={@flash} current_scope={assigns[:current_scope]}>
       <div class="lbm-lesson">
         <Layouts.lesson_toc active_topic={:markov_chains} active_lesson={:overview} />
-
         <div class="lbm-prose">
           <h1 id="page-heading">Markov Chains</h1>
-
+          
           <h2>Where do users end up in the long run?</h2>
+          
           <p>
             Every user flow is secretly a state machine: sign up, browse, checkout, abandon, come back
             next week. Draw an arrow for every transition and attach a probability to each one, and you've
@@ -23,9 +23,9 @@ defmodule AlgorithmsForOptimizationWeb.MarkovChainsLive do
             That question has a clean answer, and it's the same math that ranks web pages and models
             customer churn.
           </p>
-          <Layouts.topic_end_note active_topic={:markov_chains} active_lesson={:overview} />
         </div>
       </div>
+       <Layouts.topic_end_note active_topic={:markov_chains} active_lesson={:overview} />
     </Layouts.app>
     """
   end
