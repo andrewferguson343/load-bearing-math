@@ -7,10 +7,13 @@ defmodule AlgorithmsForOptimization.Topics do
   Landing page fields on each topic:
 
     * `collection` - id from `AlgorithmsForOptimization.Collections` (or `nil`)
-    * `kind` - `:series` for multi-part topics, `:point_load` for single-page quickies
+    * `kind` - `:series` for multi-part topics, `:point_load` for single-page quickies,
+      `:foundation` for single-page primers on the basics (collection `:foundations`)
     * `published_on` - `Date` it went public, drives "Recently posted" (`nil` sorts last)
     * `summary` - one line for cards; `card_summary/1` falls back to `description`
     * `featured` - the landing page's featured topic (first visible one wins)
+    * `prerequisites` - ids of foundation topics to read first; shown as "Before you start"
+      in the topic's sidebar. Only public ones appear.
   """
 
   @dev_routes? Application.compile_env(:algorithms_for_optimization, :dev_routes, false)
@@ -26,6 +29,8 @@ defmodule AlgorithmsForOptimization.Topics do
       # [PLACEHOLDER: one-line card summary]; cards fall back to the description
       summary: nil,
       featured: true,
+      # Foundation ids to read first, shown as "Before you start" (see Topics.prerequisites/1)
+      prerequisites: [],
       number: "01",
       label: "Cosine Similarity",
       description:
@@ -67,6 +72,8 @@ defmodule AlgorithmsForOptimization.Topics do
       # [PLACEHOLDER: one-line card summary]; cards fall back to the description
       summary: nil,
       featured: false,
+      # Foundation ids to read first, shown as "Before you start" (see Topics.prerequisites/1)
+      prerequisites: [],
       number: "02",
       label: "The Leaky Bucket",
       description:
@@ -84,6 +91,8 @@ defmodule AlgorithmsForOptimization.Topics do
       # [PLACEHOLDER: one-line card summary]; cards fall back to the description
       summary: nil,
       featured: false,
+      # Foundation ids to read first, shown as "Before you start" (see Topics.prerequisites/1)
+      prerequisites: [],
       number: "03",
       label: "Markov Chains",
       description:
@@ -101,6 +110,8 @@ defmodule AlgorithmsForOptimization.Topics do
       # [PLACEHOLDER: one-line card summary]; cards fall back to the description
       summary: nil,
       featured: false,
+      # Foundation ids to read first, shown as "Before you start" (see Topics.prerequisites/1)
+      prerequisites: [],
       number: "04",
       label: "PageRank",
       description:
@@ -118,6 +129,8 @@ defmodule AlgorithmsForOptimization.Topics do
       # [PLACEHOLDER: one-line card summary]; cards fall back to the description
       summary: nil,
       featured: false,
+      # Foundation ids to read first, shown as "Before you start" (see Topics.prerequisites/1)
+      prerequisites: [],
       number: "05",
       label: "Metastable Failures",
       description:
@@ -135,6 +148,8 @@ defmodule AlgorithmsForOptimization.Topics do
       # [PLACEHOLDER: one-line card summary]; cards fall back to the description
       summary: nil,
       featured: false,
+      # Foundation ids to read first, shown as "Before you start" (see Topics.prerequisites/1)
+      prerequisites: [],
       number: "06",
       label: "Damped Oscillators",
       description:
@@ -152,6 +167,8 @@ defmodule AlgorithmsForOptimization.Topics do
       # [PLACEHOLDER: one-line card summary]; cards fall back to the description
       summary: nil,
       featured: false,
+      # Foundation ids to read first, shown as "Before you start" (see Topics.prerequisites/1)
+      prerequisites: [],
       number: "07",
       label: "Euler's Method",
       description:
@@ -169,6 +186,8 @@ defmodule AlgorithmsForOptimization.Topics do
       # [PLACEHOLDER: one-line card summary]; cards fall back to the description
       summary: nil,
       featured: false,
+      # Foundation ids to read first, shown as "Before you start" (see Topics.prerequisites/1)
+      prerequisites: [],
       number: "08",
       label: "Optimization Algorithms",
       description:
@@ -199,6 +218,8 @@ defmodule AlgorithmsForOptimization.Topics do
       # [PLACEHOLDER: one-line card summary]; cards fall back to the description
       summary: nil,
       featured: false,
+      # Foundation ids to read first, shown as "Before you start" (see Topics.prerequisites/1)
+      prerequisites: [],
       number: "09",
       label: "Mathematics Appendix",
       description:
@@ -238,6 +259,21 @@ defmodule AlgorithmsForOptimization.Topics do
 
   @doc "Visible topics of one kind (`:series` or `:point_load`), newest first."
   def by_kind(kind), do: recent(length(@topics)) |> Enum.filter(&(&1.kind == kind))
+
+  @doc """
+  The visible foundations a topic lists as prerequisites, in the order listed.
+  Unknown or not-yet-public ids are skipped, so a topic can name a foundation before it ships.
+  """
+  def prerequisites(%{prerequisites: ids}) do
+    Enum.flat_map(ids, fn id ->
+      case Enum.find(@topics, &(&1.id == id)) do
+        %{kind: :foundation} = topic -> if public?(topic.id), do: [topic], else: []
+        _ -> []
+      end
+    end)
+  end
+
+  def prerequisites(_topic), do: []
 
   @doc "Visible topics in a collection, in registry order."
   def in_collection(collection_id), do: Enum.filter(visible(), &(&1.collection == collection_id))

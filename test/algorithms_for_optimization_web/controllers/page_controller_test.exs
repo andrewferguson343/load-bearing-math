@@ -11,7 +11,7 @@ defmodule AlgorithmsForOptimizationWeb.PageControllerTest do
       page = doc(conn, ~p"/")
 
       for id <- ~w(landing-hero landing-featured landing-recent landing-collections
-                   landing-point-loads landing-footer) do
+                   landing-foundations landing-point-loads landing-footer) do
         assert has?(page, "##{id}"), "missing ##{id}"
       end
     end
@@ -45,6 +45,13 @@ defmodule AlgorithmsForOptimizationWeb.PageControllerTest do
       end
 
       refute has?(page, "#collection-point-loads")
+    end
+
+    test "the Foundations strip links to its collection page", %{conn: conn} do
+      page = doc(conn, ~p"/")
+
+      assert has?(page, ~s(#landing-foundations a[href="/collections/foundations"]))
+      refute has?(page, "#collection-foundations")
     end
 
     test "never shows gated topics", %{conn: conn} do

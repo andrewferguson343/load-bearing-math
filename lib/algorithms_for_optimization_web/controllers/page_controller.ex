@@ -8,6 +8,9 @@ defmodule AlgorithmsForOptimizationWeb.PageController do
       featured: Topics.featured(),
       recent: Topics.recent(5),
       collections: Enum.map(Collections.grid(), &collection_card/1),
+      foundations_collection: Collections.fetch!(:foundations),
+      # Registry order is the suggested reading order.
+      foundations: Topics.in_collection(:foundations) |> Enum.take(4),
       point_loads_collection: Collections.fetch!(:point_loads),
       point_loads: Topics.by_kind(:point_load) |> Enum.take(4),
       today: Date.utc_today()

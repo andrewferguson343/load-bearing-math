@@ -114,6 +114,42 @@
       </div>
     </section>
 
+    <%!-- Foundations: short primers on the basics, in suggested reading order --%>
+    <section id="landing-foundations" aria-labelledby="foundations-heading">
+      <.section_heading
+        id="foundations-heading"
+        title={@foundations_collection.name}
+        link={collection_path(@foundations_collection)}
+        link_label="All foundations"
+      >
+        <:tagline>New to this? Start here.</:tagline>
+      </.section_heading>
+      <div class="lbm-point-load-strip">
+        <.link
+          :for={{topic, n} <- Enum.with_index(@foundations, 1)}
+          id={"foundation-#{topic.id}"}
+          navigate={AlgorithmsForOptimization.Topics.entry_path(topic)}
+          class="lbm-point-load-card lbm-foundation-card"
+        >
+          <span class="lbm-foundation-step">{String.pad_leading("#{n}", 2, "0")}</span>
+          <h3 class="lbm-point-load-title">{topic.label}</h3>
+          <p class="lbm-point-load-summary">
+            {AlgorithmsForOptimization.Topics.card_summary(topic)}
+          </p>
+        </.link>
+        <%!-- Until the first foundation is published, show placeholder cards. --%>
+        <div
+          :for={n <- 1..3}
+          :if={@foundations == []}
+          class="lbm-point-load-card lbm-foundation-card lbm-point-load-card--placeholder"
+        >
+          <span class="lbm-foundation-step">0{n}</span>
+          <h3 class="lbm-point-load-title">[PLACEHOLDER: Foundation {n} title]</h3>
+          <p class="lbm-point-load-summary">[PLACEHOLDER: Foundation {n} one-liner]</p>
+        </div>
+      </div>
+    </section>
+
     <%!-- Point Loads --%>
     <section
       id="landing-point-loads"
