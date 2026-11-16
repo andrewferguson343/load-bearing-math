@@ -9,7 +9,7 @@ defmodule AlgorithmsForOptimizationWeb.SitemapController do
   alias AlgorithmsForOptimization.{Collections, Topics}
   alias AlgorithmsForOptimizationWeb.SEO
 
-  @static_pages ["/", "/about", "/services", "/topics", "/sources", "/privacy"]
+  @static_pages ["/", "/about", "/services", "/work-with-me", "/topics", "/sources", "/privacy"]
 
   def robots(conn, _params) do
     body = """
@@ -17,6 +17,7 @@ defmodule AlgorithmsForOptimizationWeb.SitemapController do
     Allow: /
     Disallow: /topic-suggestions
     Disallow: /tutoring-inquiries
+    Disallow: /work-inquiries
     Disallow: /dev/
 
     Sitemap: #{SEO.url("/sitemap.xml")}
