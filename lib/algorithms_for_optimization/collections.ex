@@ -4,11 +4,20 @@ defmodule AlgorithmsForOptimization.Collections do
   `AlgorithmsForOptimization.Topics`). Each one gets a card on the landing page and a
   page at `/collections/<slug>`.
 
-  `:point_loads` is the home of single-page quickies (`kind: :point_load`). It has its own
-  strip on the landing page instead of a card in the collections grid.
+  `:point_loads` holds single-page quickies (`kind: :point_load`) and `:foundations` holds
+  single-page primers (`kind: :foundation`, listed in suggested reading order). Both get their
+  own strip on the landing page instead of a card in the collections grid.
   """
 
   @collections [
+    %{
+      id: :foundations,
+      slug: "foundations",
+      name: "Foundations",
+      description:
+        "Short primers on the basics the other topics build on. Read them in order, or jump to the one you need.",
+      order: 0
+    },
     %{
       id: :systems,
       slug: "systems",
@@ -41,8 +50,8 @@ defmodule AlgorithmsForOptimization.Collections do
 
   def all, do: Enum.sort_by(@collections, & &1.order)
 
-  @doc "Collections shown as cards in the landing page grid (everything but Point Loads)."
-  def grid, do: Enum.reject(all(), &(&1.id == :point_loads))
+  @doc "Collections shown as cards in the landing page grid. Foundations and Point Loads get their own strips."
+  def grid, do: Enum.reject(all(), &(&1.id in [:foundations, :point_loads]))
 
   def fetch!(id),
     do: Enum.find(@collections, &(&1.id == id)) || raise("unknown collection #{inspect(id)}")

@@ -245,8 +245,12 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
     doc: "which lesson within the active topic is current: :overview, :math, etc."
 
   def lesson_toc(assigns) do
+    current = AlgorithmsForOptimization.Topics.fetch!(assigns.active_topic)
+
     assigns =
-      assign(assigns, :current, AlgorithmsForOptimization.Topics.fetch!(assigns.active_topic))
+      assigns
+      |> assign(:current, current)
+      |> assign(:prerequisites, AlgorithmsForOptimization.Topics.prerequisites(current))
 
     ~H"""
     <aside class="lbm-toc" aria-label="Topic navigation">
@@ -260,6 +264,22 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
       >
         <a href="#derivatives" class="lbm-toc-subitem">Derivatives</a>
       </div>
+
+      <nav
+        :if={@prerequisites != []}
+        id="topic-prerequisites"
+        class="lbm-toc-prereqs"
+        aria-label="Before you start"
+      >
+        <p class="lbm-toc-eyebrow">Before you start</p>
+        <.link
+          :for={foundation <- @prerequisites}
+          navigate={AlgorithmsForOptimization.Topics.entry_path(foundation)}
+          class="lbm-toc-item"
+        >
+          {foundation.label}
+        </.link>
+      </nav>
     </aside>
     """
   end

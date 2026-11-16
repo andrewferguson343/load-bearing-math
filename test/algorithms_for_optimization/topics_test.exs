@@ -14,6 +14,32 @@ defmodule AlgorithmsForOptimization.TopicsTest do
     end
   end
 
+  test "foundations live in the Foundations collection, and prerequisites point at foundations" do
+    by_id = Map.new(Topics.all(), &{&1.id, &1})
+
+    for topic <- Topics.all() do
+      assert is_list(topic.prerequisites), "#{topic.id}: prerequisites must be a list"
+
+      if topic.kind == :foundation, do: assert(topic.collection == :foundations, "#{topic.id}")
+
+      for id <- topic.prerequisites do
+        assert %{kind: :foundation} = by_id[id],
+               "#{topic.id} lists #{inspect(id)}, not a foundation"
+      end
+    end
+  end
+
+  test "prerequisites/1 skips unknown ids and topics without the field" do
+    assert Topics.prerequisites(%{prerequisites: [:not_a_topic]}) == []
+    assert Topics.prerequisites(%{}) == []
+  end
+
+  test "Foundations and Point Loads stay out of the landing grid" do
+    grid_ids = Enum.map(Collections.grid(), & &1.id)
+    refute :foundations in grid_ids
+    refute :point_loads in grid_ids
+  end
+
   test "collection slugs are unique" do
     slugs = Enum.map(Collections.all(), & &1.slug)
     assert slugs == Enum.uniq(slugs)
