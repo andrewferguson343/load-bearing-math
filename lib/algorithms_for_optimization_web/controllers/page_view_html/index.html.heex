@@ -1,0 +1,112 @@
+<Layouts.app flash={@flash}>
+  <article id="page-views" class="lbm-stats">
+    <header class="lbm-stats-header">
+      <p class="lbm-eyebrow">Private</p>
+      <h1 class="lbm-stats-title">Page views</h1>
+      <p class="lbm-stats-sub">
+        Last {length(@summary.by_day)} days, UTC. Counts only: no cookies, no visitors, no IPs.
+      </p>
+    </header>
+
+    <section class="lbm-stats-tiles" aria-label="Totals">
+      <div class="lbm-stats-tile">
+        <p class="lbm-stats-tile-label">Total</p>
+        <p id="stats-total" class="lbm-stats-tile-value">{views(@summary.total)}</p>
+      </div>
+      <div class="lbm-stats-tile">
+        <p class="lbm-stats-tile-label">Today</p>
+        <p id="stats-today" class="lbm-stats-tile-value">{views(@today)}</p>
+      </div>
+      <div class="lbm-stats-tile">
+        <p class="lbm-stats-tile-label">Daily average</p>
+        <p id="stats-average" class="lbm-stats-tile-value">{views(@average)}</p>
+      </div>
+      <div class="lbm-stats-tile">
+        <p class="lbm-stats-tile-label">Top page</p>
+        <p id="stats-top-page" class="lbm-stats-tile-value lbm-stats-tile-value--text">
+          {@top_page || "None yet"}
+        </p>
+      </div>
+    </section>
+
+    <section class="lbm-stats-card" aria-labelledby="stats-daily-heading">
+      <div class="lbm-stats-card-head">
+        <h2 id="stats-daily-heading" class="lbm-stats-card-title">Views per day</h2>
+        <p class="lbm-stats-card-note">Peak {views(@peak)}</p>
+      </div>
+
+      <div
+        id="stats-daily-chart"
+        class="lbm-stats-chart"
+        role="img"
+        aria-label={"Views per day over the last #{length(@summary.by_day)} days, peaking at #{@peak}."}
+      >
+        <div :for={{day, count} <- @summary.by_day} class="lbm-stats-col">
+          <div
+            class={["lbm-stats-bar", count == 0 && "lbm-stats-bar--empty"]}
+            style={"height: #{max(pct(count, @peak), 0)}%"}
+          >
+          </div>
+          <span class="lbm-stats-tip" role="tooltip">
+            <strong>{views(count)}</strong> {plural(count, "view")}<br />{short_date(day)}
+          </span>
+        </div>
+      </div>
+      <div class="lbm-stats-axis" aria-hidden="true">
+        <span>{short_date(elem(List.first(@summary.by_day), 0))}</span>
+        <span>{short_date(elem(List.last(@summary.by_day), 0))}</span>
+      </div>
+
+      <details class="lbm-stats-table-toggle">
+        <summary>Show as a table</summary>
+        <table class="lbm-stats-table">
+          <thead>
+            <tr>
+              <th scope="col">Day</th><th scope="col">Views</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr :for={{day, count} <- Enum.reverse(@summary.by_day)}>
+              <td>{Date.to_iso8601(day)}</td>
+              <td>{views(count)}</td>
+            </tr>
+          </tbody>
+        </table>
+      </details>
+    </section>
+
+    <div class="lbm-stats-pair">
+      <section id="top-pages" class="lbm-stats-card" aria-labelledby="top-pages-heading">
+        <h2 id="top-pages-heading" class="lbm-stats-card-title">Top pages</h2>
+        <p :if={@summary.top_pages == []} class="lbm-stats-empty">Nothing counted yet.</p>
+        <ol :if={@summary.top_pages != []} class="lbm-stats-ranks">
+          <li :for={{path, count} <- @summary.top_pages} class="lbm-stats-rank">
+            <span
+              class="lbm-stats-rank-bar"
+              style={"width: #{pct(count, max_views(@summary.top_pages))}%"}
+            ></span>
+            <a href={path} class="lbm-stats-rank-label">{path}</a>
+            <span class="lbm-stats-rank-value">{views(count)}</span>
+          </li>
+        </ol>
+      </section>
+
+      <section id="top-referrers" class="lbm-stats-card" aria-labelledby="top-referrers-heading">
+        <h2 id="top-referrers-heading" class="lbm-stats-card-title">Top referrers</h2>
+        <p :if={@summary.top_referrers == []} class="lbm-stats-empty">Nothing counted yet.</p>
+        <ol :if={@summary.top_referrers != []} class="lbm-stats-ranks">
+          <li :for={{host, count} <- @summary.top_referrers} class="lbm-stats-rank">
+            <span
+              class="lbm-stats-rank-bar"
+              style={"width: #{pct(count, max_views(@summary.top_referrers))}%"}
+            ></span>
+            <span class={["lbm-stats-rank-label", host == "" && "lbm-stats-rank-label--muted"]}>
+              {referrer_label(host)}
+            </span>
+            <span class="lbm-stats-rank-value">{views(count)}</span>
+          </li>
+        </ol>
+      </section>
+    </div>
+  </article>
+</Layouts.app>

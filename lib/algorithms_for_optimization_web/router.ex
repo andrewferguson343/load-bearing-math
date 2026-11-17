@@ -41,6 +41,15 @@ defmodule AlgorithmsForOptimizationWeb.Router do
     get "/topic-suggestions", TopicSuggestionController, :index
     get "/tutoring-inquiries", TutoringController, :index
     get "/work-inquiries", WorkController, :index
+    get "/page-views", PageViewController, :index
+  end
+
+  # Page view beacons from assets/js/page_views.js. Outside :browser on purpose: no session
+  # or cookies are needed, and the beacon is a same-origin JSON post.
+  scope "/api", AlgorithmsForOptimizationWeb do
+    pipe_through :api
+
+    post "/read", PageViewController, :create
   end
 
   scope "/", AlgorithmsForOptimizationWeb do

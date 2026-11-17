@@ -23,6 +23,7 @@ import "phoenix_html"
 import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
 import {hooks as colocatedHooks} from "phoenix-colocated/algorithms_for_optimization"
+import {trackPageViews} from "./page_views"
 import topbar from "../vendor/topbar"
 
 // KaTeX (~275 KB) is only fetched when a page actually contains math delimiters.
@@ -124,6 +125,8 @@ liveSocket.connect()
 // >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
+
+trackPageViews()
 
 // The lines below enable quality of life phoenix_live_reload
 // development features:
