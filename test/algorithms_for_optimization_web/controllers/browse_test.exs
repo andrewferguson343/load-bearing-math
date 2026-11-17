@@ -15,21 +15,27 @@ defmodule AlgorithmsForOptimizationWeb.BrowseTest do
   describe "list numbering" do
     # The Leaky Bucket is registry number "02" but the only public topic in its collection,
     # so it must show as 01 wherever it's listed: numbers count within the list, not the registry.
+    # Those checks follow the `public_topics` gate.
     test "each collection on the Topics page counts from 01", %{conn: conn} do
       page = doc(conn, ~p"/topics")
 
-      assert numbers(page, "#topics-reliability-and-control") == ["01"]
+      if Topics.public?(:leaky_bucket) do
+        assert numbers(page, "#topics-reliability-and-control") == ["01"]
+      end
+
       assert numbers(page, "#topics-search-and-ranking") == ["01"]
     end
 
-    test "a collection page counts from 01", %{conn: conn} do
-      page = doc(conn, ~p"/collections/reliability-and-control")
-      assert numbers(page, "#collection-topics") == ["01"]
-    end
+    if Topics.public?(:leaky_bucket) do
+      test "a collection page counts from 01", %{conn: conn} do
+        page = doc(conn, ~p"/collections/reliability-and-control")
+        assert numbers(page, "#collection-topics") == ["01"]
+      end
 
-    test "a tag page counts from 01", %{conn: conn} do
-      page = doc(conn, ~p"/tags/differential-equations")
-      assert numbers(page, "#tag-topics") == ["01"]
+      test "a tag page counts from 01", %{conn: conn} do
+        page = doc(conn, ~p"/tags/differential-equations")
+        assert numbers(page, "#tag-topics") == ["01"]
+      end
     end
   end
 
@@ -40,9 +46,12 @@ defmodule AlgorithmsForOptimizationWeb.BrowseTest do
 
       assert has?(page, ~s(#browse-by-type a[href="/topics"][aria-current="page"]))
       assert has?(page, ~s|#browse-by-type a[href="/articles"]:not([aria-current])|)
-      # No foundation or Point Load is public in the test build, so those segments stay out.
+      # No foundation is public in the test build, so that segment stays out. Point Loads
+      # get a segment once one is public.
       refute has?(page, ~s(#browse-by-type a[href="/collections/foundations"]))
-      refute has?(page, ~s(#browse-by-type a[href="/collections/point-loads"]))
+
+      assert has?(page, ~s(#browse-by-type a[href="/collections/point-loads"])) ==
+               (Topics.by_kind(:point_load) != [])
     end
 
     test "the Articles page shows the same switcher with Articles active", %{conn: conn} do
@@ -75,7 +84,10 @@ defmodule AlgorithmsForOptimizationWeb.BrowseTest do
 
       assert has?(page, "#articles-page")
       assert has?(page, "#articles-search-and-ranking #topic-cosine_similarity")
-      assert has?(page, "#articles-reliability-and-control #topic-leaky_bucket")
+
+      assert has?(page, "#articles-reliability-and-control #topic-leaky_bucket") ==
+               Topics.public?(:leaky_bucket)
+
       refute has?(page, "#topic-pagerank")
 
       for topic <- Topics.all(), topic.kind != :series do

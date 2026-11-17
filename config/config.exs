@@ -17,7 +17,7 @@ config :algorithms_for_optimization,
 config :algorithms_for_optimization,
   public_topics: [
     :cosine_similarity,
-    :leaky_bucket
+    :littles_law
   ]
 
 # Configure the endpoint

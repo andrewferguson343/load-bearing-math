@@ -50,9 +50,9 @@ defmodule AlgorithmsForOptimizationWeb.PageControllerTest do
          %{conn: conn} do
       page = doc(conn, ~p"/")
 
-      # No foundation or Point Load is public in the test build yet.
+      # No foundation is public in the test build yet; Point Loads show once one is public.
       refute has?(page, "#landing-foundations")
-      refute has?(page, "#landing-point-loads")
+      assert has?(page, "#landing-point-loads") == (Topics.by_kind(:point_load) != [])
       # The dev-only reminders only render when dev_routes is on (it's off in tests).
       refute has?(page, "#dev-note-foundations")
       refute has?(page, "#collection-foundations")
@@ -140,7 +140,10 @@ defmodule AlgorithmsForOptimizationWeb.PageControllerTest do
       page = doc(conn, ~p"/topics")
 
       assert has?(page, "#topics-search-and-ranking #topic-cosine_similarity")
-      assert has?(page, "#topics-reliability-and-control #topic-leaky_bucket")
+
+      assert has?(page, "#topics-reliability-and-control #topic-leaky_bucket") ==
+               Topics.public?(:leaky_bucket)
+
       refute has?(page, "#topic-pagerank")
     end
   end
