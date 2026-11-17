@@ -398,7 +398,7 @@ defmodule AlgorithmsForOptimization.Topics do
     # Point Loads: single-page quickies, one equation each.
     %{
       id: :littles_law,
-      tags: [:probability],
+      tags: [:queueing_theory],
       collection: :point_loads,
       kind: :point_load,
       # Set to the date it goes public: orders "Recently posted" and drives the "New" badge (not shown).

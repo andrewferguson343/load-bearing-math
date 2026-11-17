@@ -261,7 +261,13 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
     <aside class="lbm-toc" aria-label="Topic navigation">
       <p class="lbm-toc-eyebrow">{@current.label}</p>
       <.type_badge kind={@current.kind} class="lbm-toc-type" />
-      <.toc_lesson :for={lesson <- @current.lessons} lesson={lesson} active_lesson={@active_lesson} />
+      <%!-- A single-page topic has nothing to navigate between, so it skips the lesson list. --%>
+      <.toc_lesson
+        :for={lesson <- @current.lessons}
+        :if={length(@current.lessons) > 1}
+        lesson={lesson}
+        active_lesson={@active_lesson}
+      />
       <div
         :if={@active_topic == :optimization and @active_lesson == :appendix}
         class="lbm-toc-sublist"
