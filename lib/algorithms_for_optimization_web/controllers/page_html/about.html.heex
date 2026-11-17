@@ -2,43 +2,45 @@
   <article id="about-page" class="lbm-about">
     <header class="lbm-hero lbm-about-hero">
       <p class="lbm-eyebrow">About</p>
-      <h1 class="lbm-hero-title">Making math less intimidating</h1>
+      <h1 class="lbm-hero-title">The math that holds things up</h1>
       <p class="lbm-hero-lede">
         Load Bearing Math is a collection of short, hands-on walkthroughs of the math behind the
-        systems we use every day: search, rate limiters, autoscalers, optimization, and more. The goal
-        is simple: demystify math.
+        systems we use every day: search, rate limiters, autoscalers, capacity planning, and more.
+        Every piece is worked out by an engineer who uses this math on the job and has spent years
+        teaching it.
       </p>
     </header>
 
     <section id="about-mission" class="lbm-about-section">
       <p>
-        Most math aversion isn't about ability. It's the overwhelming feeling of looking at a problem
-        all at once. That feeling fades as the problem gets broken into smaller pieces, and once things
-        start clicking, it's one of the most enjoyable feelings there is. It took until calculus for all
-        of it to click for me, so if it hasn't clicked for you yet, you're in good company.
-      </p>
-      <p>
         So much of computer science, and of the technology around us, is built on mathematics. As
         software matured, a lot of that math got abstracted away, and the same thing is happening again
-        with AI. It's worth remembering where these ideas come from, however technical you are.
+        with AI. That's fine until something breaks. Then the math is the only thing that tells you why.
+      </p>
+      <p>
+        It's also more approachable than its reputation. Most math aversion isn't about ability. It's
+        the overwhelming feeling of looking at a problem all at once. That feeling fades as the problem
+        gets broken into smaller pieces, and once things start clicking, it's one of the most enjoyable
+        feelings there is. It took until calculus for all of it to click for me, so if it hasn't clicked
+        for you yet, you're in good company.
       </p>
     </section>
 
     <section id="about-who" class="lbm-about-section" aria-labelledby="about-who-heading">
       <h2 id="about-who-heading">Who's behind it</h2>
       <p>
-        I'm Andrew Ferguson. I have a B.S. in Computer Science with a minor in Mathematics, and since
-        graduating I've worked across a wide range of technical fields, including aerospace, space
-        systems, cybersecurity, and large-scale systems integration. Nearly all of it runs on the kind of
-        math you'll find on this site.
+        I'm Andrew Ferguson, a software engineer with a focus on systems. I have a B.S. in Computer
+        Science with a minor in Mathematics, and since graduating I've worked in aerospace, space
+        systems, and large-scale systems integration. Nearly all of it runs on the kind of math you'll
+        find on this site.
       </p>
       <p>
-        Teaching has run alongside the engineering. I tutored math and science in college, and today I
-        mentor through the SkillBridge program, helping service members sharpen their engineering
-        skills as they move into industry.
+        Teaching has always run alongside the engineering. Understanding something well enough to
+        explain it is half the fun, and I'm glad to pass along what I've learned.
       </p>
       <p>
-        I also take on select consulting, advisory, and full-time engineering work.
+        I take on select consulting, advisory, and full-time engineering work, and I still teach
+        one-on-one.
         <.link navigate={~p"/work-with-me"} id="about-work-link">
           Work with me <span aria-hidden="true">&rarr;</span>
         </.link>
@@ -50,16 +52,20 @@
       class="lbm-about-section"
       aria-labelledby="about-teaching-heading"
     >
-      <h2 id="about-teaching-heading">How I teach</h2>
+      <h2 id="about-teaching-heading">How I work</h2>
       <p>
-        We work real problems, and as often as possible we look at where the math actually gets used.
-        "You'll never use this" is one of the most common things said about math, and it's rarely
-        true: cosine similarity is how search engines decide what counts as similar, and the leaky
-        bucket is how servers keep from being overwhelmed.
+        Whether it's a system or a student, the approach is the same: break the problem into pieces
+        small enough to reason about, work them by hand, and check the answer against reality. "You'll
+        never use this" is one of the most common things said about math, and it's rarely true:
+        <.link navigate={~p"/cosine-similarity"}>cosine similarity</.link>
+        is how search engines decide what counts as similar, and
+        <.link navigate={~p"/littles-law"}>Little's Law</.link>
+        is how you size a server's worker pool.
       </p>
       <p>
-        Students work through the problems themselves, with me as a guide, and we come back to the ideas
-        later to reinforce them so they stick.
+        With students, that means they work through the problems themselves, with me as a guide, and we
+        come back to the ideas later so they stick. With systems, it means numbers before opinions:
+        measure it, model it, then change it.
       </p>
     </section>
 
@@ -74,8 +80,8 @@
 
     <section id="about-personal" class="lbm-about-section">
       <p class="lbm-about-personal">
-        Outside of math, I'm based in New Hampshire and have lived all over New England. I like skiing, gaming, reading, and spending time with my dog, cat, and
-        newborn.
+        Outside of math, I'm based in New Hampshire and have lived all over New England. I like
+        skiing, gaming, reading, and spending time with my dog, cat, and newborn.
       </p>
     </section>
 
@@ -83,7 +89,7 @@
       <.button navigate={~p"/topics"} variant="primary" id="about-topics">
         Browse all topics <span aria-hidden="true">&rarr;</span>
       </.button>
-      <.button navigate={~p"/tutoring"} id="about-services">Tutoring services</.button>
+      <.button navigate={~p"/services"} id="about-services">Work with me</.button>
     </div>
   </article>
 </Layouts.app>

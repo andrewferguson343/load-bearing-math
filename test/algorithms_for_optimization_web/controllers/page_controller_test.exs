@@ -114,7 +114,7 @@ defmodule AlgorithmsForOptimizationWeb.PageControllerTest do
     end
 
     assert has?(page, ~s(#about-topics[href="/topics"]))
-    assert has?(page, ~s(#about-services[href="/tutoring"]))
+    assert has?(page, ~s(#about-services[href="/services"]))
   end
 
   describe "privacy page" do
