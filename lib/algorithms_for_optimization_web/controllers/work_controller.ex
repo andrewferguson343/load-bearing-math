@@ -71,7 +71,7 @@ defmodule AlgorithmsForOptimizationWeb.WorkController do
       form: Phoenix.Component.to_form(changeset, as: :work),
       page_title: "Work with me",
       page_description:
-        "Consulting, engineering advice and select full-time roles in aerospace, space systems, cybersecurity, and large-scale systems integration."
+        "Consulting, engineering advice and select full-time roles in aerospace, space systems, systems engineering, and large-scale systems integration."
     )
   end
 
