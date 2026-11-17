@@ -28,6 +28,14 @@ defmodule AlgorithmsForOptimizationWeb.PageController do
     )
   end
 
+  def services(conn, _params) do
+    render(conn, :services,
+      page_title: "Services",
+      page_description:
+        "Engineering engagements on hard systems problems, plus one-on-one math and computer science tutoring."
+    )
+  end
+
   def privacy(conn, _params) do
     render(conn, :privacy,
       contact_email: Application.fetch_env!(:algorithms_for_optimization, :contact_email),

@@ -1,6 +1,6 @@
-defmodule AlgorithmsForOptimizationWeb.ServicesController do
+defmodule AlgorithmsForOptimizationWeb.TutoringController do
   @moduledoc """
-  The Services page (tutoring offerings + inquiry form), and the private inquiry list.
+  The Tutoring page (offerings + inquiry form, linked from the Services hub), and the private inquiry list.
   The form posts here as a plain HTML form so it works without JavaScript.
   """
   use AlgorithmsForOptimizationWeb, :controller
@@ -39,7 +39,7 @@ defmodule AlgorithmsForOptimizationWeb.ServicesController do
           :error,
           "That's a lot of messages at once. Give it a few minutes and try again."
         )
-        |> redirect(to: ~p"/services")
+        |> redirect(to: ~p"/tutoring")
 
       %Ecto.Changeset{} = changeset ->
         conn
@@ -84,6 +84,6 @@ defmodule AlgorithmsForOptimizationWeb.ServicesController do
   defp thanks(conn) do
     conn
     |> put_flash(:info, "Thanks, your message is in. You'll hear back soon.")
-    |> redirect(to: ~p"/services")
+    |> redirect(to: ~p"/tutoring")
   end
 end

@@ -6,7 +6,7 @@ defmodule AlgorithmsForOptimizationWeb.TopicEndNoteTest do
   # one only. The Leaky Bucket is a single public page, so it gets the note too.
   test "shows the tutoring note on a topic's last page only", %{conn: conn} do
     {:ok, last, _html} = live(conn, ~p"/cosine-similarity-realistic-example")
-    assert has_element?(last, ~s(#topic-end-note a[href="/services"]))
+    assert has_element?(last, ~s(#topic-end-note a[href="/tutoring"]))
 
     for path <- [~p"/cosine-similarity", ~p"/cosine-similarity-math"] do
       {:ok, view, _html} = live(conn, path)

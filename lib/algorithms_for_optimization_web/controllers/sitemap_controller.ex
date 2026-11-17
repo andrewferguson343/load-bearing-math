@@ -13,6 +13,7 @@ defmodule AlgorithmsForOptimizationWeb.SitemapController do
     "/",
     "/about",
     "/services",
+    "/tutoring",
     "/work-with-me",
     "/topics",
     "/articles",

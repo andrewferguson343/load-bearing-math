@@ -1,4 +1,4 @@
-defmodule AlgorithmsForOptimizationWeb.ServicesControllerTest do
+defmodule AlgorithmsForOptimizationWeb.TutoringControllerTest do
   use AlgorithmsForOptimizationWeb.ConnCase, async: true
 
   alias AlgorithmsForOptimization.{Repo, Services, TutoringInquiry}
@@ -18,12 +18,12 @@ defmodule AlgorithmsForOptimizationWeb.ServicesControllerTest do
 
   defp doc(html), do: LazyHTML.from_document(html)
   defp has?(doc, selector), do: doc |> LazyHTML.query(selector) |> Enum.any?()
-  defp inquire(conn, params), do: post(conn, ~p"/services/inquiries", params)
+  defp inquire(conn, params), do: post(conn, ~p"/tutoring/inquiries", params)
   defp inquiry_count, do: Repo.aggregate(TutoringInquiry, :count)
 
-  describe "GET /services" do
+  describe "GET /tutoring" do
     test "shows every offering and the inquiry form", %{conn: conn} do
-      page = conn |> get(~p"/services") |> html_response(200) |> doc()
+      page = conn |> get(~p"/tutoring") |> html_response(200) |> doc()
 
       assert has?(page, "#services-hero")
 
@@ -36,15 +36,27 @@ defmodule AlgorithmsForOptimizationWeb.ServicesControllerTest do
                  offering.best_for
       end
 
-      assert has?(page, ~s(#inquiry-form[action="/services/inquiries#inquiry"]))
+      assert has?(page, ~s(#inquiry-form[action="/tutoring/inquiries#inquiry"]))
       assert has?(page, "#inquiry-form select[name='inquiry[offering]']")
     end
 
     test "links to published lessons as proof, never gated ones", %{conn: conn} do
-      page = conn |> get(~p"/services") |> html_response(200) |> doc()
+      page = conn |> get(~p"/tutoring") |> html_response(200) |> doc()
 
       assert has?(page, "#proof-cosine_similarity")
       refute has?(page, "#proof-pagerank")
+    end
+  end
+
+  describe "GET /services" do
+    test "is a hub that leads with engineering, then tutoring", %{conn: conn} do
+      page = conn |> get(~p"/services") |> html_response(200) |> doc()
+
+      assert has?(page, ~s(#services-engineering[href="/work-with-me"]))
+      assert has?(page, ~s(#services-tutoring[href="/tutoring"]))
+
+      ids = page |> LazyHTML.query("#services-paths > a") |> LazyHTML.attribute("id")
+      assert ids == ["services-engineering", "services-tutoring"]
     end
 
     test "is in the header nav", %{conn: conn} do
@@ -53,11 +65,11 @@ defmodule AlgorithmsForOptimizationWeb.ServicesControllerTest do
     end
   end
 
-  describe "POST /services/inquiries" do
+  describe "POST /tutoring/inquiries" do
     test "saves a valid inquiry and redirects back", %{conn: conn} do
       conn = inquire(conn, %{"inquiry" => @valid})
 
-      assert redirected_to(conn) == ~p"/services"
+      assert redirected_to(conn) == ~p"/tutoring"
       assert Phoenix.Flash.get(conn.assigns.flash, :info)
 
       assert [%TutoringInquiry{name: "Ada Lovelace", offering: "tier_two"}] =
@@ -91,14 +103,14 @@ defmodule AlgorithmsForOptimizationWeb.ServicesControllerTest do
       for _ <- 1..(limit + 2), do: inquire(conn, %{"inquiry" => %{@valid | "email" => "typo"}})
       conn = inquire(conn, %{"inquiry" => @valid})
 
-      assert redirected_to(conn) == ~p"/services"
+      assert redirected_to(conn) == ~p"/tutoring"
       assert inquiry_count() == 1
     end
 
     test "silently drops submissions that fill in the honeypot", %{conn: conn} do
       conn = inquire(conn, %{"inquiry" => @valid, "company_website" => "http://spam.example"})
 
-      assert redirected_to(conn) == ~p"/services"
+      assert redirected_to(conn) == ~p"/tutoring"
       assert inquiry_count() == 0
     end
 
@@ -108,7 +120,7 @@ defmodule AlgorithmsForOptimizationWeb.ServicesControllerTest do
       for _ <- 1..limit, do: inquire(conn, %{"inquiry" => @valid})
       conn = inquire(conn, %{"inquiry" => @valid})
 
-      assert redirected_to(conn) == ~p"/services"
+      assert redirected_to(conn) == ~p"/tutoring"
       assert Phoenix.Flash.get(conn.assigns.flash, :error) =~ "few minutes"
       assert inquiry_count() == limit
     end

@@ -2,7 +2,7 @@
   <div class="lbm-landing">
     <%!-- Hero --%>
     <section id="services-hero" class="lbm-hero lbm-landing-hero" aria-labelledby="services-title">
-      <p class="lbm-eyebrow">Services</p>
+      <p class="lbm-eyebrow">Tutoring</p>
       <h1 id="services-title" class="lbm-hero-title">
         Mathematics and computer science, taught properly.
       </h1>
@@ -89,7 +89,7 @@
       <.form
         for={@form}
         id="inquiry-form"
-        action={~p"/services/inquiries" <> "#inquiry"}
+        action={~p"/tutoring/inquiries" <> "#inquiry"}
         method="post"
         class="lbm-inquiry-form"
       >
@@ -118,7 +118,7 @@
           <input
             type="text"
             id="inquiry-company-website"
-            name={AlgorithmsForOptimizationWeb.ServicesController.honeypot_field()}
+            name={AlgorithmsForOptimizationWeb.TutoringController.honeypot_field()}
             value=""
             tabindex="-1"
             autocomplete="off"

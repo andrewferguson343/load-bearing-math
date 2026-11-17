@@ -39,7 +39,7 @@ defmodule AlgorithmsForOptimizationWeb.Router do
     pipe_through [:browser, :admin]
 
     get "/topic-suggestions", TopicSuggestionController, :index
-    get "/tutoring-inquiries", ServicesController, :index
+    get "/tutoring-inquiries", TutoringController, :index
     get "/work-inquiries", WorkController, :index
   end
 
@@ -55,8 +55,9 @@ defmodule AlgorithmsForOptimizationWeb.Router do
     get "/tags/:slug", PageController, :tag
     get "/work-with-me", WorkController, :show
     post "/work-with-me", WorkController, :create
-    get "/services", ServicesController, :show
-    post "/services/inquiries", ServicesController, :create
+    get "/services", PageController, :services
+    get "/tutoring", TutoringController, :show
+    post "/tutoring/inquiries", TutoringController, :create
     post "/topic-suggestions", TopicSuggestionController, :create
 
     live "/sources", SourcesLive

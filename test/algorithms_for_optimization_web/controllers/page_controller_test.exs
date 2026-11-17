@@ -79,10 +79,19 @@ defmodule AlgorithmsForOptimizationWeb.PageControllerTest do
     end
 
     test "every page has the site footer with its links", %{conn: conn} do
-      for path <- [~p"/", ~p"/topics", ~p"/about", ~p"/services", ~p"/work-with-me", ~p"/privacy"] do
+      for path <- [
+            ~p"/",
+            ~p"/topics",
+            ~p"/about",
+            ~p"/services",
+            ~p"/tutoring",
+            ~p"/work-with-me",
+            ~p"/privacy"
+          ] do
         page = doc(conn, path)
 
-        for id <- ~w(footer-about footer-services footer-work footer-topics footer-sources
+        for id <-
+              ~w(footer-about footer-services footer-work footer-tutoring footer-topics footer-sources
                      footer-privacy footer-suggest) do
           assert has?(page, "#site-footer ##{id}"), "#{path} is missing ##{id}"
         end
@@ -105,7 +114,7 @@ defmodule AlgorithmsForOptimizationWeb.PageControllerTest do
     end
 
     assert has?(page, ~s(#about-topics[href="/topics"]))
-    assert has?(page, ~s(#about-services[href="/services"]))
+    assert has?(page, ~s(#about-services[href="/tutoring"]))
   end
 
   describe "privacy page" do
@@ -122,7 +131,7 @@ defmodule AlgorithmsForOptimizationWeb.PageControllerTest do
 
     test "is linked from the landing footer and the inquiry form", %{conn: conn} do
       assert has?(doc(conn, ~p"/"), ~s(#footer-privacy[href="/privacy"]))
-      assert has?(doc(conn, ~p"/services"), ~s(#inquiry-privacy-link[href="/privacy"]))
+      assert has?(doc(conn, ~p"/tutoring"), ~s(#inquiry-privacy-link[href="/privacy"]))
     end
   end
 
