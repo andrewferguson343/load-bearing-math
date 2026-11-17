@@ -28,6 +28,8 @@ defmodule AlgorithmsForOptimizationWeb.SitemapController do
     Disallow: /topic-suggestions
     Disallow: /tutoring-inquiries
     Disallow: /work-inquiries
+    Disallow: /page-views
+    Disallow: /api/
     Disallow: /dev/
 
     Sitemap: #{SEO.url("/sitemap.xml")}

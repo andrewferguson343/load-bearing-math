@@ -93,6 +93,12 @@ config :algorithms_for_optimization, :inquiry_rate_limit,
   limit: 3,
   window_ms: :timer.minutes(10)
 
+# Throttle page view beacons per visitor IP. A real reader sends one per page, so this only
+# stops someone from inflating the counts.
+config :algorithms_for_optimization, :page_view_rate_limit,
+  limit: 30,
+  window_ms: :timer.minutes(1)
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
