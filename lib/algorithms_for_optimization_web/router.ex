@@ -106,10 +106,14 @@ defmodule AlgorithmsForOptimizationWeb.Router do
       live "/eulers-method", EulersMethodLive
     end
 
-    # Foundations: single-page primers, one live_session each so TopicAuth gates them.
+    # Foundations: short primers, one live_session each so TopicAuth gates them.
     live_session :derivatives,
       on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :derivatives} do
       live "/derivatives", DerivativesLive
+      live "/derivatives-slope", DerivativesSlopeLive
+      live "/derivatives-chain-rule", DerivativesChainRuleLive
+      live "/derivatives-second-derivatives", DerivativesSecondDerivativesLive
+      live "/derivatives-optimal-value", DerivativesOptimalValueLive
     end
 
     # Point Loads: single-page quickies, one equation each.

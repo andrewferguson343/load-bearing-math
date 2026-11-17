@@ -5,7 +5,7 @@ defmodule AlgorithmsForOptimization.Collections do
   page at `/collections/<slug>`.
 
   `:point_loads` holds single-page quickies (`kind: :point_load`) and `:foundations` holds
-  single-page primers (`kind: :foundation`, listed in suggested reading order). Both get their
+  short primers (`kind: :foundation`, listed in suggested reading order). Both get their
   own strip on the landing page instead of a card in the collections grid.
   """
 
