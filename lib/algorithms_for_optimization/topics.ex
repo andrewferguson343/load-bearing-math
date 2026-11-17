@@ -77,7 +77,7 @@ defmodule AlgorithmsForOptimization.Topics do
       summary: nil,
       featured: false,
       # Foundation ids to read first, shown as "Before you start" (see Topics.prerequisites/1)
-      prerequisites: [],
+      prerequisites: [:derivatives],
       number: "02",
       label: "The Leaky Bucket",
       description:
@@ -137,13 +137,49 @@ defmodule AlgorithmsForOptimization.Topics do
       summary: nil,
       featured: false,
       # Foundation ids to read first, shown as "Before you start" (see Topics.prerequisites/1)
-      prerequisites: [],
+      prerequisites: [:derivatives, :eigenvalues],
       number: "05",
       label: "Metastable Failures",
       description:
         "Some outages don't need the original trigger anymore to keep going: the system found a second, self-sustaining equilibrium and settled in. Phase planes make that visible: plot the right two variables and you can see the stable state you want, the failure state you're stuck in, and the wall between them you have to clear to get back.",
       lessons: [
-        %{key: :overview, number: "00", label: "Overview", path: "/metastable-failures"}
+        %{key: :overview, number: "00", label: "Overview", path: "/metastable-failures"},
+        %{
+          key: :anatomy,
+          number: "01",
+          label: "Anatomy of a Metastable Failure",
+          path: "/metastable-failures-anatomy"
+        },
+        %{
+          key: :queues,
+          number: "02",
+          label: "A Queue Is a Differential Equation",
+          path: "/metastable-failures-queues"
+        },
+        %{
+          key: :feedback,
+          number: "03",
+          label: "The Feedback Loop",
+          path: "/metastable-failures-feedback"
+        },
+        %{
+          key: :phase_plane,
+          number: "04",
+          label: "The Phase Plane",
+          path: "/metastable-failures-phase-plane"
+        },
+        %{
+          key: :basins,
+          number: "05",
+          label: "How Close to the Edge",
+          path: "/metastable-failures-basins"
+        },
+        %{
+          key: :recovery,
+          number: "06",
+          label: "Getting Out and Staying Out",
+          path: "/metastable-failures-recovery"
+        }
       ]
     },
     %{
@@ -157,13 +193,37 @@ defmodule AlgorithmsForOptimization.Topics do
       summary: nil,
       featured: false,
       # Foundation ids to read first, shown as "Before you start" (see Topics.prerequisites/1)
-      prerequisites: [],
+      prerequisites: [:derivatives, :eigenvalues],
       number: "06",
       label: "Damped Oscillators",
       description:
         "An autoscaler that adds pods, overshoots, scales back down, overshoots again, and settles into a slow wobble is running the exact same equation as a spring with too little friction. Get the damping term wrong and a control loop doesn't converge, it oscillates, sometimes forever.",
       lessons: [
-        %{key: :overview, number: "00", label: "Overview", path: "/damped-oscillators"}
+        %{key: :overview, number: "00", label: "Overview", path: "/damped-oscillators"},
+        %{
+          key: :model,
+          number: "01",
+          label: "The Spring and the Autoscaler",
+          path: "/damped-oscillators-model"
+        },
+        %{
+          key: :three_cases,
+          number: "02",
+          label: "Three Kinds of Damping",
+          path: "/damped-oscillators-three-cases"
+        },
+        %{
+          key: :phase_plane,
+          number: "03",
+          label: "The Phase Plane",
+          path: "/damped-oscillators-phase-plane"
+        },
+        %{
+          key: :tuning,
+          number: "04",
+          label: "Tuning the Loop",
+          path: "/damped-oscillators-tuning"
+        }
       ]
     },
     %{
@@ -177,13 +237,37 @@ defmodule AlgorithmsForOptimization.Topics do
       summary: nil,
       featured: false,
       # Foundation ids to read first, shown as "Before you start" (see Topics.prerequisites/1)
-      prerequisites: [],
+      prerequisites: [:derivatives],
       number: "07",
       label: "Euler's Method",
       description:
         "Every game engine updates physics the same crude way: take the current velocity, nudge position forward by a tiny time step, repeat. That's Euler's method, and it's an approximation, not the real answer. Make the time step too large and the error compounds until your character is phasing through the floor or flying off into the void.",
       lessons: [
-        %{key: :overview, number: "00", label: "Overview", path: "/eulers-method"}
+        %{key: :overview, number: "00", label: "Overview", path: "/eulers-method"},
+        %{
+          key: :stepping,
+          number: "01",
+          label: "Stepping Forward",
+          path: "/eulers-method-stepping"
+        },
+        %{
+          key: :error,
+          number: "02",
+          label: "Where the Error Comes From",
+          path: "/eulers-method-error"
+        },
+        %{
+          key: :stability,
+          number: "03",
+          label: "When It Blows Up",
+          path: "/eulers-method-stability"
+        },
+        %{
+          key: :better_steppers,
+          number: "04",
+          label: "Better Steppers",
+          path: "/eulers-method-better-steppers"
+        }
       ]
     },
     %{
@@ -258,6 +342,38 @@ defmodule AlgorithmsForOptimization.Topics do
         "A derivative is the slope of a curve at a single point: how fast something is changing right now. It's the one idea under gradient descent, control loops, and every \"rate of\" number you've ever put on a dashboard.",
       lessons: [
         %{key: :overview, number: "00", label: "Overview", path: "/derivatives"}
+      ]
+    },
+    %{
+      id: :eigenvalues,
+      tags: [:linear_algebra],
+      collection: :foundations,
+      kind: :foundation,
+      # Set to the date it goes public: orders "Recently posted" and drives the "New" badge (not shown).
+      published_on: nil,
+      # Optional one-line card summary; cards fall back to the description
+      # TODO(andrew) card summary.
+      summary: nil,
+      featured: false,
+      prerequisites: [],
+      number: "12",
+      label: "Eigenvalues and Eigenvectors",
+      # TODO(andrew) Placeholder description: replace before this foundation goes public.
+      description: "Placeholder: TODO(andrew) write the Eigenvalues foundation description.",
+      lessons: [
+        %{key: :overview, number: "00", label: "Overview", path: "/eigenvalues"},
+        %{
+          key: :basics,
+          number: "01",
+          label: "Eigenvectors and Eigenvalues",
+          path: "/eigenvalues-basics"
+        },
+        %{
+          key: :stability,
+          number: "02",
+          label: "Eigenvalues and Stability",
+          path: "/eigenvalues-stability"
+        }
       ]
     },
     # Point Loads: single-page quickies, one equation each.
