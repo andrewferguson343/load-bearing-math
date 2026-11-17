@@ -70,7 +70,7 @@ defmodule AlgorithmsForOptimizationWeb.SEO do
       "name" => @author,
       "url" => url("/about"),
       "description" =>
-        "Computer scientist with a minor in mathematics who writes Load Bearing Math and tutors math and computer science.",
+        "Software engineer with a systems focus who writes Load Bearing Math and teaches math and computer science.",
       "knowsAbout" => [
         "Mathematics",
         "Computer science",
@@ -79,6 +79,7 @@ defmodule AlgorithmsForOptimizationWeb.SEO do
         "Differential equations",
         "Probability",
         "Optimization",
+        "Queueing theory",
         "Systems engineering"
       ]
     }
