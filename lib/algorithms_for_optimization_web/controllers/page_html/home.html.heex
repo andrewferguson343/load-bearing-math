@@ -110,6 +110,39 @@
       </div>
     </section>
 
+    <%!-- Point Loads: hidden until the first one is public; dev builds show a reminder instead. --%>
+    <p :if={@point_loads == [] and @dev_routes?} id="dev-note-point-loads" class="lbm-dev-note">
+      Dev only: the Point Loads section is hidden on the live site until the first Point Load is
+      published.
+    </p>
+    <section
+      :if={@point_loads != []}
+      id="landing-point-loads"
+      aria-labelledby="point-loads-heading"
+    >
+      <.section_heading
+        id="point-loads-heading"
+        title={@point_loads_collection.name}
+        link={collection_path(@point_loads_collection)}
+        link_label="All Point Loads"
+      >
+        <:tagline>{@point_loads_collection.description}</:tagline>
+      </.section_heading>
+      <div class="lbm-point-load-strip">
+        <.link
+          :for={topic <- @point_loads}
+          id={"point-load-#{topic.id}"}
+          navigate={AlgorithmsForOptimization.Topics.entry_path(topic)}
+          class="lbm-point-load-card"
+        >
+          <h3 class="lbm-point-load-title">{topic.label}</h3>
+          <p class="lbm-point-load-summary">
+            {AlgorithmsForOptimization.Topics.card_summary(topic)}
+          </p>
+        </.link>
+      </div>
+    </section>
+
     <%!-- Foundations: short primers on the basics, in suggested reading order.
          Hidden until the first one is public; dev builds show a reminder instead. --%>
     <p :if={@foundations == [] and @dev_routes?} id="dev-note-foundations" class="lbm-dev-note">
@@ -137,39 +170,6 @@
           class="lbm-point-load-card"
         >
           <span class="lbm-foundation-step">{String.pad_leading("#{n}", 2, "0")}</span>
-          <h3 class="lbm-point-load-title">{topic.label}</h3>
-          <p class="lbm-point-load-summary">
-            {AlgorithmsForOptimization.Topics.card_summary(topic)}
-          </p>
-        </.link>
-      </div>
-    </section>
-
-    <%!-- Point Loads: hidden until the first one is public; dev builds show a reminder instead. --%>
-    <p :if={@point_loads == [] and @dev_routes?} id="dev-note-point-loads" class="lbm-dev-note">
-      Dev only: the Point Loads section is hidden on the live site until the first Point Load is
-      published.
-    </p>
-    <section
-      :if={@point_loads != []}
-      id="landing-point-loads"
-      aria-labelledby="point-loads-heading"
-    >
-      <.section_heading
-        id="point-loads-heading"
-        title={@point_loads_collection.name}
-        link={collection_path(@point_loads_collection)}
-        link_label="All Point Loads"
-      >
-        <:tagline>{@point_loads_collection.description}</:tagline>
-      </.section_heading>
-      <div class="lbm-point-load-strip">
-        <.link
-          :for={topic <- @point_loads}
-          id={"point-load-#{topic.id}"}
-          navigate={AlgorithmsForOptimization.Topics.entry_path(topic)}
-          class="lbm-point-load-card"
-        >
           <h3 class="lbm-point-load-title">{topic.label}</h3>
           <p class="lbm-point-load-summary">
             {AlgorithmsForOptimization.Topics.card_summary(topic)}
