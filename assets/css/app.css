@@ -925,6 +925,34 @@ a.lbm-featured-card:hover .lbm-topic-entry-arrow { transform: translateX(0.25rem
    Services Page
    ====================================================================== */
 
+/* Services hub: one card per path (engineering first, tutoring second). */
+.lbm-path-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 1rem;
+}
+
+.lbm-path-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 2rem;
+}
+
+.lbm-path-card .lbm-featured-title,
+.lbm-path-card .lbm-collection-name {
+  margin: 0.25rem 0 0;
+}
+
+.lbm-path-cta {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+a.lbm-path-card:hover .lbm-topic-entry-arrow { transform: translateX(0.25rem); }
+
 .lbm-services-heading {
   padding-bottom: 0.75rem;
   margin-bottom: 1.25rem;

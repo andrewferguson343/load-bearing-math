@@ -32,12 +32,12 @@ defmodule AlgorithmsForOptimizationWeb.SEOTest do
 
     test "titles use the site name, never a personal byline", %{conn: conn} do
       home = conn |> get(~p"/") |> html_response(200)
-      services = conn |> get(~p"/services") |> html_response(200)
+      tutoring = conn |> get(~p"/tutoring") |> html_response(200)
 
       assert home |> head() |> LazyHTML.query("title") |> LazyHTML.text() |> String.trim() ==
                AlgorithmsForOptimizationWeb.SEO.home_title()
 
-      assert services |> head() |> LazyHTML.query("title") |> LazyHTML.text() =~
+      assert tutoring |> head() |> LazyHTML.query("title") |> LazyHTML.text() =~
                "Math and Computer Science Tutoring · Load Bearing Math"
 
       refute home =~ "by Andrew Ferguson"
@@ -74,7 +74,14 @@ defmodule AlgorithmsForOptimizationWeb.SEOTest do
     end
 
     test "every page's description fits in search results", %{conn: conn} do
-      for path <- [~p"/", ~p"/about", ~p"/services", ~p"/sources", ~p"/leaky-bucket"] do
+      for path <- [
+            ~p"/",
+            ~p"/about",
+            ~p"/services",
+            ~p"/tutoring",
+            ~p"/sources",
+            ~p"/leaky-bucket"
+          ] do
         html = conn |> get(path) |> html_response(200)
         description = html |> head() |> attr(~s(meta[name="description"]), "content")
 
@@ -87,8 +94,8 @@ defmodule AlgorithmsForOptimizationWeb.SEOTest do
       assert %{"@type" => "Person", "name" => "Andrew Ferguson"} = json
     end
 
-    test "Services has Service JSON-LD with priced offers", %{conn: conn} do
-      json = conn |> get(~p"/services") |> html_response(200) |> head() |> json_ld()
+    test "Tutoring has Service JSON-LD with priced offers", %{conn: conn} do
+      json = conn |> get(~p"/tutoring") |> html_response(200) |> head() |> json_ld()
 
       assert %{"@type" => "Service", "hasOfferCatalog" => %{"itemListElement" => offers}} = json
       assert %{"name" => "Tutoring", "price" => "60", "priceCurrency" => "USD"} = hd(offers)
@@ -121,6 +128,7 @@ defmodule AlgorithmsForOptimizationWeb.SEOTest do
       assert body =~ "/topics</loc>"
       assert body =~ "/about</loc>"
       assert body =~ "/services</loc>"
+      assert body =~ "/tutoring</loc>"
       assert body =~ "/privacy</loc>"
       assert body =~ "/work-with-me</loc>"
       assert body =~ "/collections/search-and-ranking</loc>"

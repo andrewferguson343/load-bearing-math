@@ -183,6 +183,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
         <.link navigate={~p"/about"} id="footer-about">About</.link>
         <.link navigate={~p"/services"} id="footer-services">Services</.link>
         <.link navigate={~p"/work-with-me"} id="footer-work">Work with me</.link>
+        <.link navigate={~p"/tutoring"} id="footer-tutoring">Tutoring</.link>
         <.link navigate={~p"/topics"} id="footer-topics">All topics</.link>
         <.link navigate={~p"/sources"} id="footer-sources">Sources cited</.link>
         <.link navigate={~p"/privacy"} id="footer-privacy">Privacy</.link>
@@ -405,7 +406,7 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
     ~H"""
     <aside :if={@show?} id="topic-end-note" class="lbm-topic-end-note" aria-label="Tutoring">
       <p>
-        Want help with this material? <.link navigate={~p"/services"}>Check out the tutoring services</.link>.
+        Want help with this material? <.link navigate={~p"/tutoring"}>Check out the tutoring services</.link>.
       </p>
     </aside>
     """

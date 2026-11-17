@@ -92,7 +92,7 @@ defmodule AlgorithmsForOptimizationWeb.SEO do
       "@type" => "Service",
       "name" => "Math and computer science tutoring",
       "serviceType" => "Tutoring",
-      "url" => url("/services"),
+      "url" => url("/tutoring"),
       "provider" => %{"@type" => "Person", "name" => @author, "url" => url("/about")},
       "hasOfferCatalog" => %{
         "@type" => "OfferCatalog",

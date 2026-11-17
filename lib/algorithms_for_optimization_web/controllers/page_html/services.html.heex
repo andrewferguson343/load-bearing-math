@@ -1,0 +1,50 @@
+<Layouts.app flash={@flash}>
+  <div class="lbm-landing">
+    <section id="services-hero" class="lbm-hero lbm-landing-hero" aria-labelledby="services-title">
+      <p class="lbm-eyebrow">Services</p>
+      <h1 id="services-title" class="lbm-hero-title">Built for systems that can't fail.</h1>
+      <p class="lbm-hero-lede">
+        I've spent my career in aerospace, space systems, and large-scale integration, where one
+        wrong assumption costs more than a sprint. I take on a small number of engineering
+        engagements where the problems are hard and the results actually matter, and I still teach
+        math and computer science one-on-one.
+      </p>
+    </section>
+
+    <section id="services-paths" aria-label="Ways to work together" class="lbm-path-grid">
+      <.link
+        id="services-engineering"
+        navigate={~p"/work-with-me"}
+        class="lbm-featured-card lbm-path-card"
+      >
+        <p class="lbm-featured-meta"><span class="lbm-tag">Engineering</span></p>
+        <h2 class="lbm-featured-title">Work with me</h2>
+        <p class="lbm-featured-summary">
+          Consulting, advisory, and select full-time roles where downtime, mistakes, and bad math
+          are expensive.
+        </p>
+        <span class="lbm-path-cta">
+          See engineering work
+          <span class="lbm-topic-entry-arrow" aria-hidden="true">&rarr;</span>
+        </span>
+      </.link>
+
+      <.link
+        id="services-tutoring"
+        navigate={~p"/tutoring"}
+        class="lbm-collection-card lbm-path-card"
+      >
+        <p class="lbm-featured-meta"><span class="lbm-tag lbm-tag--muted">Teaching</span></p>
+        <h2 class="lbm-collection-name">Tutoring</h2>
+        <p class="lbm-collection-description">
+          One-on-one tutoring in math and computer science, from algebra through differential
+          equations, plus programming, data structures, and algorithms.
+        </p>
+        <span class="lbm-path-cta">
+          See tutoring options
+          <span class="lbm-topic-entry-arrow" aria-hidden="true">&rarr;</span>
+        </span>
+      </.link>
+    </section>
+  </div>
+</Layouts.app>
