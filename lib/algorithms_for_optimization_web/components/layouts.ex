@@ -383,8 +383,8 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
   end
 
   @doc """
-  A pointer to tutoring, rendered below the whole lesson block (sidebar and article) under
-  its own rule line so it reads as site furniture, not part of the article. Renders only on
+  A pointer to engineering work, rendered below the whole lesson block (sidebar and article)
+  under its own rule line so it reads as site furniture, not part of the article. Renders only on
   the topic's last published page, so multi-part topics show it once rather than on every part.
 
       <Layouts.topic_end_note active_topic={:leaky_bucket} active_lesson={:overview} />
@@ -404,9 +404,9 @@ defmodule AlgorithmsForOptimizationWeb.Layouts do
     assigns = assign(assigns, :show?, last_key == assigns.active_lesson)
 
     ~H"""
-    <aside :if={@show?} id="topic-end-note" class="lbm-topic-end-note" aria-label="Tutoring">
+    <aside :if={@show?} id="topic-end-note" class="lbm-topic-end-note" aria-label="Work with me">
       <p>
-        Want help with this material? <.link navigate={~p"/tutoring"}>Check out the tutoring services</.link>.
+        Building something where this matters? <.link navigate={~p"/work-with-me"} id="end-note-work">Let's talk</.link>.
       </p>
     </aside>
     """
