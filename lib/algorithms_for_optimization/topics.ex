@@ -398,11 +398,11 @@ defmodule AlgorithmsForOptimization.Topics do
     # Point Loads: single-page quickies, one equation each.
     %{
       id: :littles_law,
-      tags: [:probability],
+      tags: [:queueing_theory],
       collection: :point_loads,
       kind: :point_load,
       # Set to the date it goes public: orders "Recently posted" and drives the "New" badge (not shown).
-      published_on: nil,
+      published_on: ~D[2026-11-17],
       # Optional one-line card summary; cards fall back to the description
       summary:
         "L = λW. Three letters that tell you how many requests are in flight, and why your worker pool is already too small.",

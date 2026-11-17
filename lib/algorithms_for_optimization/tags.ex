@@ -14,6 +14,7 @@ defmodule AlgorithmsForOptimization.Tags do
       label: "Differential Equations"
     },
     %{id: :probability, slug: "probability", label: "Probability"},
+    %{id: :queueing_theory, slug: "queueing-theory", label: "Queueing Theory"},
     %{id: :optimization, slug: "optimization", label: "Optimization"},
     %{id: :trigonometry, slug: "trigonometry", label: "Trigonometry"},
     %{id: :graph_theory, slug: "graph-theory", label: "Graph Theory"},

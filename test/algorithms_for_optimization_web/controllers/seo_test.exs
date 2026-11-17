@@ -74,14 +74,13 @@ defmodule AlgorithmsForOptimizationWeb.SEOTest do
     end
 
     test "every page's description fits in search results", %{conn: conn} do
-      for path <- [
-            ~p"/",
-            ~p"/about",
-            ~p"/services",
-            ~p"/tutoring",
-            ~p"/sources",
-            ~p"/leaky-bucket"
-          ] do
+      # Topic pages follow the `public_topics` gate; gated ones redirect instead of rendering.
+      topic_paths =
+        if AlgorithmsForOptimization.Topics.public?(:leaky_bucket),
+          do: [~p"/leaky-bucket"],
+          else: [~p"/cosine-similarity"]
+
+      for path <- [~p"/", ~p"/about", ~p"/services", ~p"/tutoring", ~p"/sources"] ++ topic_paths do
         html = conn |> get(path) |> html_response(200)
         description = html |> head() |> attr(~s(meta[name="description"]), "content")
 
