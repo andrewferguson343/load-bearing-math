@@ -8,7 +8,7 @@ defmodule AlgorithmsForOptimization.Topics do
 
     * `collection` - id from `AlgorithmsForOptimization.Collections` (or `nil`)
     * `kind` - `:series` for multi-part topics, `:point_load` for single-page quickies,
-      `:foundation` for single-page primers on the basics (collection `:foundations`)
+      `:foundation` for short primers on the basics (collection `:foundations`)
     * `published_on` - `Date` it went public; orders "Recently posted" and drives the "New"
       badge. Not displayed (`nil` sorts last).
     * `summary` - one line for cards; `card_summary/1` falls back to `description`
@@ -239,7 +239,7 @@ defmodule AlgorithmsForOptimization.Topics do
         %{key: :overview, number: "00", label: "Overview", path: "/mathematics-appendix"}
       ]
     },
-    # Foundations: single-page primers. Registry order is the suggested reading order.
+    # Foundations: short primers on the basics. Registry order is the suggested reading order.
     %{
       id: :derivatives,
       tags: [:calculus],
@@ -253,11 +253,30 @@ defmodule AlgorithmsForOptimization.Topics do
       featured: false,
       prerequisites: [],
       number: "10",
-      label: "Derivatives and Slope",
+      label: "Derivatives",
       description:
         "A derivative is the slope of a curve at a single point: how fast something is changing right now. It's the one idea under gradient descent, control loops, and every \"rate of\" number you've ever put on a dashboard.",
       lessons: [
-        %{key: :overview, number: "00", label: "Overview", path: "/derivatives"}
+        %{key: :overview, number: "00", label: "Overview", path: "/derivatives"},
+        %{key: :slope, number: "01", label: "Derivatives and Slope", path: "/derivatives-slope"},
+        %{
+          key: :chain_rule,
+          number: "02",
+          label: "The Chain Rule",
+          path: "/derivatives-chain-rule"
+        },
+        %{
+          key: :second_derivatives,
+          number: "03",
+          label: "Second Derivatives",
+          path: "/derivatives-second-derivatives"
+        },
+        %{
+          key: :optimal_value,
+          number: "04",
+          label: "Finding an Optimal Value",
+          path: "/derivatives-optimal-value"
+        }
       ]
     },
     # Point Loads: single-page quickies, one equation each.

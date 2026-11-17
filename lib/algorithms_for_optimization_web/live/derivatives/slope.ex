@@ -1,6 +1,6 @@
-defmodule AlgorithmsForOptimizationWeb.DerivativesLive do
+defmodule AlgorithmsForOptimizationWeb.DerivativesSlopeLive do
   @moduledoc """
-  Foundation: Derivatives and Slope. A single-page primer that the Optimization series
+  Foundation: Derivatives and Slope, lesson 01 of the primer the Optimization series
   lists as a prerequisite. The curve and tangent line here are the same ones the
   series uses, so a reader who starts here sees familiar shapes later.
   """
@@ -59,7 +59,7 @@ defmodule AlgorithmsForOptimizationWeb.DerivativesLive do
     ~H"""
     <Layouts.app flash={@flash} current_scope={assigns[:current_scope]}>
       <div class="lbm-lesson">
-        <Layouts.lesson_toc active_topic={:derivatives} active_lesson={:overview} />
+        <Layouts.lesson_toc active_topic={:derivatives} active_lesson={:slope} />
         <div class="lbm-prose">
           <h1 id="page-heading">Derivatives and Slope</h1>
 
@@ -183,7 +183,7 @@ defmodule AlgorithmsForOptimizationWeb.DerivativesLive do
         </div>
       </div>
 
-      <Layouts.topic_end_note active_topic={:derivatives} active_lesson={:overview} />
+      <Layouts.topic_end_note active_topic={:derivatives} active_lesson={:slope} />
     </Layouts.app>
     """
   end

@@ -7,12 +7,35 @@ defmodule AlgorithmsForOptimizationWeb.DerivativesFoundationTest do
   # Follows the `public_topics` gate like the other topic tests, so it keeps checking the
   # right thing once the foundation goes public.
   if Topics.public?(:derivatives) do
-    test "renders the foundation with its charts and the end note", %{conn: conn} do
+    test "renders the overview without the end note", %{conn: conn} do
       {:ok, view, _html} = live(conn, ~p"/derivatives")
+
+      assert has_element?(view, "#page-heading")
+      refute has_element?(view, "#topic-end-note")
+    end
+
+    test "renders the slope lesson with its charts", %{conn: conn} do
+      {:ok, view, _html} = live(conn, ~p"/derivatives-slope")
 
       assert has_element?(view, "#page-heading")
       assert has_element?(view, "#curve-chart")
       assert has_element?(view, "#tangent-line-chart")
+      refute has_element?(view, "#topic-end-note")
+    end
+
+    test "renders the middle lessons without the end note", %{conn: conn} do
+      for path <- [~p"/derivatives-chain-rule", ~p"/derivatives-second-derivatives"] do
+        {:ok, view, _html} = live(conn, path)
+
+        assert has_element?(view, "#page-heading")
+        refute has_element?(view, "#topic-end-note")
+      end
+    end
+
+    test "renders the last lesson with the end note", %{conn: conn} do
+      {:ok, view, _html} = live(conn, ~p"/derivatives-optimal-value")
+
+      assert has_element?(view, "#page-heading")
       assert has_element?(view, "#topic-end-note")
     end
 
@@ -23,6 +46,15 @@ defmodule AlgorithmsForOptimizationWeb.DerivativesFoundationTest do
   else
     test "redirects home while the Derivatives foundation is gated", %{conn: conn} do
       assert {:error, {:live_redirect, %{to: "/"}}} = live(conn, ~p"/derivatives")
+
+      for path <- [
+            ~p"/derivatives-slope",
+            ~p"/derivatives-chain-rule",
+            ~p"/derivatives-second-derivatives",
+            ~p"/derivatives-optimal-value"
+          ] do
+        assert {:error, {:live_redirect, %{to: "/"}}} = live(conn, path)
+      end
     end
   end
 
