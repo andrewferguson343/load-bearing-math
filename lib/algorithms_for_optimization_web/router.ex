@@ -95,16 +95,30 @@ defmodule AlgorithmsForOptimizationWeb.Router do
     live_session :metastable_failures,
       on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :metastable_failures} do
       live "/metastable-failures", MetastableFailuresLive
+      live "/metastable-failures-anatomy", MetastableFailuresAnatomyLive
+      live "/metastable-failures-queues", MetastableFailuresQueuesLive
+      live "/metastable-failures-feedback", MetastableFailuresFeedbackLive
+      live "/metastable-failures-phase-plane", MetastableFailuresPhasePlaneLive
+      live "/metastable-failures-basins", MetastableFailuresBasinsLive
+      live "/metastable-failures-recovery", MetastableFailuresRecoveryLive
     end
 
     live_session :damped_oscillators,
       on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :damped_oscillators} do
       live "/damped-oscillators", DampedOscillatorsLive
+      live "/damped-oscillators-model", DampedOscillatorsModelLive
+      live "/damped-oscillators-three-cases", DampedOscillatorsThreeCasesLive
+      live "/damped-oscillators-phase-plane", DampedOscillatorsPhasePlaneLive
+      live "/damped-oscillators-tuning", DampedOscillatorsTuningLive
     end
 
     live_session :eulers_method,
       on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :eulers_method} do
       live "/eulers-method", EulersMethodLive
+      live "/eulers-method-stepping", EulersMethodSteppingLive
+      live "/eulers-method-error", EulersMethodErrorLive
+      live "/eulers-method-stability", EulersMethodStabilityLive
+      live "/eulers-method-better-steppers", EulersMethodBetterSteppersLive
     end
 
     # Foundations: short primers, one live_session each so TopicAuth gates them.
@@ -115,6 +129,12 @@ defmodule AlgorithmsForOptimizationWeb.Router do
       live "/derivatives-chain-rule", DerivativesChainRuleLive
       live "/derivatives-second-derivatives", DerivativesSecondDerivativesLive
       live "/derivatives-optimal-value", DerivativesOptimalValueLive
+    end
+
+    live_session :eigenvalues, on_mount: {AlgorithmsForOptimizationWeb.TopicAuth, :eigenvalues} do
+      live "/eigenvalues", EigenvaluesLive
+      live "/eigenvalues-basics", EigenvaluesBasicsLive
+      live "/eigenvalues-stability", EigenvaluesStabilityLive
     end
 
     # Point Loads: single-page quickies, one equation each.
